@@ -6,8 +6,11 @@ html,
 body {
     padding: 0;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-        Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    font-family: "Manrope", sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 16px;
 }
 
 a {
@@ -17,4 +20,8 @@ a {
 
 * {
     box-sizing: border-box;
+}
+
+.container {
+    min-height: calc(100vh - 104px);
 }

@@ -1,0 +1,65 @@
+.navigationWrapper {
+    @apply relative mx-5 mt-7;
+    height: 138px;
+}
+.containerSlide {
+    @apply w-full h-full;
+    border-radius: 16px;
+    box-shadow: 0px 10px 20px 0px rgb(0 0 0 / 5%);
+}
+.positionDot {
+    @apply absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    bottom: 3px;
+    z-index: 9;
+}
+.divImage {
+    @apply w-full h-full relative;
+}
+.dots {
+    align-self: center;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    li {
+        margin-right: 6px;
+        &:before {
+            content: "";
+            height: 12px;
+            width: 12px;
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 300ms ease;
+        }
+        &.active {
+            &:before {
+                width: 30px;
+                background: #00baaf;
+            }
+        }
+    }
+}
+// .dot {
+//     border: none;
+//     width: 10px;
+//     height: 10px;
+//     background: #c5c5c5;
+//     border-radius: 50%;
+//     margin: 0 5px;
+//     padding: 5px;
+//     cursor: pointer;
+// }
+
+// .dot:focus {
+//     outline: none;
+// }
+
+// .dot.active {
+//     background: #000;
+// }

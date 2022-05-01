@@ -1,8 +1,15 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import { AppProps } from "next/app";
+import { Component, ReactNode } from "react";
+import Layout from "../components/organisms/Layout";
+import "../styles/globals.css";
+import "keen-slider/keen-slider.min.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
+    return (
+        <Layout>
+            <Component {...pageProps} className="container" />
+        </Layout>
+    );
 }
 
-export default MyApp
+export default MyApp;
