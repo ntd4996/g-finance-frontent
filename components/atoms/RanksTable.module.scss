@@ -1,44 +1,12 @@
-.container {
-    @apply px-5 pb-20;
+.tableHead {
+    background: #f4f4f4;
+    height: 36px;
 }
-.title {
-    font-weight: 800;
-    font-size: 16px;
-    line-height: 28px;
-    color: #292929;
-}
-.colName {
-    @apply flex justify-start  flex-col;
-}
-.name {
-    font-weight: 800;
-    font-size: 13px;
-    line-height: 20px;
-    letter-spacing: 0.04em;
-    color: #292929;
-}
-.subName {
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 16px;
-    color: #888888;
-}
-.colNumber {
-    @apply flex justify-end  flex-col;
-}
-.numberTop {
+.textHead {
     font-weight: 500;
     font-size: 12px;
     line-height: 16px;
-    text-align: right;
-    color: #08ca98;
-}
-.numberBottom {
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 16px;
-    text-align: right;
-    color: #292929;
+    color: #8c8c8c !important;
 }
 .numberLabel {
     background: #00b876;
@@ -48,17 +16,23 @@
     font-weight: 800;
     font-size: 15px;
     line-height: 20px;
+    @apply flex justify-center items-center;
+    width: 40px;
+    margin: auto;
 }
-.colChartTable {
-    @apply relative;
+.btnBuy {
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: 0.04em;
+    color: #00b876;
+    cursor: pointer;
 }
-.chard {
-    width: 66.78px;
-    height: 100%;
-}
-.positionChart {
-    @apply cursor-pointer;
-    position: absolute;
-    height: 100px;
-    top: -48px;
+.code {
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0.04em;
+    color: #292929;
 }

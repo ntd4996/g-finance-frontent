@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import CardButton from "../components/atoms/CardButton";
 import Carousel from "../components/atoms/Carousel";
 import ListButton from "../components/atoms/ListButton";
-import RanksTable from "../components/atoms/RanksTable";
+import RanksTableWithChart from "../components/atoms/RanksTableWithChart";
 import { currentLayoutSlice } from "../stores/layout";
 
 const Home: NextPage = () => {
@@ -19,7 +19,7 @@ const Home: NextPage = () => {
             <Carousel />
             <ListButton />
             <CardButton />
-            <RanksTable />
+            <RanksTableWithChart />
         </div>
     );
 };
