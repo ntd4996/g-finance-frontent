@@ -25,3 +25,10 @@ a {
 .container {
     min-height: calc(100vh - 104px);
 }
+.pagePaddingTop {
+    @apply w-full;
+    padding-top: 60px;
+}
+.pageNotNav {
+    min-height: calc(100vh);
+}

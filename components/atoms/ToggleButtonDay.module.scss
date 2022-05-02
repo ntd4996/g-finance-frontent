@@ -1,0 +1,19 @@
+.page {
+    @apply w-full flex flex-row py-5 px-5 items-center justify-center gap-3;
+}
+.btn {
+    background: #f5edff;
+    border-radius: 16px !important;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: #282828;
+    margin-right: 8px;
+    border: unset;
+    height: 24px;
+    min-width: 37px;
+}
+.btnActive {
+    color: #ffffff !important;
+	background: #A349A4 !important;
+}

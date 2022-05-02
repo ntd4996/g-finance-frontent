@@ -1,0 +1,32 @@
+.list {
+    @apply py-8 flex flex-row px-5 justify-around;
+}
+.buttonOutline {
+    @apply w-16 h-16 cursor-pointer flex items-center justify-center;
+    box-sizing: border-box;
+    border-radius: 12px;
+}
+.buttonRanks {
+    @apply buttonOutline;
+    background: #edfffe;
+    border: 1px solid #00ba77;
+}
+.buttonShare {
+    @apply buttonOutline;
+    background: #e6f9ff;
+    border: 1px solid #3fd1ff;
+}
+.buttonVote {
+    @apply buttonOutline;
+    background: #fff1f1;
+    border: 1px solid #ff5a5a;
+}
+.buttonTop {
+    @apply buttonOutline;
+    background: #fffaed;
+    border: 1px solid #ffb800;
+}
+.btn {
+    @apply flex flex-col gap-3 items-center text-center;
+    width: 64px;
+}

@@ -1,0 +1,55 @@
+.CardButton {
+    @apply pb-8 px-5 flex cursor-pointer;
+    flex-flow: row wrap;
+    align-content: space-between;
+    justify-content: space-between;
+}
+.card {
+    @apply bg-white drop-shadow-lg rounded-2xl px-4 py-3 relative;
+    width: 166px;
+    height: 80px;
+    margin: 5px;
+}
+.card:nth-child(3n) {
+    page-break-after: always;
+    break-after: always;
+    wrap-after: flex;
+}
+.topCard {
+    @apply flex items-center justify-between;
+}
+.title {
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 28px;
+}
+.numberLabel {
+    background: #00b876;
+    border-radius: 4px;
+    padding: 0 4px;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 15px;
+    line-height: 20px;
+}
+.bottomCard {
+    @apply flex items-center justify-between;
+}
+.flexCol {
+    @apply flex flex-col gap-1;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 16px;
+    color: #262626;
+}
+.chard {
+    width: 66.78px;
+    height: 100%;
+}
+.positionChart {
+    @apply cursor-pointer;
+    position: absolute;
+    height: 100px;
+    top: -22px;
+    right: 4px;
+}

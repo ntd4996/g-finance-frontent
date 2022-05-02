@@ -4,14 +4,14 @@ import Button from "@mui/material/Button";
 import theme from "../../libs/theme";
 import { IconButton } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { useSelector } from "react-redux";
+import { RootState } from "../../stores";
+import { useRouter } from "next/router";
 
-type MyComponentProps = React.PropsWithChildren<{
-    isBack?: boolean;
-    title?: string;
-}>;
+const Header = () => {
+    const { isBack, title } = useSelector((state: RootState) => state.layout);
+    const router = useRouter();
 
-const Header = (props: MyComponentProps) => {
-    const { isBack, title } = props;
     return (
         <div className="w-full">
             {isBack && (
@@ -20,6 +20,7 @@ const Header = (props: MyComponentProps) => {
                         <IconButton
                             aria-label="delete"
                             className={styles.colorButton}
+                            onClick={() => {router.back()}}
                         >
                             <ArrowBackIosIcon />
                         </IconButton>
@@ -62,8 +63,4 @@ const Header = (props: MyComponentProps) => {
     );
 };
 
-Header.defaultProps = {
-    isBack: false,
-    title: "",
-};
 export default Header;
