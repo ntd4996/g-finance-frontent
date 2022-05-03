@@ -9,10 +9,16 @@ import SlideShow from "../icons/SlideShow";
 import FolderChart from "../icons/FolderChart";
 import { useSelector } from "react-redux";
 import { RootState } from "../../stores";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
     const [value, setValue] = React.useState(0);
     const { isShowNav } = useSelector((state: RootState) => state.layout);
+    const router = useRouter();
+    const { valueNav } = useSelector((state: RootState) => state.layout);
+    React.useEffect(() => {
+        setValue(valueNav);
+    }, [valueNav]);
 
     return (
         <div>
@@ -57,18 +63,31 @@ const Navbar = () => {
                     <BottomNavigationAction
                         label="Trang chủ"
                         icon={<House />}
+                        onClick={() => {
+                            router.push("/");
+                        }}
                     />
+
                     <BottomNavigationAction
                         label="Khuyến nghị"
                         icon={<FundsLine />}
+                        onClick={() => {
+                            router.push("/ahihi");
+                        }}
                     />
                     <BottomNavigationAction
                         label="Săn tin"
                         icon={<SlideShow />}
+                        onClick={() => {
+                            router.push("/findNews");
+                        }}
                     />
                     <BottomNavigationAction
                         label="Danh mục"
                         icon={<FolderChart />}
+                        onClick={() => {
+                            router.push("/ahihi");
+                        }}
                     />
                 </BottomNavigation>
             )}

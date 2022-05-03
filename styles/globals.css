@@ -32,3 +32,6 @@ a {
 .pageNotNav {
     min-height: calc(100vh);
 }
+#lockIcon {
+    margin-right: 0 !important;
+}

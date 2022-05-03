@@ -1,0 +1,141 @@
+import React from "react";
+import styles from "./TabContainerNew.module.scss";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Box from "@mui/material/Box";
+import { withStyles, WithStyles } from "@mui/styles";
+import CardNew from "./CardNew";
+import TopNews from "./TopNews";
+
+interface TabPanelProps {
+    children?: React.ReactNode;
+    index: number;
+    value: number;
+}
+
+function TabPanel(props: TabPanelProps) {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && <div>{children}</div>}
+        </div>
+    );
+}
+
+function a11yProps(index: number) {
+    return {
+        id: `simple-tab-${index}`,
+        "aria-controls": `simple-tabpanel-${index}`,
+    };
+}
+const stylesRoot = {
+    tabsRoot: {
+        minHeight: "36px",
+        height: "36px",
+    },
+    tabRoot: {
+        width: "78px",
+        minWidth: "78px",
+    },
+};
+
+function TabContainerNew(props: WithStyles<typeof stylesRoot>) {
+    const { classes } = props;
+    const [value, setValue] = React.useState(0);
+
+    const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+        setValue(newValue);
+    };
+
+    return (
+        <div className="w-full">
+            <Box
+                sx={{ borderBottom: 1, borderColor: "divider" }}
+                className={styles.tab}
+            >
+                <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    aria-label="basic tabs example"
+                    textColor="secondary"
+                    indicatorColor="secondary"
+                    scrollButtons
+                    selectionFollowsFocus
+                    variant="fullWidth"
+                    classes={{
+                        root: classes.tabsRoot,
+                    }}
+                >
+                    <Tab
+                        label="Báo chí"
+                        {...a11yProps(0)}
+                        sx={{
+                            padding: 0,
+                        }}
+                        classes={{
+                            root: classes.tabRoot,
+                        }}
+                    />
+                    <Tab
+                        label="F319"
+                        {...a11yProps(1)}
+                        sx={{
+                            padding: 0,
+                        }}
+                        classes={{
+                            root: classes.tabRoot,
+                        }}
+                    />
+                    <Tab
+                        label="Facebook"
+                        {...a11yProps(2)}
+                        sx={{
+                            padding: 0,
+                        }}
+                        classes={{
+                            root: classes.tabRoot,
+                        }}
+                    />
+                </Tabs>
+            </Box>
+            <TabPanel value={value} index={0}>
+                <TopNews />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                <div className="pb-20">
+                    <CardNew />
+                    <CardNew />
+                    <CardNew />
+                    <CardNew />
+                    <CardNew />
+                    <CardNew />
+                    <CardNew />
+                    <CardNew />
+                    <CardNew />
+                </div>
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+                <div className="pb-20">
+                    <CardNew />
+                    <CardNew />
+                    <CardNew />
+                    <CardNew />
+                    <CardNew />
+                    <CardNew />
+                    <CardNew />
+                    <CardNew />
+                    <CardNew />
+                </div>
+            </TabPanel>
+        </div>
+    );
+}
+
+export default withStyles(stylesRoot)(TabContainerNew);

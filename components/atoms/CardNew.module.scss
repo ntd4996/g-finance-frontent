@@ -1,0 +1,31 @@
+.cardNew {
+    @apply flex flex-row gap-5 px-5 justify-center items-center cursor-pointer my-5;
+    height: 92px;
+}
+.image {
+    width: 65%;
+}
+.info {
+    width: auto;
+    font-weight: 500;
+    font-size: 11px;
+    line-height: 16px;
+    color: #8c8c8c;
+}
+.title {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 20px;
+    color: #000000;
+    padding-bottom: 8px;
+}
+.flexRow {
+    @apply flex flex-row gap-2 items-center pb-2;
+}
+.bold {
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 16px;
+    color: #292929;
+}

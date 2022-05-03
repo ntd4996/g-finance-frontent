@@ -1,0 +1,60 @@
+.tableHead {
+    background: #f4f4f4;
+    height: 36px;
+}
+.textHead {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #8c8c8c !important;
+}
+.numberLabel {
+    background: #00b876;
+    border-radius: 4px;
+    padding: 0 4px;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 15px;
+    line-height: 20px;
+    @apply flex justify-center items-center;
+    width: 40px;
+    margin: auto;
+}
+.btnBuy {
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: 0.04em;
+    color: #00b876;
+    cursor: pointer;
+}
+.code {
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0.04em;
+    color: #292929;
+}
+.flexCol {
+    @apply flex flex-col;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0.04em;
+    color: #292929;
+}
+.textRed {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0.04em;
+    color: #f04164;
+}
+.textGreen {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: 0.04em;
+    color: #00b876;
+}

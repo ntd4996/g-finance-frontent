@@ -49,7 +49,6 @@ const rows = [
     createData("MBB", "Ngân hàng", 6.0, 24, "Mua"),
     createData("MBB", "Ngân hàng", 6.0, 24, "Mua"),
     createData("MBB", "Ngân hàng", 6.0, 24, "Mua"),
-
     createData("MBB", "Ngân hàng", 6.0, 24, "Mua"),
 ];
 

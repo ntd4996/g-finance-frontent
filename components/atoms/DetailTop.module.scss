@@ -1,0 +1,48 @@
+.container {
+    height: 104px;
+    width: 100%;
+    padding: 16px;
+    display: flex;
+    @apply justify-between;
+}
+.flexRow {
+    @apply flex justify-center items-center gap-4;
+}
+.numberLabel {
+    background: #00b876;
+    border-radius: 16px;
+    padding: 12px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20px;
+    color: #ffffff;
+    width: 72px;
+    height: 72px;
+    text-align: center;
+    .number {
+        font-weight: 800;
+        font-size: 24px;
+        line-height: 28px;
+    }
+}
+.flexCol {
+    @apply flex flex-col gap-1;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 20px;
+    color: #292929;
+}
+.textGreen {
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 32px;
+    color: #00b876;
+}
+.flexColRight {
+    @apply flex flex-col gap-1 items-center justify-center gap-4;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 20px;
+    color: #292929;
+	
+}

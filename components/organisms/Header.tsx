@@ -9,7 +9,9 @@ import { RootState } from "../../stores";
 import { useRouter } from "next/router";
 
 const Header = () => {
-    const { isBack, title } = useSelector((state: RootState) => state.layout);
+    const { isBack, title, isLogin, isFixedHeader } = useSelector(
+        (state: RootState) => state.layout
+    );
     const router = useRouter();
 
     return (
@@ -20,25 +22,33 @@ const Header = () => {
                         <IconButton
                             aria-label="delete"
                             className={styles.colorButton}
-                            onClick={() => {router.back()}}
+                            onClick={() => {
+                                router.back();
+                            }}
                         >
                             <ArrowBackIosIcon />
                         </IconButton>
                         {title}
                     </div>
-                    <Button
-                        color="secondary"
-                        variant="contained"
-                        style={{
-                            backgroundColor: theme.palette.secondary.main,
-                        }}
-                    >
-                        Login
-                    </Button>
+                    {!isLogin && (
+                        <Button
+                            color="secondary"
+                            variant="contained"
+                            style={{
+                                backgroundColor: theme.palette.secondary.main,
+                            }}
+                        >
+                            Login
+                        </Button>
+                    )}
                 </div>
             )}
             {!isBack && (
-                <div className={styles.header}>
+                <div
+                    className={
+                        isFixedHeader ? styles.headerWithShadow : styles.header
+                    }
+                >
                     <div className={styles.logo}>
                         <Image
                             src="/logo.png"
@@ -48,15 +58,17 @@ const Header = () => {
                         />
                         <span>BRAND NAME</span>
                     </div>
-                    <Button
-                        color="secondary"
-                        variant="contained"
-                        style={{
-                            backgroundColor: theme.palette.secondary.main,
-                        }}
-                    >
-                        Login
-                    </Button>
+                    {!isLogin && (
+                        <Button
+                            color="secondary"
+                            variant="contained"
+                            style={{
+                                backgroundColor: theme.palette.secondary.main,
+                            }}
+                        >
+                            Login
+                        </Button>
+                    )}
                 </div>
             )}
         </div>

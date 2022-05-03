@@ -6,12 +6,18 @@ export type CurrentLayoutState = {
     isBack: boolean;
     title: string;
     isShowNav: boolean;
+    isLogin: boolean;
+    valueNav: number
+    isFixedHeader: boolean
 };
 
 let initialState: CurrentLayoutState = {
     isBack: false,
     isShowNav: true,
+    isLogin: false,
     title: "",
+    valueNav: 0,
+    isFixedHeader: false
 };
 
 export const currentLayoutSlice = createSlice({
@@ -27,6 +33,15 @@ export const currentLayoutSlice = createSlice({
         },
         updateTitle(state, action: PayloadAction<updatePayload>) {
             state.title = action.payload;
+        },
+        updateIsLogin(state, action: PayloadAction<updatePayload>) {
+            state.isLogin = action.payload;
+        },
+        updateValueNav(state, action: PayloadAction<updatePayload>) {
+            state.valueNav = action.payload;
+        },
+        updateIsFixedHeader(state, action: PayloadAction<updatePayload>) {
+            state.isFixedHeader = action.payload;
         },
         reset() {
             return initialState;
