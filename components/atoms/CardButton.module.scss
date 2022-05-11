@@ -1,12 +1,12 @@
 .CardButton {
-    @apply pb-8 px-5 flex cursor-pointer;
+    @apply pb-8 px-5 flex;
     flex-flow: row wrap;
     align-content: space-between;
     justify-content: space-between;
 }
 .card {
-    @apply bg-white drop-shadow-lg rounded-2xl px-4 py-3 relative;
-    width: 166px;
+    @apply bg-white drop-shadow-lg rounded-2xl px-4 py-3 relative cursor-pointer;
+    width: 45%;
     height: 80px;
     margin: 5px;
 }

@@ -6,8 +6,15 @@ import TableContainer from "@mui/material/TableContainer";
 import TableRow from "@mui/material/TableRow";
 import styles from "./RanksTableWithChart.module.scss";
 import ChartTable from "./ChartTable";
+import { useRouter } from "next/router";
 
 export default function RanksTable() {
+    const router = useRouter();
+
+    const redirectPage = () => {
+        router.push("/detail/1");
+    };
+
     function createData(
         name: string,
         subName: string,
@@ -111,6 +118,7 @@ export default function RanksTable() {
                                         padding: 0,
                                         width: "100px",
                                     }}
+                                    onClick={redirectPage}
                                 >
                                     <div className={styles.colName}>
                                         <div className={styles.name}>
@@ -161,6 +169,7 @@ export default function RanksTable() {
                                         padding: 0,
                                         paddingLeft: "35px",
                                     }}
+                                    onClick={redirectPage}
                                 >
                                     <div className={styles.numberLabel}>
                                         {row.carbs}

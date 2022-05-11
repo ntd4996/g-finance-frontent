@@ -1,11 +1,18 @@
 import React from "react";
 import styles from "./CardButton.module.scss";
 import ChartButton from "./ChartButton";
+import { useRouter } from "next/router";
 
 export default function CardButton() {
+    const router = useRouter();
+
+    const redirectPage = () => {
+        router.push("/detail/1");
+    };
+
     return (
         <div className={styles.CardButton}>
-            <div className={styles.card}>
+            <div className={styles.card} onClick={redirectPage}>
                 <div className={styles.topCard}>
                     <div className={styles.title}>HPG</div>
                     <div className={styles.numberLabel}>95</div>
@@ -23,7 +30,7 @@ export default function CardButton() {
                 </div>
             </div>
 
-            <div className={styles.card}>
+            <div className={styles.card} onClick={redirectPage}>
                 <div className={styles.topCard}>
                     <div className={styles.title}>VCB</div>
                     <div className={styles.numberLabel}>93</div>
@@ -41,7 +48,7 @@ export default function CardButton() {
                 </div>
             </div>
 
-            <div className={styles.card}>
+            <div className={styles.card} onClick={redirectPage}>
                 <div className={styles.topCard}>
                     <div className={styles.title}>ACB</div>
                     <div className={styles.numberLabel}>91</div>
@@ -59,7 +66,7 @@ export default function CardButton() {
                 </div>
             </div>
 
-            <div className={styles.card}>
+            <div className={styles.card} onClick={redirectPage}>
                 <div className={styles.topCard}>
                     <div className={styles.title}>MBB</div>
                     <div className={styles.numberLabel}>90</div>
