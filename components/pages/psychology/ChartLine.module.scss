@@ -1,0 +1,11 @@
+.divChart {
+    @apply absolute;
+	height: 300px;
+	left: 6%;
+	top: -14%
+}
+.container {
+    @apply w-full relative flex justify-center items-center;
+    height: 212px;
+    min-width: 300px;
+}

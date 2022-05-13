@@ -11,6 +11,7 @@ body {
     font-weight: 600;
     font-size: 12px;
     line-height: 16px;
+    background: #fff;
 }
 
 a {
@@ -34,4 +35,13 @@ a {
 }
 #lockIcon {
     margin-right: 0 !important;
+}
+.textGray {
+    color: #8c8c8c;
+}
+.textGreen {
+    color: #00b876;
+}
+.textRed {
+    color: #f04164;
 }

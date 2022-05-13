@@ -1,19 +1,24 @@
 .page {
     @apply w-full flex flex-row py-5 px-5 items-center justify-center gap-3;
 }
-.btn {
-    background: #f5edff;
+.buttons {
+    height: 24px;
     border-radius: 16px !important;
+    border: 0;
+    color: #000;
+    background: #f5edff;
+    font-family: "Manrope";
+    font-style: normal;
     font-weight: 400;
     font-size: 12px;
     line-height: 16px;
-    color: #282828;
     margin-right: 8px;
-    border: unset;
-    height: 24px;
-    min-width: 37px;
+    text-transform: capitalize !important;
+    &:hover {
+        background: #f5edff;
+    }
 }
-.btnActive {
-    color: #ffffff !important;
-	background: #A349A4 !important;
+.buttonsSelected {
+    background: #a349a4 !important;
+    color: #f8f8f8 !important;
 }
