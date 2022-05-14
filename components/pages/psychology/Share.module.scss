@@ -19,7 +19,7 @@
     border-radius: 16px !important;
     border: 0 !important;
     color: #000;
-    background: #f5edff;
+    background: #f5edff !important;
     font-family: "Manrope" !important;
     font-style: normal;
     font-weight: 400 !important;
@@ -28,7 +28,7 @@
     margin-right: 8px !important;
     text-transform: capitalize !important;
     &:hover {
-        background: #f5edff;
+        background: #f5edff !important;
     }
 }
 .buttonsSelected {
