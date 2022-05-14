@@ -64,7 +64,7 @@ const Navbar = () => {
                         label="Trang chủ"
                         icon={<House />}
                         onClick={() => {
-                            router.push("/");
+                            router.push("/home");
                         }}
                     />
 

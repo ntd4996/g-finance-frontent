@@ -1,0 +1,51 @@
+.divChart {
+    min-width: 300px;
+    height: 300px;
+}
+.chart {
+    @apply relative;
+    height: 300px;
+    width: 342px;
+    margin: auto;
+}
+.buy {
+    position: absolute;
+    color: orange;
+    top: 39%;
+    right: 3%;
+    transform: rotate(57deg);
+}
+.sale {
+    position: absolute;
+    color: orange;
+    top: 39%;
+    left: 3%;
+    transform: rotate(306deg);
+}
+.middle {
+    position: absolute;
+    color: orange;
+    top: 4%;
+    left: 42%;
+}
+.colLeft {
+    @apply flex flex-col items-center justify-center gap-5 absolute;
+    font-size: 20px;
+    color: #ee4130;
+    top: 70%;
+    left: 14%;
+}
+.colMiddle {
+    @apply flex flex-col items-center justify-center gap-5 absolute;
+    font-size: 20px;
+    color: #585873;
+    top: 70%;
+    left: 37%;
+}
+.colRight {
+    @apply flex flex-col items-center justify-center gap-5 absolute;
+    font-size: 20px;
+    color: #4FC868;
+    top: 70%;
+    right: 14%;
+}

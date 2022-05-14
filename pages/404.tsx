@@ -9,7 +9,7 @@ const NotFound = () => {
         setTimeout(() => {
             // router.go(-1)
             // router.go(1)
-            router.push("/");
+            router.push("/home");
         }, 3000);
     }, []);
 
@@ -19,7 +19,7 @@ const NotFound = () => {
             <h2>That page cannot be found :(</h2>
             <p>
                 Going back to the{" "}
-                <Link href="/">
+                <Link href="/home">
                     <a>Homepage</a>
                 </Link>{" "}
                 is 3 seconds...

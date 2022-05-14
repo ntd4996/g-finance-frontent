@@ -5,6 +5,7 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import theme from "../../libs/theme";
 import Bitcoin from "../../components/pages/psychology/Bitcoin";
+import Share from "../../components/pages/psychology/Share";
 
 export default function Psychology() {
     const dispatch = useDispatch();
@@ -22,6 +23,7 @@ export default function Psychology() {
                 "Tâm lý thị trường & Phán đoán"
             )
         );
+        dispatch(currentLayoutSlice.actions.updateIsShowHeader(true));
     };
 
     const [alignment, setAlignment] = React.useState("bitcoin");
@@ -37,7 +39,7 @@ export default function Psychology() {
 
     return (
         <div className="pagePaddingTop bg-white">
-            <div className="flex items-center w-100 justify-center pt-5 mb-7 relative z-20">
+            <div className="flex items-center w-100 justify-center pt-5 mb-7 relative z-10">
                 <ToggleButtonGroup
                     color="secondary"
                     value={alignment}
@@ -71,9 +73,6 @@ export default function Psychology() {
                             fontSize: "14px",
                             textTransform: "capitalize",
                         }}
-                        onClick={() => {
-                            console.log(1);
-                        }}
                     >
                         Bitcoin
                     </ToggleButton>
@@ -93,16 +92,13 @@ export default function Psychology() {
                             fontSize: "14px",
                             textTransform: "capitalize",
                         }}
-                        onClick={() => {
-                            console.log(2);
-                        }}
                     >
                         Cổ phiếu
                     </ToggleButton>
                 </ToggleButtonGroup>
             </div>
             {alignment === "bitcoin" && <Bitcoin />}
-            {alignment !== "bitcoin" && <div>aa</div>}
+            {alignment !== "bitcoin" && <Share />}
         </div>
     );
 }

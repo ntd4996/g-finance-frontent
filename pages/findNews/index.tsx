@@ -13,6 +13,7 @@ export default function FindNews() {
         Dispatch(currentLayoutSlice.actions.updateIsShowNav(true));
         Dispatch(currentLayoutSlice.actions.updateIsFixedHeader(true));
         Dispatch(currentLayoutSlice.actions.updateValueNav(2));
+        Dispatch(currentLayoutSlice.actions.updateIsShowHeader(true));
     };
     return (
         <div className="pagePaddingTop">

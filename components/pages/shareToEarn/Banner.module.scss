@@ -1,0 +1,52 @@
+.banner {
+    @apply p-5 relative;
+}
+.background {
+    background-image: url("/banner.png");
+    height: 156px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 12px;
+}
+.content {
+    @apply flex flex-col justify-center items-center absolute;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    top: 16%;
+}
+.name {
+    @apply flex flex-row gap-3 items-center;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 24px;
+    color: #ffffff;
+    padding-bottom: 28px;
+}
+.vip {
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 12px;
+    color: #ffffff;
+    background: #e2a300;
+    border-radius: 4px;
+    padding: 2px 4px;
+    width: 52px;
+    height: 16px;
+}
+.point {
+    font-weight: 800;
+    font-size: 40px;
+    line-height: 40px;
+    color: #ffffff;
+    padding-bottom: 12px;
+}
+.today {
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 24px;
+    color: #ffffff;
+}

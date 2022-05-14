@@ -9,14 +9,14 @@ import { RootState } from "../../stores";
 import { useRouter } from "next/router";
 
 const Header = () => {
-    const { isBack, title, isLogin, isFixedHeader } = useSelector(
+    const { isBack, title, isLogin, isFixedHeader, isShowHeader } = useSelector(
         (state: RootState) => state.layout
     );
     const router = useRouter();
 
     return (
         <div className="w-full">
-            {isBack && (
+            {isBack && isShowHeader && (
                 <div className={styles.headerWithShadow}>
                     <div className={styles.back}>
                         <IconButton
@@ -43,7 +43,7 @@ const Header = () => {
                     )}
                 </div>
             )}
-            {!isBack && (
+            {!isBack && isShowHeader && (
                 <div
                     className={
                         isFixedHeader ? styles.headerWithShadow : styles.header
@@ -64,6 +64,9 @@ const Header = () => {
                             variant="contained"
                             style={{
                                 backgroundColor: theme.palette.secondary.main,
+                            }}
+                            onClick={() => {
+                                router.push("/login");
                             }}
                         >
                             Login

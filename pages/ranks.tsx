@@ -14,6 +14,7 @@ export default function Ranks() {
         Dispatch(currentLayoutSlice.actions.updateIsBack(true));
         Dispatch(currentLayoutSlice.actions.updateIsShowNav(false));
         Dispatch(currentLayoutSlice.actions.updateTitle("Xếp hạng cổ phiếu"));
+        Dispatch(currentLayoutSlice.actions.updateIsShowHeader(true));
     };
 
     return (

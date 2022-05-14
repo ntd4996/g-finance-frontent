@@ -23,6 +23,41 @@ a {
     box-sizing: border-box;
 }
 
+.container-login {
+    @apply flex justify-center;
+    width: 100vw;
+    height: 100vh;
+    background: url(/backgroundBottom.png);
+    background-repeat: no-repeat;
+    background-position: 42% 100%;
+    background-size: 100vw 436px;
+}
+.text-login {
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+
+    color: #000000;
+}
+.textField-login {
+    width: 327px;
+    height: 48px;
+    @apply my-5;
+}
+.divBoxIcon {
+    border: #dddcdc 1px solid;
+    border-radius: 12px;
+    padding: 12px 20px;
+}
+.textSecond {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+
+    color: #8c8c8c;
+}
 .container {
     min-height: calc(100vh - 104px);
 }
@@ -44,4 +79,16 @@ a {
 }
 .textRed {
     color: #f04164;
+}
+.textSecondary {
+    color: #a349a4;
+}
+.textOrange {
+    color: #e2a300;
+}
+.textPink {
+    color: #f190f2;
+}
+.textPrimary {
+    color: #338cf7;
 }

@@ -7,8 +7,9 @@ export type CurrentLayoutState = {
     title: string;
     isShowNav: boolean;
     isLogin: boolean;
-    valueNav: number
-    isFixedHeader: boolean
+    valueNav: number;
+    isFixedHeader: boolean;
+    isShowHeader: boolean;
 };
 
 let initialState: CurrentLayoutState = {
@@ -17,7 +18,8 @@ let initialState: CurrentLayoutState = {
     isLogin: false,
     title: "",
     valueNav: 0,
-    isFixedHeader: false
+    isFixedHeader: false,
+    isShowHeader: true,
 };
 
 export const currentLayoutSlice = createSlice({
@@ -42,6 +44,9 @@ export const currentLayoutSlice = createSlice({
         },
         updateIsFixedHeader(state, action: PayloadAction<updatePayload>) {
             state.isFixedHeader = action.payload;
+        },
+        updateIsShowHeader(state, action: PayloadAction<updatePayload>) {
+            state.isShowHeader = action.payload;
         },
         reset() {
             return initialState;

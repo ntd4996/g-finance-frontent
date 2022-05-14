@@ -21,6 +21,7 @@ export default function Detail() {
                 "AAS - Chứng khoán Smartinvest (UPC...)"
             )
         );
+        Dispatch(currentLayoutSlice.actions.updateIsShowHeader(true));
     };
 
     return (

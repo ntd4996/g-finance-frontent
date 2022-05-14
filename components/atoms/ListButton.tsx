@@ -33,7 +33,7 @@ export default function ListButton() {
                     Vote
                 </div>
             </Link>
-            <Link href="/ahji">
+            <Link href="/shareToEarn">
                 <div className={styles.btn}>
                     <div className={styles.buttonShare}>
                         <ShareToEarn />

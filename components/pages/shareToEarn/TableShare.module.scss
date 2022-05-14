@@ -1,0 +1,23 @@
+.content {
+    @apply p-5 flex flex-col gap-1;
+
+    box-shadow: inset 0px -1px 0px #eeeeee;
+}
+.name {
+    font-weight: 800;
+    font-size: 14px;
+    line-height: 16px;
+    color: #000000;
+}
+.email {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #000000;
+}
+.address {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    color: #8c8c8c;
+}
