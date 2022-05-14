@@ -25,12 +25,12 @@ export default function ListButton() {
                     Top trader
                 </div>
             </Link>
-            <Link href="/ahji">
+            <Link href="/psychology">
                 <div className={styles.btn}>
                     <div className={styles.buttonVote}>
                         <Vote />
                     </div>
-                    Vote
+                    Tâm lý TT & Dự đoán
                 </div>
             </Link>
             <Link href="/shareToEarn">
