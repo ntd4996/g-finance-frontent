@@ -27,7 +27,7 @@
     @apply mt-11;
 }
 .divButtonToggle {
-    @apply flex justify-center items-center w-full py-5 relative ;
+    @apply flex justify-center items-center w-full py-5 relative;
     z-index: 1;
 }
 .buttons {
@@ -36,7 +36,7 @@
     border: 0;
     color: #000;
     background: #f5edff;
-    font-family: "Manrope";
+    font-family: "Manrope" !important;
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
