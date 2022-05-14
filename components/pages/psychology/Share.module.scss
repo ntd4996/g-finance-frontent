@@ -15,17 +15,17 @@
     @apply pt-8 pb-5;
 }
 .buttons {
-    height: 24px;
+    height: 24px !important;
     border-radius: 16px !important;
-    border: 0;
+    border: 0 !important;
     color: #000;
     background: #f5edff;
-    font-family: "Manrope";
+    font-family: "Manrope" !important;
     font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 16px;
-    margin-right: 8px;
+    font-weight: 400 !important;
+    font-size: 12px !important;
+    line-height: 16px !important;
+    margin-right: 8px !important;
     text-transform: capitalize !important;
     &:hover {
         background: #f5edff;
@@ -75,8 +75,10 @@
     color: rgba(0, 0, 0, 0.6);
 }
 .tabRoot {
-    flex-direction: row-reverse;
-    @apply flex items-center justify-center;
+    flex-direction: row-reverse !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     height: 30px !important;
     .MuiTab-iconWrapper {
         margin: 0;

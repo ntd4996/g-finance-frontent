@@ -88,8 +88,10 @@
     color: rgba(0, 0, 0, 0.6);
 }
 .tabRoot {
-    flex-direction: row-reverse;
-    @apply flex items-center justify-center;
+    flex-direction: row-reverse !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     height: 30px !important;
     .MuiTab-iconWrapper {
         margin: 0;
