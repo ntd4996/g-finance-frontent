@@ -43,6 +43,8 @@ a {
 .textField-login {
     width: 327px;
     height: 48px;
+    margin-top: 1.25rem !important;
+    margin-bottom: 1.25rem !important;
     @apply my-5;
 }
 .divBoxIcon {
@@ -92,3 +94,60 @@ a {
 .textPrimary {
     color: #338cf7;
 }
+
+/* 
+* Coming Soon
+*/
+.containerComingSoon {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+}
+
+.containerCommingSoon span {
+    text-transform: uppercase;
+    display: block;
+}
+
+.textComingSoon1 {
+    color: #262626;
+    font-size: 30px;
+    font-weight: 700;
+    letter-spacing: 10px;
+    margin-bottom: 100px;
+    background: #ffffff;
+    position: relative;
+    animation: text 3s 1;
+}
+
+.textComingSoon2 {
+    font-size: 15px;
+    font-weight: 300;
+    color: #f0932b;
+}
+
+@keyframes text {
+    0% {
+        color: #262626;
+        padding-bottom: 100px;
+        letter-spacing: 12px;
+    }
+    1% {
+        letter-spacing: 12px;
+    }
+
+    50% {
+        letter-spacing: 15px;
+        padding-bottom: -60px;
+    }
+    85% {
+        letter-spacing: 8px;
+        padding-bottom: -60px;
+    }
+}
+/* 
+* /Coming Soon
+*/

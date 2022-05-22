@@ -11,6 +11,7 @@ export default function Home() {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        console.log(1)
         dispatch(currentLayoutSlice.actions.reset());
     }, []);
 
