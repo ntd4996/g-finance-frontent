@@ -7,6 +7,8 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import theme from "../../libs/theme";
 import Google from "../../components/icons/Google";
+import FacebookCircle from "../../components/icons/FacebookCircle";
+import Apple from "../../components/icons/Apple";
 
 export default function SignUp() {
     const dispatch = useDispatch();
@@ -62,7 +64,7 @@ export default function SignUp() {
                         backgroundColor: theme.palette.secondary.main,
                         width: "100%",
                         height: "48px",
-                        marginBottom: "8rem !important",
+                        marginBottom: "1rem",
                     }}
                     onClick={() => {
                         router.push("/home");
@@ -71,15 +73,15 @@ export default function SignUp() {
                     Sign up
                 </Button>
                 <div className="textSecond">- Or sign in with -</div>
-                <div className="flex gap-4 py-3">
+                <div className="flex gap-4 py-5">
                     <div className="divBoxIcon">
                         <Google />
                     </div>
                     <div className="divBoxIcon">
-                        <Image src="/facebook.png" width="30px" height="30px" />
+                        <FacebookCircle />
                     </div>
                     <div className="divBoxIcon">
-                        <Image src="/apple.png" width="30px" height="30px" />
+                        <Apple />
                     </div>
                 </div>
             </div>

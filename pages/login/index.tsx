@@ -56,7 +56,7 @@ export default function Login() {
                         backgroundColor: theme.palette.secondary.main,
                         width: "100%",
                         height: "48px",
-                        marginBottom: "8rem !important",
+                        marginBottom: "1rem",
                     }}
                     onClick={() => {
                         router.push("/home");
