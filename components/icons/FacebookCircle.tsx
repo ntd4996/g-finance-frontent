@@ -10,10 +10,10 @@ export default function FacebookCircle() {
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
         >
-            <circle cx="14.5" cy="14" r="14" fill="url(#pattern0)" />
+            <circle cx="14.5" cy="14" r="14" fill="url(#pattern1)" />
             <defs>
                 <pattern
-                    id="pattern0"
+                    id="pattern1"
                     patternContentUnits="objectBoundingBox"
                     width="1"
                     height="1"
