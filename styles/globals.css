@@ -45,7 +45,6 @@ a {
     height: 48px;
     margin-top: 1.25rem !important;
     margin-bottom: 1.25rem !important;
-    @apply my-5;
 }
 .divBoxIcon {
     border: #dddcdc 1px solid;
