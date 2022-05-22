@@ -62,8 +62,8 @@ export default function SignUp() {
                         backgroundColor: theme.palette.secondary.main,
                         width: "100%",
                         height: "48px",
+                        marginBottom: "8rem !important",
                     }}
-                    className="mb-8"
                     onClick={() => {
                         router.push("/home");
                     }}

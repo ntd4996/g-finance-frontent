@@ -7,15 +7,18 @@ import House from "../icons/House";
 import FundsLine from "../icons/FundsLine";
 import SlideShow from "../icons/SlideShow";
 import FolderChart from "../icons/FolderChart";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../stores";
 import { useRouter } from "next/router";
+import { currentLayoutSlice } from "../../stores/layout";
 
 const Navbar = () => {
     const [value, setValue] = React.useState(0);
     const { isShowNav } = useSelector((state: RootState) => state.layout);
     const router = useRouter();
     const { valueNav } = useSelector((state: RootState) => state.layout);
+    const Dispatch = useDispatch();
+
     React.useEffect(() => {
         setValue(valueNav);
     }, [valueNav]);
@@ -64,6 +67,9 @@ const Navbar = () => {
                         label="Trang chủ"
                         icon={<House />}
                         onClick={() => {
+                            Dispatch(
+                                currentLayoutSlice.actions.updateValueNav(0)
+                            );
                             router.push("/home");
                         }}
                     />
@@ -72,13 +78,19 @@ const Navbar = () => {
                         label="Khuyến nghị"
                         icon={<FundsLine />}
                         onClick={() => {
-                            router.push("/ahihi");
+                            Dispatch(
+                                currentLayoutSlice.actions.updateValueNav(1)
+                            );
+                            router.push("/ranks");
                         }}
                     />
                     <BottomNavigationAction
                         label="Săn tin"
                         icon={<SlideShow />}
                         onClick={() => {
+                            Dispatch(
+                                currentLayoutSlice.actions.updateValueNav(2)
+                            );
                             router.push("/findNews");
                         }}
                     />
@@ -86,6 +98,9 @@ const Navbar = () => {
                         label="Danh mục"
                         icon={<FolderChart />}
                         onClick={() => {
+                            Dispatch(
+                                currentLayoutSlice.actions.updateValueNav(3)
+                            );
                             router.push("/ahihi");
                         }}
                     />

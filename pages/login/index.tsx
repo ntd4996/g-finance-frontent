@@ -7,6 +7,8 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import theme from "../../libs/theme";
 import Google from "../../components/icons/Google";
+import FacebookCircle from "../../components/icons/FacebookCircle";
+import Apple from "../../components/icons/Apple";
 
 export default function Login() {
     const dispatch = useDispatch();
@@ -54,8 +56,8 @@ export default function Login() {
                         backgroundColor: theme.palette.secondary.main,
                         width: "100%",
                         height: "48px",
+                        marginBottom: "8rem !important",
                     }}
-                    className="mb-8"
                     onClick={() => {
                         router.push("/home");
                     }}
@@ -68,16 +70,16 @@ export default function Login() {
                         <Google />
                     </div>
                     <div className="divBoxIcon">
-                        <Image src="/facebook.png" width="30px" height="30px" />
+                        <FacebookCircle />
                     </div>
                     <div className="divBoxIcon">
-                        <Image src="/apple.png" width="30px" height="30px" />
+                        <Apple />
                     </div>
                 </div>
                 <div className="textSecond">
                     Don’t have an account?{" "}
                     <span
-                        className="textPrimary"
+                        className="textPrimary cursor-pointer"
                         onClick={() => {
                             router.push("/signup");
                         }}

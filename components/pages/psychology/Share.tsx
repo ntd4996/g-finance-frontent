@@ -234,7 +234,7 @@ export default function Share() {
 
             <div>
                 <Box
-                    sx={{ borderBottom: 1, borderColor: "divider" }}
+                    sx={{ borderBottom: 1, borderColor: "#a5a4a4cc" }}
                     className={styles.tab}
                 >
                     <Tabs
