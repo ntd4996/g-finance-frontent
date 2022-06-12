@@ -65,6 +65,8 @@ export default function SignUp() {
                         width: "100%",
                         height: "48px",
                         marginBottom: "1rem",
+                        borderRadius: "8px",
+                        fontSize: "14px",
                     }}
                     onClick={() => {
                         router.push("/home");

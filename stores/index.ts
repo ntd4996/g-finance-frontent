@@ -1,6 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
+import { currentAccountSlice } from "./account";
 import { currentLayoutSlice } from "./layout";
 
 const storage = createWebStorage("local");
@@ -12,6 +13,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
     layout: currentLayoutSlice.reducer,
+    account: currentAccountSlice.reducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

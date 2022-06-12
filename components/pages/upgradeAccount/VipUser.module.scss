@@ -1,0 +1,40 @@
+.container {
+    @apply px-8;
+}
+.title {
+    @apply flex justify-center mb-10;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 28px;
+    color: #a349a4;
+    span {
+        @apply border-b-2;
+        border-color: #a349a4;
+    }
+}
+.table {
+    @apply w-full flex flex-col justify-center items-center mb-28;
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 24px;
+    color: #000000;
+	border-radius: 12px;
+	border: 1px solid #FFE4FF;
+    div {
+        @apply w-full flex flex-col justify-center items-center text-center py-4 px-3;
+    }
+    div:nth-child(odd) {
+        background: #f7f1ff;
+    }
+    div:nth-child(even) {
+        background: #efe2ff;
+    }
+	div:first-child {
+		border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+    }
+	div:last-child {
+		border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+    }
+}

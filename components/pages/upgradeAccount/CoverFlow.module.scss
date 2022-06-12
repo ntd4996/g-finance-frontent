@@ -1,0 +1,38 @@
+.card {
+    @apply flex justify-center items-center flex-col;
+    background-image: url("/backgroundCardUpgrade.png");
+    background-position: center;
+    height: 152px;
+    color: #ffffff;
+    border: 2px solid #ce9dff;
+    border-radius: 16px;
+}
+.container {
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.contentCard {
+    @apply p-5 flex flex-col items-center justify-center w-full h-full gap-2;
+    .titleMonth {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: center;
+        color: #ffffff;
+    }
+    .titleG {
+        font-weight: 800;
+        font-size: 36px;
+        line-height: 48px;
+        text-align: center;
+        color: #ffffff;
+    }
+    .titleBuy {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 20px;
+        text-align: center;
+        color: #fe97ff;
+    }
+}
