@@ -508,7 +508,7 @@ export default function Share() {
             >
                 <DialogTitle
                     sx={{
-                        borderBottom: "1px solid #8c8c8c",
+                        borderBottom: "1px solid #eeeeee",
                         padding: "8px",
                     }}
                 >

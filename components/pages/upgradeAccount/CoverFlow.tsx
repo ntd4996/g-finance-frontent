@@ -23,7 +23,6 @@ export default function CoverFlow() {
                     modifier: 1,
                     slideShadows: false,
                 }}
-                // spaceBetween={100}
                 className={styles.container}
                 breakpoints={{
                     320: {
@@ -37,10 +36,11 @@ export default function CoverFlow() {
                 <SwiperSlide>
                     <div className={styles.card}>
                         <div className={styles.contentCard}>
-                            <div className={styles.titleMonth}>1 THÁNG</div>
+                            <div className={styles.title}>GÓI VIP 1</div>
                             <div className={styles.titleG}>200 G</div>
-                            <div className={styles.titleBuy}>
-                                (1G = 1000 VND)
+                            <div className={styles.titleMonth}>
+                                1 THÁNG{" "}
+                                <span className={styles.discount}>(-10%)</span>
                             </div>
                         </div>
                     </div>
@@ -48,26 +48,29 @@ export default function CoverFlow() {
                 <SwiperSlide>
                     <div className={styles.card}>
                         <div className={styles.contentCard}>
-                            <div className={styles.titleMonth}>6 THÁNG</div>
+                            <div className={styles.title}>
+                                GÓI VIP 6{" "}
+                                <span className={styles.discount}>(-15%)</span>
+                            </div>
                             <div className={styles.titleG}>1000 G</div>
-                            <div className={styles.titleBuy}>
-                                (1G = 1000 VND)
-                            </div>
+                            <div className={styles.titleMonth}>+ 6 THÁNG</div>
                         </div>
                     </div>
                 </SwiperSlide>
                 <SwiperSlide>
                     <div className={styles.card}>
                         <div className={styles.contentCard}>
-                            <div className={styles.titleMonth}>12 THÁNG</div>
+                            <div className={styles.title}>GÓI VIP 12</div>
                             <div className={styles.titleG}>2000 G</div>
-                            <div className={styles.titleBuy}>
-                                (1G = 1000 VND)
+                            <div className={styles.titleMonth}>
+                                + 12 THÁNG{" "}
+                                <span className={styles.discount}>(-20%)</span>
                             </div>
                         </div>
                     </div>
                 </SwiperSlide>
             </Swiper>
+            <div className={styles.note}>(1G = 1000VND)</div>
         </div>
     );
 }

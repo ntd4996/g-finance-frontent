@@ -10,10 +10,6 @@ import { RootState } from "../../../stores";
 export default function Banner() {
     const { isUserVip } = useSelector((state: RootState) => state.account);
 
-    useEffect(() => {
-        console.log(isUserVip);
-    }, []);
-
     return (
         <div className={styles.banner}>
             <div className={styles.background}></div>
@@ -37,7 +33,11 @@ export default function Banner() {
                             </div>
                         </Link>
                     ) : (
-                        <QueenChess />
+                        <Link href="/upgradeAccount">
+                            <div className="cursor-pointer">
+                                <QueenChess />
+                            </div>
+                        </Link>
                     )}
                 </div>
             </div>
