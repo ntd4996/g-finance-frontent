@@ -4,8 +4,9 @@ import { currentLayoutSlice } from "../../stores/layout";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import theme from "../../libs/theme";
-import FreeUser from "../../components/pages/upgradeAccount/FreeUser";
-import VipUser from "../../components/pages/upgradeAccount/VipUser";
+import AccountUser from "../../components/pages/upgradeAccount/FreeUser";
+import BuyVipUser from "../../components/pages/upgradeAccount/VipUser";
+import TabAccount from "../../components/pages/upgradeAccount/TabAccount";
 
 export default function UpgradeAccount() {
     const dispatch = useDispatch();
@@ -70,7 +71,7 @@ export default function UpgradeAccount() {
                             textTransform: "capitalize",
                         }}
                     >
-                        VIP User
+                        Mua VIP
                     </ToggleButton>
                     <ToggleButton
                         value={"free"}
@@ -89,12 +90,13 @@ export default function UpgradeAccount() {
                             textTransform: "capitalize",
                         }}
                     >
-                        FREE User
+                        Tài khoản
                     </ToggleButton>
                 </ToggleButtonGroup>
             </div>
-            {type === "vip" && <VipUser />}
-            {type !== "vip" && <FreeUser />}
+            {type === "vip" && <BuyVipUser />}
+            {type !== "vip" && <AccountUser />}
+            <TabAccount />
         </div>
     );
 }

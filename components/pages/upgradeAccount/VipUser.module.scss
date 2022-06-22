@@ -1,5 +1,5 @@
 .container {
-    @apply px-8;
+    @apply px-8 relative;
 }
 .title {
     @apply flex justify-center mb-10;
@@ -18,8 +18,8 @@
     font-size: 13px;
     line-height: 24px;
     color: #000000;
-	border-radius: 12px;
-	border: 1px solid #FFE4FF;
+    border-radius: 12px;
+    border: 1px solid #ffe4ff;
     div {
         @apply w-full flex flex-col justify-center items-center text-center py-4 px-3;
     }
@@ -29,12 +29,12 @@
     div:nth-child(even) {
         background: #efe2ff;
     }
-	div:first-child {
-		border-top-left-radius: 12px;
+    div:first-child {
+        border-top-left-radius: 12px;
         border-top-right-radius: 12px;
     }
-	div:last-child {
-		border-bottom-left-radius: 12px;
+    div:last-child {
+        border-bottom-left-radius: 12px;
         border-bottom-right-radius: 12px;
     }
 }

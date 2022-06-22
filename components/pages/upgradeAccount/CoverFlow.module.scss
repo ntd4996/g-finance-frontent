@@ -9,11 +9,20 @@
 }
 .container {
     width: 100%;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding-top: 24px;
+    padding-bottom: 8px;
 }
 .contentCard {
-    @apply p-5 flex flex-col items-center justify-center w-full h-full gap-2;
+    @apply flex flex-col items-center justify-center w-full h-full gap-2 mb-3;
+    .title {
+        font-weight: 800;
+        font-size: 14px;
+        line-height: 20px;
+        color: #fec4ff;
+    }
+    .discount {
+        color: #faca41;
+    }
     .titleMonth {
         font-weight: 500;
         font-size: 16px;
@@ -35,4 +44,16 @@
         text-align: center;
         color: #fe97ff;
     }
+}
+.note {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #979797;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
 }
