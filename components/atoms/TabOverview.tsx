@@ -1,7 +1,10 @@
+import Image from "next/image";
 import React from "react";
 import styles from "./TabOverView.module.scss";
 
-export default function TabOverView() {
+export default function TabOverView(props: any) {
+    const { data } = props;
+
     return (
         <div className="w-full container">
             <div className={styles.tradingView}>Tradingview</div>
@@ -97,22 +100,59 @@ export default function TabOverView() {
 
             <div className={styles.titleContent}>Thông tin doanh nghiệp</div>
             <div className={styles.content}>
-                &nbsp; &nbsp; &nbsp; Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-                eu turpis molestie, dictum est a, mattis tellus. Sed dignissim,
-                metus nec fringilla accumsan, risus sem sollicitudin lacus, ut
-                interdum tellus elit sed risus. Maecenas eget condimentum velit,
-                sit amet feugiat lectus. Class aptent taciti sociosqu ad litora
-                torquent per conubia nostra, per inceptos himenaeos.
-                <br /> &nbsp; &nbsp; &nbsp; Curabitur tempor quis eros tempus lacinia. Nam bibendum
-                pellentesque quam a convallis. Sed ut vulputate nisi. Integer in
-                felis sed leo vestibulum venenatis. Suspendisse quis arcu sem.
-                Aenean feugiat ex eu vestibulum vestibulum. Morbi a eleifend
-                magna. Nam metus lacus, porttitor eu mauris a, blandit ultrices
-                nibh. Mauris sit amet magna non ligula vestibulum eleifend.
-                Nulla varius volutpat turpis sed lacinia. Nam eget mi in purus
-                lobortis eleifend. Sed nec ante dictum sem condimentum
-                ullamcorper quis venenatis nisi. Proin vitae facilisis nisi, ac
-                posuere leo.
+                <div className={styles.information}>
+                    <div>
+                        {data?.profile?.logo_url ? (
+                            <div className={styles.logo}>
+                                <Image
+                                    src={data?.profile?.logo_url}
+                                    alt="logo"
+                                    width="100%"
+                                    height="100%"
+                                    layout="responsive"
+                                    objectFit="fill"
+                                />
+                            </div>
+                        ) : (
+                            <div></div>
+                        )}
+                    </div>
+                    <div>
+                        <div>
+                            <span className="font-bold">Điện thoại:</span>{" "}
+                            <a
+                                href={`tel:${data?.profile?.telephone}`}
+                                className="textLink"
+                            >
+                                {data?.profile?.telephone}
+                            </a>
+                        </div>
+                        <div>
+                            <span className="font-bold">Website:</span>{" "}
+                            <a
+                                href={`https://${data?.profile?.website}`}
+                                className="textLink"
+                                rel="noreferrer"
+                                target="_blank"
+                            >
+                                {data?.profile?.website}
+                            </a>
+                        </div>
+                        <div>
+                            <span className="font-bold">MST:</span>{" "}
+                            <span>{data?.profile?.enterprise_code}</span>
+                        </div>
+                        <div>
+                            <span className="font-bold">Fax:</span>{" "}
+                            <span>{data?.profile?.fax}</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <span className="font-bold">Địa chỉ:</span>{" "}
+                    {data?.profile?.address}
+                </div>
+                <div>{data?.profile?.intro}</div>
             </div>
         </div>
     );

@@ -28,7 +28,7 @@ const Header = () => {
                         >
                             <ArrowBackIosIcon />
                         </IconButton>
-                        {title}
+                        <span>{title}</span>
                     </div>
                     {!isLogin && (
                         <Button

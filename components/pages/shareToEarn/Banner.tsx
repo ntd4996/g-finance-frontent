@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import PawnChess from "../../icons/PawnChess";
 import QueenChess from "../../icons/QueenChess";
 import styles from "./Banner.module.scss";
-import dayjs from "dayjs";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../stores";

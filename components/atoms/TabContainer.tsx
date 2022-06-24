@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./TabContainer.module.scss";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -48,13 +48,20 @@ const stylesRoot = {
     },
 };
 
-function TabContainer(props: WithStyles<typeof stylesRoot>) {
+function TabContainer(props: any) {
     const { classes } = props;
-    const [value, setValue] = React.useState(0);
+    const [value, setValue] = useState(0);
+    const [data, setData] = useState({} as any);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
+
+    useEffect(() => {
+        if (props.data) {
+            setData(props.data);
+        }
+    }, [props.data]);
 
     return (
         <div className="w-full">
@@ -138,7 +145,7 @@ function TabContainer(props: WithStyles<typeof stylesRoot>) {
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                <TabOverView />
+                <TabOverView data={data} />
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <TabFinance />

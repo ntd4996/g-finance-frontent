@@ -147,6 +147,15 @@ a {
         padding-bottom: -60px;
     }
 }
+
+.textLink{
+    text-decoration: none;
+    color: #32a897;
+}
+.textLink:hover{
+    text-decoration: underline;
+    color: #32a897;
+}
 /* 
 * /Coming Soon
 */

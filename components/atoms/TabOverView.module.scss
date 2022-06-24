@@ -49,10 +49,21 @@
     @apply px-5;
 }
 .content {
+    @apply flex flex-col px-5 gap-2;
     font-weight: 400;
     font-size: 14px;
     line-height: 24px;
     color: #000000;
-    @apply px-5;
-	padding-bottom: 60px;
+    padding-bottom: 60px;
+}
+.logo {
+    width: 100px;
+    border-radius: 20px;
+    img {
+        @apply border;
+        border-radius: 20px;
+    }
+}
+.information {
+    @apply flex flex-row gap-4;
 }
