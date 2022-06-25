@@ -15,17 +15,23 @@
     @apply flex pt-5 w-full justify-between items-center px-5;
 }
 .flexCol {
-    @apply flex flex-col w-1/3;
+    @apply flex flex-col w-full;
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
     color: #282828;
 }
 .title {
+    @apply truncate;
     font-weight: 700;
     font-size: 11px;
     line-height: 20px;
     color: #979797;
+    width: 100%;
+}
+.contentMeta {
+    @apply truncate;
+    width: 100%;
 }
 .textGreen {
     font-weight: 500;
@@ -66,4 +72,7 @@
 }
 .information {
     @apply flex flex-row gap-4;
+}
+.gird {
+    @apply grid grid-cols-3 grid-flow-row gap-4 px-5;
 }
