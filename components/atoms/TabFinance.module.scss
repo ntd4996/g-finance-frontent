@@ -7,6 +7,7 @@
     font-size: 12px;
     line-height: 16px;
     color: #8c8c8c !important;
+    min-width: 80px;
 }
 .numberLabel {
     background: #00b876;
@@ -57,4 +58,7 @@
     line-height: 20px;
     letter-spacing: 0.04em;
     color: #00b876;
+}
+.table {
+    padding-bottom: 54px;
 }

@@ -54,9 +54,9 @@ export default function Detail() {
 
     return (
         <div className="pagePaddingTop">
-            <DetailTop data={dataFetch} />
-            <ToggleButtonDay />
-            <TabContainer data={dataFetch} />
+            <DetailTop data={dataFetch} loading={loading} />
+            <ToggleButtonDay loading={loading}/>
+            <TabContainer data={dataFetch} loading={loading} />
         </div>
     );
 }

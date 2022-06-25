@@ -49,7 +49,7 @@ const stylesRoot = {
 };
 
 function TabContainer(props: any) {
-    const { classes } = props;
+    const { classes, loading } = props;
     const [value, setValue] = useState(0);
     const [data, setData] = useState({} as any);
 
@@ -145,10 +145,10 @@ function TabContainer(props: any) {
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                <TabOverView data={data} />
+                <TabOverView data={data} loading={loading} />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <TabFinance />
+                <TabFinance data={data} loading={loading} />
             </TabPanel>
             <TabPanel value={value} index={2}>
                 <TabSignal />

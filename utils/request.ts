@@ -6,7 +6,6 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-    console.log("request=>request", config.url, config.params);
     return config;
 });
 
