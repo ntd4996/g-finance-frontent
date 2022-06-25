@@ -37,9 +37,9 @@ export default function CoverFlow() {
                     <div className={styles.card}>
                         <div className={styles.contentCard}>
                             <div className={styles.title}>GÓI VIP 1</div>
-                            <div className={styles.titleG}>200 G</div>
-                            <div className={styles.titleMonth}>
-                                1 THÁNG{" "}
+                            <div className={styles.titleMonth}>1 THÁNG</div>
+                            <div className={styles.titleG}>
+                                200 G{" "}
                                 <span className={styles.discount}>(-10%)</span>
                             </div>
                         </div>
@@ -48,12 +48,12 @@ export default function CoverFlow() {
                 <SwiperSlide>
                     <div className={styles.card}>
                         <div className={styles.contentCard}>
-                            <div className={styles.title}>
-                                GÓI VIP 6{" "}
+                            <div className={styles.title}>GÓI VIP 6</div>
+                            <div className={styles.titleMonth}>+ 6 THÁNG</div>
+                            <div className={styles.titleG}>
+                                1000 G{" "}
                                 <span className={styles.discount}>(-15%)</span>
                             </div>
-                            <div className={styles.titleG}>1000 G</div>
-                            <div className={styles.titleMonth}>+ 6 THÁNG</div>
                         </div>
                     </div>
                 </SwiperSlide>
@@ -61,9 +61,9 @@ export default function CoverFlow() {
                     <div className={styles.card}>
                         <div className={styles.contentCard}>
                             <div className={styles.title}>GÓI VIP 12</div>
-                            <div className={styles.titleG}>2000 G</div>
-                            <div className={styles.titleMonth}>
-                                + 12 THÁNG{" "}
+                            <div className={styles.titleMonth}>+ 12 THÁNG</div>
+                            <div className={styles.titleG}>
+                                2000 G{" "}
                                 <span className={styles.discount}>(-20%)</span>
                             </div>
                         </div>
