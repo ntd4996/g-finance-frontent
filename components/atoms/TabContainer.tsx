@@ -3,11 +3,16 @@ import styles from "./TabContainer.module.scss";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import { withStyles, WithStyles } from "@mui/styles";
+import { withStyles } from "@mui/styles";
 import TabOverView from "./TabOverview";
 import TabFinance from "./TabFinance";
 import TabSignal from "./TabSignal";
 import TabNewspapers from "./TabNewspapers";
+import TabAnalysis from "./TabAnalysis";
+import TabF319 from "./TabF319";
+import { currentDetailSlice } from "../../stores/detail";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -49,12 +54,18 @@ const stylesRoot = {
 };
 
 function TabContainer(props: any) {
+    const router = useRouter();
+    const dispatch = useDispatch();
+
     const { classes, loading } = props;
+    const { valueTab } = router.query;
+
     const [value, setValue] = useState(0);
     const [data, setData] = useState({} as any);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
+        dispatch(currentDetailSlice.actions.updateValueTab(newValue));
     };
 
     useEffect(() => {
@@ -62,6 +73,13 @@ function TabContainer(props: any) {
             setData(props.data);
         }
     }, [props.data]);
+
+    useEffect(() => {
+        if (valueTab) {
+            setValue(+valueTab);
+            dispatch(currentDetailSlice.actions.updateValueTab(valueTab));
+        }
+    }, [valueTab]);
 
     return (
         <div className="w-full">
@@ -154,13 +172,13 @@ function TabContainer(props: any) {
                 <TabSignal />
             </TabPanel>
             <TabPanel value={value} index={3}>
-                <TabNewspapers />
+                <TabAnalysis />
             </TabPanel>
             <TabPanel value={value} index={4}>
                 <TabNewspapers />
             </TabPanel>
             <TabPanel value={value} index={5}>
-                <TabNewspapers />
+                <TabF319 />
             </TabPanel>
         </div>
     );

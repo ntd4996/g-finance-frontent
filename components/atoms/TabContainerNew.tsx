@@ -110,28 +110,12 @@ function TabContainerNew(props: WithStyles<typeof stylesRoot>) {
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <div className="pb-20">
-                    <CardNew />
-                    <CardNew />
-                    <CardNew />
-                    <CardNew />
-                    <CardNew />
-                    <CardNew />
-                    <CardNew />
-                    <CardNew />
-                    <CardNew />
+                    <div className={styles.textComingSoon}>Coming soon...</div>
                 </div>
             </TabPanel>
             <TabPanel value={value} index={2}>
                 <div className="pb-20">
-                    <CardNew />
-                    <CardNew />
-                    <CardNew />
-                    <CardNew />
-                    <CardNew />
-                    <CardNew />
-                    <CardNew />
-                    <CardNew />
-                    <CardNew />
+                    <div className={styles.textComingSoon}>Coming soon...</div>
                 </div>
             </TabPanel>
         </div>

@@ -18,29 +18,32 @@ const Header = () => {
         <div className="w-full">
             {isBack && isShowHeader && (
                 <div className={styles.headerWithShadow}>
-                    <div className={styles.back}>
-                        <IconButton
-                            aria-label="delete"
-                            className={styles.colorButton}
-                            onClick={() => {
-                                router.back();
-                            }}
-                        >
-                            <ArrowBackIosIcon />
-                        </IconButton>
-                        <span>{title}</span>
+                    <div className={styles.contentHeader}>
+                        <div className={styles.back}>
+                            <IconButton
+                                aria-label="delete"
+                                className={styles.colorButton}
+                                onClick={() => {
+                                    router.back();
+                                }}
+                            >
+                                <ArrowBackIosIcon />
+                            </IconButton>
+                            <span>{title}</span>
+                        </div>
+                        {!isLogin && (
+                            <Button
+                                color="secondary"
+                                variant="contained"
+                                style={{
+                                    backgroundColor:
+                                        theme.palette.secondary.main,
+                                }}
+                            >
+                                Login
+                            </Button>
+                        )}
                     </div>
-                    {!isLogin && (
-                        <Button
-                            color="secondary"
-                            variant="contained"
-                            style={{
-                                backgroundColor: theme.palette.secondary.main,
-                            }}
-                        >
-                            Login
-                        </Button>
-                    )}
                 </div>
             )}
             {!isBack && isShowHeader && (
@@ -49,29 +52,32 @@ const Header = () => {
                         isFixedHeader ? styles.headerWithShadow : styles.header
                     }
                 >
-                    <div className={styles.logo}>
-                        <Image
-                            src="/logo.png"
-                            alt="site logo"
-                            width={40}
-                            height={40}
-                        />
-                        <span>BRAND NAME</span>
+                    <div className={styles.contentHeader}>
+                        <div className={styles.logo}>
+                            <Image
+                                src="/logo.png"
+                                alt="site logo"
+                                width={40}
+                                height={40}
+                            />
+                            <span>BRAND NAME</span>
+                        </div>
+                        {!isLogin && (
+                            <Button
+                                color="secondary"
+                                variant="contained"
+                                style={{
+                                    backgroundColor:
+                                        theme.palette.secondary.main,
+                                }}
+                                onClick={() => {
+                                    router.push("/login");
+                                }}
+                            >
+                                Login
+                            </Button>
+                        )}
                     </div>
-                    {!isLogin && (
-                        <Button
-                            color="secondary"
-                            variant="contained"
-                            style={{
-                                backgroundColor: theme.palette.secondary.main,
-                            }}
-                            onClick={() => {
-                                router.push("/login");
-                            }}
-                        >
-                            Login
-                        </Button>
-                    )}
                 </div>
             )}
         </div>

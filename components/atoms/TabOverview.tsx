@@ -16,12 +16,12 @@ export default function TabOverView(props: any) {
                         <div className={styles.contentMeta}>
                             <span
                                 className={
-                                    data?.metadata[key] > 0
+                                    data?.metadata[key]?.deviant >= 0
                                         ? styles.textGreen
                                         : styles.textRed
                                 }
                             >
-                                {_.ceil(data?.metadata[key], 3)}
+                                {_.ceil(data?.metadata[key]?.amount, 3)}
                             </span>
                         </div>
                     </div>

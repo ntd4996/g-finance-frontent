@@ -30,3 +30,6 @@
 .colorButton {
     color: #222;
 }
+.contentHeader {
+    @apply w-full max-w-6xl flex justify-between items-center m-auto;
+}

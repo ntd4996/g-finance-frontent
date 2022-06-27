@@ -53,8 +53,15 @@ export default function DetailTop(props: any) {
                             </div>
                         </div>
                         <div className={styles.flexCol}>
-                            <div className={styles.textGreen}>
-                                {data?.costPrice ?? 0} (5.2%)
+                            <div
+                                className={
+                                    data?.priceDifference >= 0
+                                        ? styles.textGreen
+                                        : styles.textRed
+                                }
+                            >
+                                {data?.costPrice ?? 0} ({data?.priceDifference}
+                                %)
                             </div>
                             <div>
                                 Vol: {data?.volume ?? 0} (
