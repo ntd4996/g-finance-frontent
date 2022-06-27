@@ -1,31 +1,65 @@
 .cardNew {
-    @apply flex flex-row gap-5 px-5 justify-center items-center cursor-pointer my-5;
-    height: 92px;
+    @apply flex flex-row gap-5 px-5 justify-start items-start cursor-pointer my-5 w-full;
+    @media (min-width: 900px) {
+        width: 864px;
+    }
 }
 .image {
-    width: 65%;
+    @apply relative;
+    width: 40%;
+    height: 20vw;
+    min-width: 127px;
+    min-height: 92px;
+    border-radius: 12px;
+    max-height: 170px;
+    img {
+        border-radius: 12px;
+    }
+}
+.imageSkeleton {
+    width: 40%;
+    height: 20vw;
+    max-height: 170px;
+    min-width: 127px;
+    min-height: 92px;
+    border-radius: 12px;
 }
 .info {
-    width: auto;
+    @apply w-full;
     font-weight: 500;
     font-size: 11px;
     line-height: 16px;
     color: #8c8c8c;
 }
 .title {
+    @apply w-full truncate;
     font-style: normal;
     font-weight: 700;
     font-size: 12px;
     line-height: 20px;
     color: #000000;
     padding-bottom: 8px;
+    @media (max-width: 640px) {
+        width: 58vw;
+    }
+    @media (min-width: 640px) {
+        overflow: unset;
+        text-overflow: unset;
+        white-space: unset;
+    }
 }
 .flexRow {
-    @apply flex flex-row gap-2 items-center pb-2;
+    @apply flex flex-row gap-2 items-center pb-2 justify-between;
 }
 .bold {
     font-weight: 700;
     font-size: 11px;
+    line-height: 16px;
+    color: #292929;
+}
+.textBlack {
+    font-weight: 500;
+    font-size: 12px;
     line-height: 16px;
     color: #292929;
 }

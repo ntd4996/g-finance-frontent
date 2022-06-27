@@ -29,7 +29,7 @@ export default function TabFinance(props: any) {
     const [arrayProfitsTitle, setArrayProfitsTitle] = useState([] as any[]);
     useEffect(() => {
         if (data?.turnovers) {
-            const arrayKey = Object.keys(data?.turnovers).map((key) => key);
+            const arrayKey = Object.keys(data?.turnovers).map((key) => key).reverse();
             const arrayValue = Object.keys(data?.turnovers).map(
                 (key) => data?.turnovers[key]
             );
@@ -65,6 +65,7 @@ export default function TabFinance(props: any) {
                             deviant: 0,
                         });
                     }
+                    element.reverse()
                 }
             }
             const element = arrayTurnoversTitle.splice(0, 1)[0];
@@ -74,7 +75,7 @@ export default function TabFinance(props: any) {
             setArrayValueTurnoversState(grouped);
         }
         if (data?.profits) {
-            const arrayKey = Object.keys(data?.profits).map((key) => key);
+            const arrayKey = Object.keys(data?.profits).map((key) => key).reverse();
             const arrayValue = Object.keys(data?.profits).map(
                 (key) => data?.profits[key]
             );
@@ -110,6 +111,7 @@ export default function TabFinance(props: any) {
                             deviant: 0,
                         });
                     }
+                    element.reverse()
                 }
             }
             const element = arrayProfitsTitle.splice(0, 1)[0];
@@ -171,9 +173,8 @@ export default function TabFinance(props: any) {
         ));
         return <>{renderObj}</>;
     };
+
     const RenderRowArrayProfitsTitle: FC = () => {
-        console.log(arrayValueProfitsState["Cả năm"]);
-        console.log(arrayProfitsTitle);
         let renderObj = arrayProfitsTitle.map((title, indexTitle) => (
             <TableRow
                 sx={{

@@ -1,13 +1,66 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./detail.module.scss";
 import Clock from "../../../components/icons/Clock";
 import { IconButton } from "@mui/material";
 import { useRouter } from "next/router";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import { useDispatch } from "react-redux";
+import { currentLayoutSlice } from "../../../stores/layout";
+import ArticlesServer from "../../../services/articles";
+import dayjs from "dayjs";
 
 export default function DetailFindNews() {
+    const Dispatch = useDispatch();
     const router = useRouter();
+    const { id } = router.query;
+    const [loading, setLoading] = useState(true);
+    const [dataArticles, setDataArticles] = useState({} as any);
+    const fetchData = async () => {
+        await ArticlesServer.detailArticles({ id })
+            .then((result) => {
+                console.log("🚀 ~ result", result);
+                if (result?.data?.data) {
+                    setDataArticles(result?.data?.data);
+                    console.log(result?.data?.data?.elements);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        setLoading(false);
+    };
+    useEffect(() => {
+        changeLayoutState();
+    }, []);
+    useEffect(() => {
+        if (id) {
+            fetchData();
+        }
+    }, [id]);
+
+    const changeLayoutState = () => {
+        Dispatch(currentLayoutSlice.actions.updateIsShowNav(true));
+        Dispatch(currentLayoutSlice.actions.updateIsFixedHeader(true));
+        Dispatch(currentLayoutSlice.actions.updateValueNav(2));
+        Dispatch(currentLayoutSlice.actions.updateIsShowHeader(true));
+        Dispatch(currentLayoutSlice.actions.updateIsBack(false));
+    };
+
+    const backPage = () => {
+        const storage = globalThis?.sessionStorage;
+        const prevPath = storage.getItem("prevPath");
+        const pattern = /\/detail\//;
+        console.log(pattern.test(prevPath as string));
+        if (pattern.test(prevPath as string)) {
+            router.push({
+                pathname: prevPath,
+                query: { valueTab: "4" },
+            });
+        } else {
+            router.back();
+        }
+    };
 
     return (
         <div className="w-full py-20">
@@ -17,67 +70,54 @@ export default function DetailFindNews() {
                         aria-label="delete"
                         className={styles.colorButton}
                         onClick={() => {
-                            router.back();
+                            backPage();
                         }}
                     >
                         <ArrowBackIosIcon />
                     </IconButton>
-                    Elon Musk bị cựu cổ đông Twitter kiện v...
+                    <span className={styles.titleHeader}>
+                        {dataArticles?.title}
+                    </span>
                 </div>
-                <div className={styles.image}>
-                    <Image
-                        src="/mus.png"
-                        alt="news"
-                        width="100%"
-                        height="128px"
-                        layout="fill"
-                        objectFit="contain"
-                    />
-                </div>
-                <div className={styles.title}>
-                    Elon Musk bị cựu cổ đông Twitter kiện vì chậm công bố thông
-                    tin
-                </div>
+                {dataArticles?.avatar ? (
+                    <div className={styles.image}>
+                        <Image
+                            src={dataArticles?.avatar ?? "/no-image.jpeg"}
+                            alt="news"
+                            layout="fill"
+                            objectFit="cover"
+                        />
+                    </div>
+                ) : (
+                    ""
+                )}
+
+                <div className={styles.title}>{dataArticles?.title}</div>
+                <div className={styles.sapo}>{dataArticles?.sapo}</div>
                 <div className={styles.flexRow}>
                     <div className="flex gap-2 justify-center">
-                        <Clock /> 10/03/2022 - 08:46
+                        <Clock />
+                        <div>
+                            {dayjs(dataArticles?.publicTime).format(
+                                "DD/MM/YYYY - HH:mm"
+                            )}
+                        </div>
                     </div>
                     <div>
-                        Nguồn:<span className={styles.textBlack}> CafeF</span>
+                        Nguồn:{" "}
+                        <span className={styles.textBlack}>
+                            {dataArticles?.source}
+                        </span>
                     </div>
                 </div>
                 <div className={styles.content}>
-                    &nbsp;&nbsp;&nbsp;Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit. Etiam eu turpis molestie, dictum est a,
-                    mattis tellus. Sed dignissim, metus nec fringilla accumsan,
-                    risus sem sollicitudin lacus, ut interdum tellus elit sed
-                    risus. Maecenas eget condimentum velit, sit amet feugiat
-                    lectus.
-                    <br /> &nbsp;&nbsp;&nbsp; Curabitur tempor quis eros tempus
-                    lacinia. Nam bibendum pellentesque quam a convallis. Sed ut
-                    vulputate nisi. Integer in felis sed leo vestibulum
-                    venenatis. Suspendisse quis arcu sem. Aenean feugiat ex eu
-                    vestibulum vestibulum. Morbi a eleifend magna. Nam metus
-                    lacus, porttitor eu mauris a, blandit ultrices nibh. Mauris
-                    sit amet magna non ligula vestibulum eleifend. Nulla varius
-                    volutpat turpis sed lacinia. Nam eget mi in purus lobortis
-                    eleifend.
-                    <br /> &nbsp;&nbsp;&nbsp; Sed nec ante dictum sem
-                    condimentum ullamcorper quis venenatis nisi. Proin vitae
-                    facilisis nisi, ac posuere leo. Nam pulvinar blandit velit,
-                    id condimentum diam faucibus at. Aliquam lacus nisi,
-                    sollicitudin at nisi nec, fermentum congue felis. Quisque
-                    mauris dolor, fringilla sed tincidunt ac, finibus non odio.
-                    <br /> &nbsp;&nbsp;&nbsp; Sed vitae mauris nec ante pretium
-                    finibus. Donec nisl neque, pharetra ac elit eu, faucibus
-                    aliquam ligula. Nullam dictum, tellus tincidunt tempor
-                    laoreet, nibh elit sollicitudin felis, eget feugiat sapien
-                    diam nec nisl. Aenean gravida turpis nisi, consequat dictum
-                    risus dapibus a. Duis felis ante, varius in neque eu, tempor
-                    suscipit sem. Maecenas ullamcorper gravida sem sit amet
-                    cursus. Etiam pulvinar purus vitae justo pharetra consequat.
-                    Mauris id mi ut arcu feugiat maximus. Mauris consequat
-                    tellus id tempus aliquet.
+                    {dataArticles?.elements?.map((ele: any, index: number) => {
+                        return (
+                            <div key={index}>
+                                <p>{ele.content}</p>
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
         </div>
