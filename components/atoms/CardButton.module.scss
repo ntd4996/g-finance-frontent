@@ -19,6 +19,7 @@
     @apply flex items-center justify-between;
 }
 .title {
+    @apply truncate;
     font-weight: 800;
     font-size: 20px;
     line-height: 28px;
@@ -52,4 +53,18 @@
     height: 100px;
     top: -22px;
     right: 4px;
+}
+.numberTop {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: left;
+    color: #08ca98;
+}
+.numberBottom {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: left;
+    color: #292929;
 }
