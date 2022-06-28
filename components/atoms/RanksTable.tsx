@@ -9,6 +9,7 @@ import styles from "./RanksTable.module.scss";
 import TicketServer from "../../services/ticket";
 import FlagIcon from "@mui/icons-material/Flag";
 import FavoriteHear from "./FavoriteHear";
+import { useRouter } from "next/router";
 
 function createData(name: string, calories: string, carbs: number) {
     return { name, calories, carbs };
@@ -18,6 +19,7 @@ export default function RanksTable() {
     const [loading, setLoading] = useState(true);
     const [dataFetch, setDataFetch] = useState([] as any[]);
     const [page, setPage] = useState(0);
+    const router = useRouter();
 
     useEffect(() => {
         fetchData();
@@ -55,6 +57,12 @@ export default function RanksTable() {
 
     const numberWithCommas = (x: any) => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    };
+
+    const redirectPageDetail = (code: string) => {
+        if (code) {
+            router.push(`/detail/${code}`);
+        }
     };
     return (
         <TableContainer>
@@ -122,12 +130,16 @@ export default function RanksTable() {
                                     border: 0,
                                 },
                             }}
+                            className="cursor-pointer"
                         >
                             <TableCell
                                 sx={{
                                     paddingRight: 0,
                                 }}
                                 align="left"
+                                onClick={() =>
+                                    redirectPageDetail(row?.component)
+                                }
                             >
                                 <div className={styles.code}>
                                     {row?.component}
@@ -139,13 +151,26 @@ export default function RanksTable() {
                                     paddingLeft: 0,
                                 }}
                                 align="left"
+                                onClick={() =>
+                                    redirectPageDetail(row?.component)
+                                }
                             >
                                 {row?.name}
                             </TableCell>
-                            <TableCell align="center">
+                            <TableCell
+                                align="center"
+                                onClick={() =>
+                                    redirectPageDetail(row?.component)
+                                }
+                            >
                                 {numberWithCommas(row.costPrice)}
                             </TableCell>
-                            <TableCell align="center">
+                            <TableCell
+                                align="center"
+                                onClick={() =>
+                                    redirectPageDetail(row?.component)
+                                }
+                            >
                                 <div className={styles.numberLabel}>
                                     {row?.scope ? parseInt(row?.scope) : 0}
                                 </div>
