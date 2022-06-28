@@ -57,7 +57,7 @@ function TabContainer(props: any) {
     const router = useRouter();
     const dispatch = useDispatch();
 
-    const { classes, loading } = props;
+    const { classes, loading, toggleButtonDay } = props;
     const { valueTab } = router.query;
 
     const [value, setValue] = useState(0);
@@ -163,7 +163,11 @@ function TabContainer(props: any) {
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                <TabOverView data={data} loading={loading} />
+                <TabOverView
+                    data={data}
+                    loading={loading}
+                    toggleButtonDay={toggleButtonDay}
+                />
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <TabFinance data={data} loading={loading} />

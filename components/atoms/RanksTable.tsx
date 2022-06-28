@@ -7,8 +7,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import styles from "./RanksTable.module.scss";
 import TicketServer from "../../services/ticket";
-import InfiniteScroll from "react-infinite-scroll-component";
-import CardNewSkeleton from "./CardNewSkeleton";
+import FlagIcon from "@mui/icons-material/Flag";
+import FavoriteHear from "./FavoriteHear";
 
 function createData(name: string, calories: string, carbs: number) {
     return { name, calories, carbs };
@@ -52,6 +52,10 @@ export default function RanksTable() {
         setLoading(false);
         setPage(page + 1);
     };
+
+    const numberWithCommas = (x: any) => {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    };
     return (
         <TableContainer>
             <Table aria-label="simple table">
@@ -64,6 +68,7 @@ export default function RanksTable() {
                                 paddingLeft: "15px",
                             }}
                             align="left"
+                            width={"15%"}
                         >
                             Mã
                         </TableCell>
@@ -73,8 +78,9 @@ export default function RanksTable() {
                             sx={{
                                 padding: 0,
                             }}
+                            width={"40%"}
                         >
-                            Ngành
+                            Tên
                         </TableCell>
                         <TableCell
                             className={styles.textHead}
@@ -83,7 +89,7 @@ export default function RanksTable() {
                                 padding: 0,
                             }}
                         >
-                            Giá
+                            Giá (₫)
                         </TableCell>
 
                         <TableCell
@@ -94,6 +100,15 @@ export default function RanksTable() {
                             }}
                         >
                             Điểm Số
+                        </TableCell>
+                        <TableCell
+                            className={styles.textHead}
+                            align="center"
+                            sx={{
+                                padding: 0,
+                            }}
+                        >
+                            <FlagIcon />
                         </TableCell>
                     </TableRow>
                 </TableHead>
@@ -124,16 +139,19 @@ export default function RanksTable() {
                                     paddingLeft: 0,
                                 }}
                                 align="left"
-                            ></TableCell>
+                            >
+                                {row?.name}
+                            </TableCell>
                             <TableCell align="center">
-                                {row.costPrice}
+                                {numberWithCommas(row.costPrice)}
                             </TableCell>
                             <TableCell align="center">
                                 <div className={styles.numberLabel}>
-                                    {row?.componentWeight
-                                        ? parseInt(row?.componentWeight)
-                                        : 0}
+                                    {row?.scope ? parseInt(row?.scope) : 0}
                                 </div>
+                            </TableCell>
+                            <TableCell align="center">
+                                <FavoriteHear />
                             </TableCell>
                         </TableRow>
                     ))}

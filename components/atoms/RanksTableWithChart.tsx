@@ -129,7 +129,7 @@ export default function RanksTable() {
                                         }}
                                     >
                                         <div className={styles.numberLabel}>
-                                            {parseInt(row?.componentWeight) ??
+                                            {parseInt(row?.scope) ??
                                                 0}
                                         </div>
                                     </TableCell>

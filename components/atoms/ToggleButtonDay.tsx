@@ -5,7 +5,7 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { Skeleton } from "@mui/material";
 
 export default function ToggleButtonDay(props: any) {
-    const { loading } = props;
+    const { loading, changeButtonDay } = props;
     const [alignment, setAlignment] = React.useState<string | null>("now");
 
     const handleAlignment = (
@@ -14,6 +14,9 @@ export default function ToggleButtonDay(props: any) {
     ) => {
         if (newAlignment?.length) {
             setAlignment(newAlignment);
+            if (changeButtonDay) {
+                changeButtonDay(newAlignment);
+            }
         }
     };
     return (

@@ -45,8 +45,8 @@ export default function DetailTop(props: any) {
                         <div className={styles.numberLabel}>
                             <div>
                                 <span className={styles.number}>
-                                    {data?.componentWeight
-                                        ? parseInt(data?.componentWeight)
+                                    {data?.scope
+                                        ? parseInt(data?.scope)
                                         : 0}
                                 </span>{" "}
                                 Điểm
@@ -65,7 +65,7 @@ export default function DetailTop(props: any) {
                             </div>
                             <div>
                                 Vol: {data?.volume ?? 0} (
-                                {data?.weightAddition ?? 0}%)
+                                {data?.volumeDifferent ?? 0}%)
                             </div>
                         </div>
                     </div>

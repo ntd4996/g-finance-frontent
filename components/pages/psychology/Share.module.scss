@@ -50,9 +50,9 @@
     @apply w-full flex flex-col py-5;
 }
 .divTabPanel {
-    @apply shadow drop-shadow-lg w-full p-5 flex flex-col mb-5;
-    border-radius: 12px;
+    @apply w-full p-5 flex flex-col mb-5;
     box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
 }
 .row {
     @apply flex flex-row justify-between items-center;
