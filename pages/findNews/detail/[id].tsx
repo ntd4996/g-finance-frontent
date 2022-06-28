@@ -19,10 +19,8 @@ export default function DetailFindNews() {
     const fetchData = async () => {
         await ArticlesServer.detailArticles({ id })
             .then((result) => {
-                console.log("🚀 ~ result", result);
                 if (result?.data?.data) {
                     setDataArticles(result?.data?.data);
-                    console.log(result?.data?.data?.elements);
                 }
             })
             .catch((err) => {
@@ -51,7 +49,6 @@ export default function DetailFindNews() {
         const storage = globalThis?.sessionStorage;
         const prevPath = storage.getItem("prevPath");
         const pattern = /\/detail\//;
-        console.log(pattern.test(prevPath as string));
         if (pattern.test(prevPath as string)) {
             router.push({
                 pathname: prevPath,

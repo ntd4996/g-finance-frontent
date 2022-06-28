@@ -23,7 +23,6 @@ export default function CardButton() {
         await TicketServer.listTicket()
             .then((result) => {
                 if (result?.data?.data) {
-                    console.log("🚀 ~ result?.data?.data", result?.data?.data);
                     setDataFetch(result.data.data);
                 }
             })
