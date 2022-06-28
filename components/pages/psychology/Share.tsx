@@ -279,7 +279,10 @@ export default function Share() {
                 </Box>
                 <TabPanel value={value} index={0}>
                     <div className={styles.tabPanel}>
-                        <div className={styles.divTabPanel}>
+                        <div className={styles.textComingSoon}>
+                            Coming soon...
+                        </div>
+                        {/* <div className={styles.divTabPanel}>
                             <div className={styles.row}>
                                 <div>
                                     <span className="textGray">Thời gian:</span>
@@ -384,12 +387,15 @@ export default function Share() {
                                     ...
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     <div className={styles.tabPanel}>
-                        <div className={styles.divTabPanel}>
+                        <div className={styles.textComingSoon}>
+                            Coming soon...
+                        </div>
+                        {/* <div className={styles.divTabPanel}>
                             <div className={styles.row}>
                                 <div>
                                     <span className="textGray">Thời gian:</span>
@@ -494,7 +500,7 @@ export default function Share() {
                                     ...
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </TabPanel>
             </div>
@@ -546,13 +552,13 @@ export default function Share() {
                                 https://twitter.com/suspendisse/cacinia
                             </a>
                         </div>
-						<div>
+                        <div>
                             Link:{" "}
                             <a href="" className={styles.link}>
                                 https://twitter.com/suspendisse/cacinia
                             </a>
                         </div>
-						<div>
+                        <div>
                             Link:{" "}
                             <a href="" className={styles.link}>
                                 https://twitter.com/suspendisse/cacinia

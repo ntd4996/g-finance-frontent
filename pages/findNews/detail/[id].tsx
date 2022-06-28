@@ -112,11 +112,28 @@ export default function DetailFindNews() {
                 </div>
                 <div className={styles.content}>
                     {dataArticles?.elements?.map((ele: any, index: number) => {
-                        return (
-                            <div key={index}>
-                                <p>{ele.content}</p>
-                            </div>
-                        );
+                        switch (ele?.type) {
+                            case "p":
+                                return (
+                                    <div key={index}>
+                                        <p>{ele.content}</p>
+                                    </div>
+                                );
+                            case "img":
+                                return (
+                                    <div className={styles.image}>
+                                        <Image
+                                            src={ele?.content}
+                                            alt="news"
+                                            layout="fill"
+                                            objectFit="cover"
+                                        />
+                                    </div>
+                                );
+
+                            default:
+                                return <div key={index}></div>;
+                        }
                     })}
                 </div>
             </div>

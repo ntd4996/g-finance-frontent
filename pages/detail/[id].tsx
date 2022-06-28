@@ -13,6 +13,7 @@ export default function Detail() {
     const { id } = router.query;
     const [dataFetch, setDataFetch] = useState({} as any);
     const [loading, setLoading] = useState(true);
+    const [toggleButtonDay, setToggleButtonDay] = useState("now");
 
     useEffect(() => {
         changeLayoutState();
@@ -55,8 +56,15 @@ export default function Detail() {
     return (
         <div className="pagePaddingTop">
             <DetailTop data={dataFetch} loading={loading} />
-            <ToggleButtonDay loading={loading}/>
-            <TabContainer data={dataFetch} loading={loading} />
+            <ToggleButtonDay
+                loading={loading}
+                changeButtonDay={setToggleButtonDay}
+            />
+            <TabContainer
+                data={dataFetch}
+                loading={loading}
+                toggleButtonDay={toggleButtonDay}
+            />
         </div>
     );
 }
