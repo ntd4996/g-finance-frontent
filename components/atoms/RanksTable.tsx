@@ -30,7 +30,6 @@ export default function RanksTable() {
             .then((result) => {
                 if (result?.data?.data) {
                     setDataFetch(result.data.data);
-                    console.log("🚀 ~ result.data.data", result.data.data[3]);
                 }
             })
             .catch((err) => {

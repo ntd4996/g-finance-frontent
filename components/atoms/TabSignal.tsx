@@ -23,7 +23,7 @@ const rows = [createData("Quý 1", 5.9, 6.0, 24)];
 export default function TabSignal() {
     return (
         <div>
-            <div className={styles.textComingSoon}>Coming soon...</div>;
+            <div className={styles.textComingSoon}>Coming soon...</div>
         </div>
         // <div className="w-full container">
         //     <TableContainer>
