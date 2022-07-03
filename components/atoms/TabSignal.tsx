@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./TabSignal.module.scss";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -8,6 +8,8 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Lock from "../icons/Lock";
 import BigLock from "../icons/BigLock";
+import ChartGaugeShare from "../pages/psychology/ChartGaugeShare";
+import { ToggleButton, ToggleButtonGroup } from "@mui/material";
 
 function createData(
     name: string,
@@ -18,13 +20,100 @@ function createData(
     return { name, calories, fat, carbs };
 }
 
-const rows = [createData("Quý 1", 5.9, 6.0, 24)];
+// const rows = [createData("Quý 1", 5.9, 6.0, 24)];
 
-export default function TabSignal() {
+export default function TabSignal(props: any) {
+    const { data } = props;
+    const [alignment, setAlignment] = useState<string>("shortSignal");
+    const handleAlignment = (
+        event: React.MouseEvent<HTMLElement>,
+        newAlignment: string | null
+    ) => {
+        if (newAlignment?.length) {
+            setAlignment(newAlignment);
+        }
+    };
     return (
-        <div>
-            <div className={styles.textComingSoon}>Coming soon...</div>
-        </div>
+        <>
+            <div className={styles.containerChart}>
+                <div className={styles.divChart}>
+                    <ChartGaugeShare signal={data[alignment]} />
+                </div>
+            </div>
+            <div>
+                <div className={styles.divButtonToggle}>
+                    <ToggleButtonGroup
+                        value={alignment}
+                        exclusive
+                        onChange={handleAlignment}
+                        aria-label="day"
+                    >
+                        <ToggleButton
+                            value="shortSignal"
+                            aria-label="left aligned"
+                            classes={{
+                                root: styles.buttons,
+                                selected: styles.buttonsSelected,
+                            }}
+                        >
+                            Ngắn hạn
+                        </ToggleButton>
+                        <ToggleButton
+                            value="longSignal"
+                            aria-label="right aligned"
+                            classes={{
+                                root: styles.buttons,
+                                selected: styles.buttonsSelected,
+                            }}
+                        >
+                            Dài hạn
+                        </ToggleButton>
+                    </ToggleButtonGroup>
+                </div>
+            </div>
+            <div>
+                <TableContainer>
+                    <Table aria-label="simple table">
+                        <TableBody>
+                            {(data[alignment]?.indicators || []).map((row: any, index: any) => (
+                                <TableRow
+                                    key={index}
+                                    sx={{
+                                        "&:last-child td, &:last-child th": {
+                                            border: 0,
+                                        },
+                                    }}
+                                >
+                                    <TableCell align="left" width={"60%"}>
+                                        <div className={styles.name}>
+                                            {row.indicatorName}
+                                        </div>
+                                    </TableCell>
+                                    <TableCell align="center">
+                                        <div className={styles.numberLabel}>
+                                            {row.latestValue}
+                                        </div>
+                                    </TableCell>
+                                    <TableCell align="right">
+                                        <div
+                                            className={
+                                                row.signal === "buy"
+                                                    ? "textGreen"
+                                                    : row.signal === "sell"
+                                                        ? "textRed"
+                                                        : "textMiddle"
+                                            }
+                                        >
+                                            {row.signal === 'sell' ? 'Bán' : row.signal === 'buy' ? 'Mua' : 'Trung lập'}
+                                        </div>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </div>
+        </>
         // <div className="w-full container">
         //     <TableContainer>
         //         <Table aria-label="simple table">

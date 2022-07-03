@@ -4,12 +4,14 @@ import CardNew from "./CardNew";
 import CardNewSkeleton from "./CardNewSkeleton";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-export default function TabNewspapers() {
+export default function TabNewspapers(props: any) {
+    const { data } = props;
     const [loading, setLoading] = useState(true);
     const [dataArticles, setDataArticles] = useState([] as any[]);
     const [page, setPage] = useState(0);
+    const params = { keywords: data?.component };
     const fetchData = async () => {
-        await ArticlesServer.listArticles({ page: page })
+        await ArticlesServer.listArticles({ ...params, page: page, })
             .then((result) => {
                 if (result?.data?.data) {
                     const data = result?.data?.data;
