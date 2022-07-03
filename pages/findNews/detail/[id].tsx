@@ -133,8 +133,8 @@ export default function DetailFindNews() {
                         }
                     })}
                     <br />
-                    <hr/>
-                    <p style={{textAlign: 'right'}}>Nguồn: <a href={dataArticles.url} target='_blank'>{dataArticles.url}</a></p>
+                    <hr />
+                    <p style={{ textAlign: 'right' }}>Nguồn: <a href={dataArticles.url} rel="noreferrer" target="_blank">{dataArticles.url}</a></p>
                 </div>
             </div>
         </div>

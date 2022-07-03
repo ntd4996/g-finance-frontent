@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import styles from "./Share.module.scss";
-import SearchIcon from "@mui/icons-material/Search";
 import {
     Autocomplete,
-    Button,
+    Box,
     Dialog,
     DialogActions,
     DialogContent,
@@ -23,15 +22,12 @@ import {
 } from "@mui/material";
 import ChartGaugeShare from "./ChartGaugeShare";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
-import Question from "../../icons/Question";
-import { Box } from "@mui/system";
+// import { Box } from "@mui/system";
 import ArrowDown from "../../icons/ArrowDown";
 import ArrowRight from "../../icons/ArrowRight";
 import { TransitionProps } from "@mui/material/transitions";
 import ClearIcon from "@mui/icons-material/Clear";
-import Link from "next/link";
 import TicketServer from "../../../services/ticket";
-import { sign } from "crypto";
 
 function createData(name: string, carbs: number, protein: string) {
     return { name, carbs, protein };
