@@ -1,29 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReactECharts from "echarts-for-react";
 import styles from "./ChartGaugeShare.module.scss";
 
-export default function ChartGaugeShare() {
+export default function ChartGaugeShare(data: any) {
+    const [value, setValue] = useState(0.5);
+    const [totalBuy, setTotalBuy] = useState(0);
+    const [totalSell, setTotalSell] = useState(0);
+    const [totalNeutral, setTotalNeutral] = useState(0);
     useEffect(() => {
-        const interval: any = window.setInterval(() => {
-            const randomValue = +(Math.random() * 1).toFixed(2);
-            if (eChartsRef && eChartsRef.current) {
-                eChartsRef.current?.getEchartsInstance().setOption({
-                    series: [
-                        {
-                            data: [
-                                {
-                                    value: randomValue,
-                                },
-                            ],
-                        },
-                    ],
-                });
-            }
-        }, 3000);
-        return () => clearInterval(interval);
-    }, []);
+        const signal = data.signal;
+        // const sum = (signal?.indicators || [])
+        //     .reduce(
+        //         (partialSum: number, a: any) => partialSum + (a.signal == 'buy' ? 1
+        //             : a.signal == 'sell' ? -1
+        //                 : 0), 0);
+        const buy = (signal?.indicators || []).reduce((count: number, a: any) => count += a.signal == 'buy' ? 1 : 0, 0);
+        const sell = (signal?.indicators || []).reduce((count: number, a: any) => count += a.signal == 'sell' ? 1 : 0, 0);
+        const neutral = (signal?.indicators || []).reduce((count: number, a: any) => count += (a.signal != 'buy' && a.signal != 'sell') ? 1 : 0, 0);        
+        setTotalNeutral(neutral);
+        setTotalBuy(buy);
+        setTotalSell(sell);
+        
+
+        const tv = buy / (sell + buy);
+        setValue(tv);
+    }, [data])
     const option = {
-        backgroundColor: "#000",
+        backgroundColor: "#FFF",
         series: [
             {
                 type: "gauge",
@@ -66,11 +69,6 @@ export default function ChartGaugeShare() {
                 detail: {
                     show: false,
                 },
-                data: [
-                    {
-                        value: 0.3,
-                    },
-                ],
             },
         ],
     };
@@ -79,7 +77,7 @@ export default function ChartGaugeShare() {
         <div className={styles.divChart}>
             <div className={styles.chart}>
                 <ReactECharts
-                    option={option}
+                    option={{ ...option, series: [{ ...option.series[0], data: [{ value }] }] }}
                     style={{
                         height: "100%",
                         width: "342px",
@@ -91,15 +89,15 @@ export default function ChartGaugeShare() {
                 <div className={styles.sale}>Bán mạnh</div>
                 <div className={styles.middle}>Trung lập</div>
                 <div className={styles.colLeft}>
-                    <span>8</span>
+                    <span>{totalSell}</span>
                     <span>Bán</span>
                 </div>
                 <div className={styles.colMiddle}>
-                    <span>1</span>
+                    <span>{totalNeutral}</span>
                     <span>Trung lập</span>
                 </div>
-				<div className={styles.colRight}>
-                    <span>0</span>
+                <div className={styles.colRight}>
+                    <span>{totalBuy}</span>
                     <span>Mua</span>
                 </div>
             </div>

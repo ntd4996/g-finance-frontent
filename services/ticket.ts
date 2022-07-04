@@ -2,6 +2,7 @@ import request from "../utils/request";
 
 export interface IIndexTagListParamsType {
     page?: number;
+    size?: number;
     limit?: number;
     keyword?: string;
     id?: string | string[];

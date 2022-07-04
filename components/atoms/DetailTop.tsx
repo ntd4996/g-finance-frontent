@@ -60,12 +60,12 @@ export default function DetailTop(props: any) {
                                         : styles.textRed
                                 }
                             >
-                                {data?.costPrice ?? 0} ({data?.priceDifference}
+                                {data?.costPrice ?? 0} ({Math.round((data?.priceDifference || 0) * 100) / 100}
                                 %)
                             </div>
                             <div>
                                 Vol: {data?.volume ?? 0} (
-                                {data?.volumeDifferent ?? 0}%)
+                                {Math.round(data?.volumeDifferent ?? 0 * 100)/100}%)
                             </div>
                         </div>
                     </div>

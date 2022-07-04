@@ -26,7 +26,7 @@ export default function Psychology() {
         dispatch(currentLayoutSlice.actions.updateIsShowHeader(true));
     };
 
-    const [alignment, setAlignment] = React.useState("bitcoin");
+    const [alignment, setAlignment] = React.useState("cophieu");
 
     const handleChange = (
         event: React.MouseEvent<HTMLElement>,
@@ -77,7 +77,7 @@ export default function Psychology() {
                         Bitcoin
                     </ToggleButton>
                     <ToggleButton
-                        value={"bitcoin2"}
+                        value={"cophieu"}
                         sx={{
                             width: "96px",
                             height: "32px",

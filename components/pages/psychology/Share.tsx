@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import styles from "./Share.module.scss";
-import SearchIcon from "@mui/icons-material/Search";
 import {
-    Button,
+    Autocomplete,
+    Box,
     Dialog,
     DialogActions,
     DialogContent,
@@ -22,28 +22,16 @@ import {
 } from "@mui/material";
 import ChartGaugeShare from "./ChartGaugeShare";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
-import Question from "../../icons/Question";
-import { Box } from "@mui/system";
+// import { Box } from "@mui/system";
 import ArrowDown from "../../icons/ArrowDown";
 import ArrowRight from "../../icons/ArrowRight";
 import { TransitionProps } from "@mui/material/transitions";
 import ClearIcon from "@mui/icons-material/Clear";
-import Link from "next/link";
+import TicketServer from "../../../services/ticket";
 
 function createData(name: string, carbs: number, protein: string) {
     return { name, carbs, protein };
 }
-
-const rows = [
-    createData("MBB", 24, "Mua"),
-    createData("MBB", 24, "Bán"),
-    createData("MBB", 24, "Trung lập"),
-    createData("MACD Histogram (12,26,9)", 24, "Mua"),
-    createData("Ichimoku Kijun (9,26,52,26)", 24, "Mua"),
-    createData("Ichimoku Tenkan (9,26,52,26)", 24, "Bán"),
-    createData("MBB", 24, "Trung lập"),
-    createData("MACD Histogram (12,26,9)", 24, "Mua"),
-];
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -84,7 +72,55 @@ const Transition = React.forwardRef(function Transition(
 });
 
 export default function Share() {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [ticker, setTicker] = useState<any>({ component: 'HAG', name: 'Công ty CP Hoàng Anh Gia Lai' });
+    const [tickerlDetai, setTickerDetail] = useState<any>({});
+    const [tickers, setTickers] = useState<any[]>([]);
+    const fetAllTickers = async () => {
+        await TicketServer.listTicket({ size: -1 })
+            .then((result) => {
+                if (result?.data?.data) {
+                    setTickers(result.data.data);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+    useEffect(() => {
+        fetAllTickers();
+    }, []);
+
+    useEffect(() => {
+        const loadTicker = async () => {
+            await TicketServer.detailTicket({ id: ticker?.component })
+                .then((result) => {
+                    if (result?.data?.data) {
+                        setTickerDetail(result.data.data);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+
+        }
+        loadTicker();
+    }, [ticker]);
+
+    useEffect(() => {
+        if (!tickers.length) {
+            return;
+        }
+
+        for (const tk of tickers) {
+            if (tk?.component == 'HAG') {
+                setTicker(tk);
+                return;
+            }
+        }
+        setTicker(tickers[0]);
+    }, [tickers.length])
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -93,7 +129,7 @@ export default function Share() {
     const handleClose = () => {
         setOpen(false);
     };
-    const [alignment, setAlignment] = React.useState<string | null>("7d");
+    const [alignment, setAlignment] = useState<string>("shortSignal");
     const handleAlignment = (
         event: React.MouseEvent<HTMLElement>,
         newAlignment: string | null
@@ -111,7 +147,7 @@ export default function Share() {
 
     return (
         <div className="px-5 w-full">
-            <TextField
+            {/* <TextField
                 label="Nhập mã cổ phiếu"
                 id="outlined-size-normal"
                 color="secondary"
@@ -124,13 +160,41 @@ export default function Share() {
                         </InputAdornment>
                     ),
                 }}
+            /> */}
+            <Autocomplete
+                value={ticker}
+                id="outlined-size-normal"
+                color="secondary"
+                onChange={(event, newValue) => {
+                    setTicker(newValue);
+                }}
+                className={styles.inputSearch}
+                sx={{ width: '100%' }}
+                options={tickers}
+                autoHighlight
+                getOptionLabel={(option) => `${option.component} - ${option.name}`}
+                renderOption={(props, option) => (
+                    <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+                        {option.component} - {option.name}
+                    </Box>
+                )}
+                renderInput={(params) => (
+                    <TextField
+                        {...params}
+                        label="Nhập mã cổ phiếu"
+                        inputProps={{
+                            ...params.inputProps,
+                            autoComplete: 'new-password', // disable autocomplete and autofill
+                        }}
+                    />
+                )}
             />
-            <div className={styles.title}>
-                HAG - Công ty CP Hoàng Anh Gia Lai
-            </div>
+            {/* <div className={styles.title}>
+                {ticker?.component} - {ticker?.name}
+            </div> */}
             <div className={styles.containerChart}>
                 <div className={styles.divChart}>
-                    <ChartGaugeShare />
+                    <ChartGaugeShare signal={tickerlDetai[alignment]} />
                 </div>
             </div>
             <div>
@@ -142,7 +206,7 @@ export default function Share() {
                         aria-label="day"
                     >
                         <ToggleButton
-                            value="7d"
+                            value="shortSignal"
                             aria-label="left aligned"
                             classes={{
                                 root: styles.buttons,
@@ -152,7 +216,7 @@ export default function Share() {
                             Ngắn hạn
                         </ToggleButton>
                         <ToggleButton
-                            value="1m"
+                            value="longSignal"
                             aria-label="right aligned"
                             classes={{
                                 root: styles.buttons,
@@ -168,7 +232,7 @@ export default function Share() {
                 <TableContainer>
                     <Table aria-label="simple table">
                         <TableBody>
-                            {rows.map((row, index) => (
+                            {(tickerlDetai[alignment]?.indicators || []).map((row: any, index: any) => (
                                 <TableRow
                                     key={index}
                                     sx={{
@@ -179,25 +243,25 @@ export default function Share() {
                                 >
                                     <TableCell align="left" width={"60%"}>
                                         <div className={styles.name}>
-                                            {row.name}
+                                            {row.indicatorName}
                                         </div>
                                     </TableCell>
                                     <TableCell align="center">
                                         <div className={styles.numberLabel}>
-                                            {row.carbs}
+                                            {row.latestValue}
                                         </div>
                                     </TableCell>
                                     <TableCell align="right">
                                         <div
                                             className={
-                                                row.protein === "Mua"
+                                                row.signal === "buy"
                                                     ? "textGreen"
-                                                    : row.protein === "Bán"
-                                                    ? "textRed"
-                                                    : "textMiddle"
+                                                    : row.signal === "sell"
+                                                        ? "textRed"
+                                                        : "textMiddle"
                                             }
                                         >
-                                            {row.protein}
+                                            {row.signal === 'sell' ? 'Bán' : row.signal === 'buy' ? 'Mua' : 'Trung lập'}
                                         </div>
                                     </TableCell>
                                 </TableRow>
@@ -209,7 +273,7 @@ export default function Share() {
 
             <div>
                 <div className="flex justify-between">
-                    <div className={styles.title}>Giá HAG ngày 12/04/2022</div>
+                    <div className={styles.title}>Giá {ticker?.component} ngày {'1111'}</div>
                     <span
                         onClick={handleClickOpen}
                         className="flex justify-center items-center gap-3 textSecondary"

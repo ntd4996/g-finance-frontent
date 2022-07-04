@@ -38,16 +38,17 @@ export default function TabOverView(props: any) {
     const chooseDataTicker = (day: number) => {
         if (data?.tickerPerDays) {
             const tickerPerDays = data?.tickerPerDays;
-            let dataChoose = {} as any;
-            tickerPerDays.map((ticker: any) => {
-                const convertString = convertDate(ticker?.time);
-                if (convertString?.length) {
-                    const diff = dayjs().diff(convertString, "day");
-                    if (diff === day) {
-                        dataChoose = ticker;
-                    }
-                }
-            });
+            let dataChoose = tickerPerDays[day];
+            // let dataChoose = {} as any;
+            // tickerPerDays.map((ticker: any) => {
+            //     const convertString = convertDate(ticker?.time);
+            //     if (convertString?.length) {
+            //         const diff = dayjs().diff(convertString, "day");
+            //         if (diff === day) {
+            //             dataChoose = ticker;
+            //         }
+            //     }
+            // });
             if (dataChoose?.id) {
                 setDateDisplay(dataChoose);
             } else {

@@ -35,6 +35,24 @@
     @apply w-full truncate;
     font-style: normal;
     font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    color: #000000;
+    padding-bottom: 8px;
+    @media (max-width: 640px) {
+        width: 58vw;
+    }
+    @media (min-width: 640px) {
+        overflow: unset;
+        text-overflow: unset;
+        white-space: unset;
+    }
+}
+
+.sapo {
+    @apply w-full truncate;
+    font-style: normal;
+    font-weight: 100;
     font-size: 12px;
     line-height: 20px;
     color: #000000;

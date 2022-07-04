@@ -20,6 +20,7 @@ export default function CardNew(props: any) {
                 </div>
                 <div className={styles.info}>
                     <div className={styles.title}>{articles?.title}</div>
+                    <div className={styles.sapo}>{articles?.sapo}</div>
                     <div className={styles.flexRow}>
                         <div className="flex gap-2 justify-center">
                             <Clock />

@@ -150,7 +150,7 @@ function TabContainer(props: any) {
                             root: classes.tabRoot,
                         }}
                     />
-                    <Tab
+                    {/* <Tab
                         label="F319"
                         {...a11yProps(5)}
                         sx={{
@@ -159,7 +159,7 @@ function TabContainer(props: any) {
                         classes={{
                             root: classes.tabRoot,
                         }}
-                    />
+                    /> */}
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
@@ -173,13 +173,13 @@ function TabContainer(props: any) {
                 <TabFinance data={data} loading={loading} />
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <TabSignal />
+                <TabSignal data={data} />
             </TabPanel>
             <TabPanel value={value} index={3}>
                 <TabAnalysis />
             </TabPanel>
             <TabPanel value={value} index={4}>
-                <TabNewspapers />
+                <TabNewspapers data={data} />
             </TabPanel>
             <TabPanel value={value} index={5}>
                 <TabF319 />
