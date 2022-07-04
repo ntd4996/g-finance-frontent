@@ -43,10 +43,10 @@ export default function RanksTable() {
                 <div>
                     {[...Array(10)].map((x, i) => (
                         <div className={styles.skeleton} key={i}>
-                            <Skeleton variant="text" width={100} height={50} />
-                            <Skeleton variant="text" width={60} height={50} />
-                            <Skeleton variant="text" width={65} height={50} />
-                            <Skeleton variant="text" width={135} />
+                            <Skeleton variant="text" width={"40%"} height={50} />
+                            <Skeleton variant="text" width={"10%"} height={50} />
+                            <Skeleton variant="text" width={"10%"} height={50} />
+                            <Skeleton variant="text" width={"40%"} />
                         </div>
                     ))}
                 </div>

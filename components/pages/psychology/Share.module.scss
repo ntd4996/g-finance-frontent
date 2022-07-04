@@ -152,3 +152,7 @@
 .link {
     color: #338cf7;
 }
+.textComingSoon {
+    @apply w-full pb-20 text-center p-7 text-2xl;
+    color: #8c8c8c;
+}
