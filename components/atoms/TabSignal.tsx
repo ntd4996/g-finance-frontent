@@ -34,7 +34,7 @@ export default function TabSignal(props: any) {
         }
     };
     return (
-        <>
+        <div className="w-full container">
             <div className={styles.containerChart}>
                 <div className={styles.divChart}>
                     <ChartGaugeShare signal={data[alignment]} />
@@ -113,7 +113,7 @@ export default function TabSignal(props: any) {
                     </Table>
                 </TableContainer>
             </div>
-        </>
+        </div>
         // <div className="w-full container">
         //     <TableContainer>
         //         <Table aria-label="simple table">
