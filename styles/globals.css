@@ -22,6 +22,13 @@ a {
 * {
     box-sizing: border-box;
 }
+html {
+    -webkit-tap-highlight-color: transparent; /* transparent with keyword */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0); /* transparent with rgba */
+    -webkit-tap-highlight-color: hsla(0, 0, 0, 0); /* transparent with hsla */
+    -webkit-tap-highlight-color: #00000000; /* transparent with hex with alpha */
+    -webkit-tap-highlight-color: #0000; /* transparent with short hex with alpha */
+}
 
 .container-login {
     @apply flex justify-center;
@@ -148,11 +155,11 @@ a {
     }
 }
 
-.textLink{
+.textLink {
     text-decoration: none;
     color: #32a897;
 }
-.textLink:hover{
+.textLink:hover {
     text-decoration: underline;
     color: #32a897;
 }
