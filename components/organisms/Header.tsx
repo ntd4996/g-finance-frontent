@@ -88,7 +88,7 @@ const Header = () => {
                                 width={40}
                                 height={40}
                             />
-                            <span>BRAND NAME</span>
+                            <span>G FINANCE</span>
                         </div>
                         {!isLogin && (
                             <Button
