@@ -32,8 +32,11 @@ const Header = () => {
     const router = useRouter();
     const [isOpenMenu, setIsOpenMenu] = useState(false);
     const toggleDrawer = () => {
-        console.log("2");
         setIsOpenMenu(!isOpenMenu);
+    };
+    const redirectPage = (url: string) => {
+        toggleDrawer();
+        router.push(url);
     };
 
     return (
@@ -74,22 +77,30 @@ const Header = () => {
                         isFixedHeader ? styles.headerWithShadow : styles.header
                     }
                 >
-                    <div
-                        className={styles.hamburgerButton}
-                        onClick={() => toggleDrawer()}
-                    >
-                        <HamburgerButton />
-                    </div>
                     <div className={styles.contentHeader}>
-                        <div className={styles.logo}>
-                            <Image
-                                src="/logo.png"
-                                alt="site logo"
-                                width={40}
-                                height={40}
-                            />
-                            <span>G FINANCE</span>
+                        <div className={styles.flexLogo}>
+                            <div
+                                className={styles.hamburgerButton}
+                                onClick={() => toggleDrawer()}
+                            >
+                                <HamburgerButton />
+                            </div>
+                            <div
+                                className={styles.logo}
+                                onClick={() => {
+                                    router.push("/home");
+                                }}
+                            >
+                                <Image
+                                    src="/logo.png"
+                                    alt="site logo"
+                                    width={40}
+                                    height={40}
+                                />
+                                <span>G FINANCE</span>
+                            </div>
                         </div>
+
                         {!isLogin && (
                             <Button
                                 color="secondary"
@@ -119,60 +130,103 @@ const Header = () => {
                             <Avatar />
                             Username101
                         </div>
-
-                        <Notification />
+                        <div
+                            className="cursor-pointer"
+                            onClick={() => redirectPage("/user")}
+                        >
+                            <Notification />
+                        </div>
                     </div>
                     <div className={styles.middle}>
-                        <div className={styles.content}>
+                        <div
+                            className={styles.content}
+                            onClick={() => redirectPage("/home")}
+                        >
                             <Buildings />
                             Trang chủ
                         </div>
-                        <div className={styles.content}>
+                        <div
+                            className={styles.content}
+                            onClick={() => redirectPage("/favorite")}
+                        >
                             <Document />
                             Danh mục theo dõi
                         </div>
-                        <div className={styles.content}>
+                        <div
+                            className={styles.content}
+                            onClick={() => redirectPage("/filter")}
+                        >
                             <Filter />
                             Bộ lọc
                         </div>
-                        <div className={styles.content}>
+                        <div
+                            className={styles.content}
+                            onClick={() => redirectPage("/ranks")}
+                        >
                             <Ranks />
                             Xếp hạng cổ phiếu
                         </div>
-                        <div className={styles.content}>
+                        <div
+                            className={styles.content}
+                            onClick={() => redirectPage("/ranks")}
+                        >
                             <Heart />
                             Tâm lý thị trường & phán đoán
                         </div>
-                        <div className={styles.content}>
+                        <div
+                            className={styles.content}
+                            onClick={() => redirectPage("/psychology")}
+                        >
                             <News />
                             Săn tin
                         </div>
-                        <div className={styles.content}>
+                        <div
+                            className={styles.content}
+                            onClick={() => redirectPage("/top")}
+                        >
                             <Finance />
                             Top Trader
                         </div>
-                        <div className={styles.content}>
+                        <div
+                            className={styles.content}
+                            onClick={() => redirectPage("/blog")}
+                        >
                             <Blog />
                             Blog
                         </div>
-                        <div className={styles.content}>
+                        <div
+                            className={styles.content}
+                            onClick={() => redirectPage("/exp?tab=guide")}
+                        >
                             <Book />
                             Hướng dẫn chung
                         </div>
-                        <div className={styles.content}>
+                        <div
+                            className={styles.content}
+                            onClick={() => redirectPage("/exp?tab=method")}
+                        >
                             <Method />
                             Phương pháp đầu tư
                         </div>
-                        <div className={styles.content}>
+                        <div
+                            className={styles.content}
+                            onClick={() => redirectPage("/gfinance")}
+                        >
                             <Document />
                             Về Gfinance
                         </div>
-                        <div className={styles.content}>
+                        <div
+                            className={styles.content}
+                            onClick={() => redirectPage("/info")}
+                        >
                             <Info />
                             Liên hệ
                         </div>
                     </div>
-                    <div className={styles.bottom}>
+                    <div
+                        className={styles.bottom}
+                        onClick={() => redirectPage("/login")}
+                    >
                         <Logout /> Đăng xuất
                     </div>
                 </div>

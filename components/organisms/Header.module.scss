@@ -10,8 +10,11 @@
     box-shadow: 0px -4px 20px 3px rgb(0 0 0 / 10%);
     z-index: 90;
 }
+.flexLogo{
+    @apply flex justify-center items-center;
+}
 .logo {
-    @apply flex gap-3 items-center;
+    @apply flex gap-3 items-center cursor-pointer;
 }
 .back {
     @apply flex items-center;
@@ -31,7 +34,8 @@
     color: #222;
 }
 .contentHeader {
-    @apply w-full max-w-6xl flex justify-between items-center m-auto;
+    @apply w-full flex justify-between items-center m-auto;
+    max-width: 834px;
 }
 .hamburgerButton {
     @apply mr-1 cursor-pointer;
