@@ -8,6 +8,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import { useStore } from "../stores";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import Head from "next/head";
 
 const store = useStore;
 const persist = persistStore(store);
@@ -31,6 +32,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Provider store={store}>
             <PersistGate persistor={persist}>
                 <Layout>
+                    <Head>
+                        <title>G Finance</title>
+                    </Head>
                     <Component {...pageProps} className="container" />
                 </Layout>
             </PersistGate>

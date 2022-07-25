@@ -10,6 +10,7 @@ export type CurrentLayoutState = {
     valueNav: number;
     isFixedHeader: boolean;
     isShowHeader: boolean;
+    isShowHeaderAdmin: boolean;
 };
 
 let initialState: CurrentLayoutState = {
@@ -20,6 +21,7 @@ let initialState: CurrentLayoutState = {
     valueNav: 0,
     isFixedHeader: false,
     isShowHeader: true,
+    isShowHeaderAdmin: false
 };
 
 export const currentLayoutSlice = createSlice({
@@ -47,6 +49,9 @@ export const currentLayoutSlice = createSlice({
         },
         updateIsShowHeader(state, action: PayloadAction<updatePayload>) {
             state.isShowHeader = action.payload;
+        },
+        updateIsShowHeaderAdmin(state, action: PayloadAction<updatePayload>) {
+            state.isShowHeaderAdmin = action.payload;
         },
         reset() {
             return initialState;

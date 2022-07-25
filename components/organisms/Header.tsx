@@ -24,14 +24,21 @@ import Book from "../icons/Book";
 import Blog from "../icons/Blog";
 import News from "../icons/News";
 import Ranks from "../icons/Ranks";
+import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 
 const Header = () => {
-    const { isBack, title, isLogin, isFixedHeader, isShowHeader } = useSelector(
-        (state: RootState) => state.layout
-    );
+    const {
+        isBack,
+        title,
+        isLogin,
+        isFixedHeader,
+        isShowHeader,
+        isShowHeaderAdmin,
+    } = useSelector((state: RootState) => state.layout);
     const router = useRouter();
     const [isOpenMenu, setIsOpenMenu] = useState(false);
     const toggleDrawer = () => {
+        console.log("112");
         setIsOpenMenu(!isOpenMenu);
     };
     const redirectPage = (url: string) => {
@@ -41,37 +48,7 @@ const Header = () => {
 
     return (
         <div className="w-full">
-            {isBack && isShowHeader && (
-                <div className={styles.headerWithShadow}>
-                    <div className={styles.contentHeader}>
-                        <div className={styles.back}>
-                            <IconButton
-                                aria-label="delete"
-                                className={styles.colorButton}
-                                onClick={() => {
-                                    router.back();
-                                }}
-                            >
-                                <ArrowBackIosIcon />
-                            </IconButton>
-                            <span>{title}</span>
-                        </div>
-                        {!isLogin && (
-                            <Button
-                                color="secondary"
-                                variant="contained"
-                                style={{
-                                    backgroundColor:
-                                        theme.palette.secondary.main,
-                                }}
-                            >
-                                Login
-                            </Button>
-                        )}
-                    </div>
-                </div>
-            )}
-            {!isBack && isShowHeader && (
+            {isShowHeaderAdmin ? (
                 <div
                     className={
                         isFixedHeader ? styles.headerWithShadow : styles.header
@@ -97,26 +74,93 @@ const Header = () => {
                                     width={40}
                                     height={40}
                                 />
-                                <span>G FINANCE</span>
+                                <span>ADMIN - G FINANCE</span>
                             </div>
                         </div>
-
-                        {!isLogin && (
-                            <Button
-                                color="secondary"
-                                variant="contained"
-                                style={{
-                                    backgroundColor:
-                                        theme.palette.secondary.main,
-                                }}
-                                onClick={() => {
-                                    router.push("/login");
-                                }}
-                            >
-                                Login
-                            </Button>
-                        )}
                     </div>
+                </div>
+            ) : (
+                <div>
+                    {isBack && isShowHeader && (
+                        <div className={styles.headerWithShadow}>
+                            <div className={styles.contentHeader}>
+                                <div className={styles.back}>
+                                    <IconButton
+                                        aria-label="delete"
+                                        className={styles.colorButton}
+                                        onClick={() => {
+                                            router.back();
+                                        }}
+                                    >
+                                        <ArrowBackIosIcon />
+                                    </IconButton>
+                                    <span>{title}</span>
+                                </div>
+                                {!isLogin && (
+                                    <Button
+                                        color="secondary"
+                                        variant="contained"
+                                        style={{
+                                            backgroundColor:
+                                                theme.palette.secondary.main,
+                                        }}
+                                    >
+                                        Login
+                                    </Button>
+                                )}
+                            </div>
+                        </div>
+                    )}
+                    {!isBack && isShowHeader && (
+                        <div
+                            className={
+                                isFixedHeader
+                                    ? styles.headerWithShadow
+                                    : styles.header
+                            }
+                        >
+                            <div className={styles.contentHeader}>
+                                <div className={styles.flexLogo}>
+                                    <div
+                                        className={styles.hamburgerButton}
+                                        onClick={() => toggleDrawer()}
+                                    >
+                                        <HamburgerButton />
+                                    </div>
+                                    <div
+                                        className={styles.logo}
+                                        onClick={() => {
+                                            router.push("/home");
+                                        }}
+                                    >
+                                        <Image
+                                            src="/logo.png"
+                                            alt="site logo"
+                                            width={40}
+                                            height={40}
+                                        />
+                                        <span>G FINANCE</span>
+                                    </div>
+                                </div>
+
+                                {!isLogin && (
+                                    <Button
+                                        color="secondary"
+                                        variant="contained"
+                                        style={{
+                                            backgroundColor:
+                                                theme.palette.secondary.main,
+                                        }}
+                                        onClick={() => {
+                                            router.push("/login");
+                                        }}
+                                    >
+                                        Login
+                                    </Button>
+                                )}
+                            </div>
+                        </div>
+                    )}
                 </div>
             )}
             <Drawer
@@ -138,6 +182,16 @@ const Header = () => {
                         </div>
                     </div>
                     <div className={styles.middle}>
+                        <div
+                            className={styles.content}
+                            onClick={() => redirectPage("/admin")}
+                        >
+                            <AdminPanelSettingsOutlinedIcon
+                                fontSize="large"
+                                color="secondary"
+                            />
+                            Admin
+                        </div>
                         <div
                             className={styles.content}
                             onClick={() => redirectPage("/home")}
