@@ -168,14 +168,14 @@ const Header = () => {
                         </div>
                         <div
                             className={styles.content}
-                            onClick={() => redirectPage("/ranks")}
+                            onClick={() => redirectPage("/psychology")}
                         >
                             <Heart />
                             Tâm lý thị trường & phán đoán
                         </div>
                         <div
                             className={styles.content}
-                            onClick={() => redirectPage("/psychology")}
+                            onClick={() => redirectPage("/findNews")}
                         >
                             <News />
                             Săn tin
