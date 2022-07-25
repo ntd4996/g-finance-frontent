@@ -11,21 +11,15 @@ export default function Admin() {
         changeLayoutState();
         return () => {
             Dispatch(currentLayoutSlice.actions.updateIsShowHeaderAdmin(false));
+            Dispatch(currentLayoutSlice.actions.updateIsFixedHeader(false));
+            Dispatch(currentLayoutSlice.actions.updateIsShowNav(true));
         };
     }, []);
     const changeLayoutState = () => {
         Dispatch(currentLayoutSlice.actions.updateIsShowHeaderAdmin(true));
+        Dispatch(currentLayoutSlice.actions.updateIsFixedHeader(true));
+        Dispatch(currentLayoutSlice.actions.updateIsShowNav(false));
     };
 
-    return (
-        <div>
-            <div
-                onClick={() => {
-                    router.push("/home");
-                }}
-            >
-                button
-            </div>
-        </div>
-    );
+    return <div></div>;
 }

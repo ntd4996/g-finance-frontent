@@ -8,23 +8,9 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../stores";
 import { useRouter } from "next/router";
 import HamburgerButton from "../icons/HamburgerButton";
-import Drawer from "@mui/material/Drawer";
 import { useState } from "react";
-import Notification from "../icons/Notification";
-import Avatar from "../atoms/Avatar";
-import Logout from "../icons/Logout";
-import Buildings from "../icons/Buildings";
-import Document from "../icons/Document";
-import Filter from "../icons/Filter";
-import Info from "../icons/Info";
-import Heart from "../icons/Heart";
-import Finance from "../icons/Finance";
-import Method from "../icons/Method";
-import Book from "../icons/Book";
-import Blog from "../icons/Blog";
-import News from "../icons/News";
-import Ranks from "../icons/Ranks";
-import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
+import MenuAccountUser from "./MenuAccountUser";
+import MenuAccountAdmin from "./MenuAccountAdmin";
 
 const Header = () => {
     const {
@@ -37,10 +23,11 @@ const Header = () => {
     } = useSelector((state: RootState) => state.layout);
     const router = useRouter();
     const [isOpenMenu, setIsOpenMenu] = useState(false);
+
     const toggleDrawer = () => {
-        console.log("112");
         setIsOpenMenu(!isOpenMenu);
     };
+
     const redirectPage = (url: string) => {
         toggleDrawer();
         router.push(url);
@@ -77,6 +64,18 @@ const Header = () => {
                                 <span>ADMIN - G FINANCE</span>
                             </div>
                         </div>
+                        <Button
+                            color="secondary"
+                            variant="contained"
+                            style={{
+                                backgroundColor: theme.palette.secondary.main,
+                            }}
+                            onClick={() => {
+                                router.push("/home");
+                            }}
+                        >
+                            Quay lại trang chủ
+                        </Button>
                     </div>
                 </div>
             ) : (
@@ -163,128 +162,16 @@ const Header = () => {
                     )}
                 </div>
             )}
-            <Drawer
-                anchor="left"
-                open={isOpenMenu}
-                onClose={() => toggleDrawer()}
-            >
-                <div className={styles.drawer}>
-                    <div className={styles.top}>
-                        <div className={styles.avatar}>
-                            <Avatar />
-                            Username101
-                        </div>
-                        <div
-                            className="cursor-pointer"
-                            onClick={() => redirectPage("/user")}
-                        >
-                            <Notification />
-                        </div>
-                    </div>
-                    <div className={styles.middle}>
-                        <div
-                            className={styles.content}
-                            onClick={() => redirectPage("/admin")}
-                        >
-                            <AdminPanelSettingsOutlinedIcon
-                                fontSize="large"
-                                color="secondary"
-                            />
-                            Admin
-                        </div>
-                        <div
-                            className={styles.content}
-                            onClick={() => redirectPage("/home")}
-                        >
-                            <Buildings />
-                            Trang chủ
-                        </div>
-                        <div
-                            className={styles.content}
-                            onClick={() => redirectPage("/favorite")}
-                        >
-                            <Document />
-                            Danh mục theo dõi
-                        </div>
-                        <div
-                            className={styles.content}
-                            onClick={() => redirectPage("/filter")}
-                        >
-                            <Filter />
-                            Bộ lọc
-                        </div>
-                        <div
-                            className={styles.content}
-                            onClick={() => redirectPage("/ranks")}
-                        >
-                            <Ranks />
-                            Xếp hạng cổ phiếu
-                        </div>
-                        <div
-                            className={styles.content}
-                            onClick={() => redirectPage("/psychology")}
-                        >
-                            <Heart />
-                            Tâm lý thị trường & phán đoán
-                        </div>
-                        <div
-                            className={styles.content}
-                            onClick={() => redirectPage("/findNews")}
-                        >
-                            <News />
-                            Săn tin
-                        </div>
-                        <div
-                            className={styles.content}
-                            onClick={() => redirectPage("/top")}
-                        >
-                            <Finance />
-                            Top Trader
-                        </div>
-                        <div
-                            className={styles.content}
-                            onClick={() => redirectPage("/blog")}
-                        >
-                            <Blog />
-                            Blog
-                        </div>
-                        <div
-                            className={styles.content}
-                            onClick={() => redirectPage("/exp?tab=guide")}
-                        >
-                            <Book />
-                            Hướng dẫn chung
-                        </div>
-                        <div
-                            className={styles.content}
-                            onClick={() => redirectPage("/exp?tab=method")}
-                        >
-                            <Method />
-                            Phương pháp đầu tư
-                        </div>
-                        <div
-                            className={styles.content}
-                            onClick={() => redirectPage("/gfinance")}
-                        >
-                            <Document />
-                            Về Gfinance
-                        </div>
-                        <div
-                            className={styles.content}
-                            onClick={() => redirectPage("/info")}
-                        >
-                            <Info />
-                            Liên hệ
-                        </div>
-                    </div>
-                    <div
-                        className={styles.bottom}
-                        onClick={() => redirectPage("/login")}
-                    >
-                        <Logout /> Đăng xuất
-                    </div>
-                </div>
-            </Drawer>
+            <MenuAccountUser
+                isOpenMenu={isOpenMenu}
+                toggleDrawer={toggleDrawer}
+                redirectPage={redirectPage}
+            />
+            <MenuAccountAdmin
+                isOpenMenu={isOpenMenu}
+                toggleDrawer={toggleDrawer}
+                redirectPage={redirectPage}
+            />
         </div>
     );
 };
