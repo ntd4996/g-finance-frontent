@@ -9,6 +9,7 @@ import { useStore } from "../stores";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import Head from "next/head";
+import "react-quill/dist/quill.snow.css";
 
 const store = useStore;
 const persist = persistStore(store);

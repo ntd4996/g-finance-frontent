@@ -24,7 +24,9 @@
     "next": "12.1.5",
     "react": "18.1.0",
     "react-dom": "18.1.0",
+    "react-hook-form": "^7.33.1",
     "react-infinite-scroll-component": "^6.1.0",
+    "react-quill": "^1.3.5",
     "redux-persist": "^6.0.0",
     "swiper": "^8.2.3"
   },

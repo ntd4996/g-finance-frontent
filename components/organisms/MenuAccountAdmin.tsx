@@ -5,17 +5,11 @@ import Avatar from "../atoms/Avatar";
 import Logout from "../icons/Logout";
 import Buildings from "../icons/Buildings";
 import Document from "../icons/Document";
-import Filter from "../icons/Filter";
 import Info from "../icons/Info";
-import Heart from "../icons/Heart";
-import Finance from "../icons/Finance";
 import Method from "../icons/Method";
 import Book from "../icons/Book";
 import Blog from "../icons/Blog";
-import News from "../icons/News";
-import Ranks from "../icons/Ranks";
 import Drawer from "@mui/material/Drawer";
-import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 import { RootState } from "../../stores";
 import { useSelector } from "react-redux";
 
@@ -66,35 +60,35 @@ export default function MenuAccountAdmin(props: propsType) {
                                 onClick={() => redirectPage("admin/blog")}
                             >
                                 <Blog />
-                                Cài đặt Blog
+                                Quản Lý Blog
                             </div>
                             <div
                                 className={styles.content}
                                 onClick={() => redirectPage("admin/guide")}
                             >
                                 <Book />
-                                Cài Đặt Hướng dẫn chung
+                                Quản Lý Hướng dẫn chung
                             </div>
                             <div
                                 className={styles.content}
                                 onClick={() => redirectPage("admin/method")}
                             >
                                 <Method />
-                                Cài Đặt Phương pháp đầu tư
+                                Quản Lý Phương pháp đầu tư
                             </div>
                             <div
                                 className={styles.content}
                                 onClick={() => redirectPage("admin/gfinance")}
                             >
                                 <Document />
-                                Cài Đặt Về Gfinance
+                                Quản Lý Về Gfinance
                             </div>
                             <div
                                 className={styles.content}
                                 onClick={() => redirectPage("admin/info")}
                             >
                                 <Info />
-                                Cài Đặt Liên hệ
+                                Quản Lý Liên hệ
                             </div>
                         </div>
                         <div

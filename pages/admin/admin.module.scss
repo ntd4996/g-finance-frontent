@@ -1,0 +1,13 @@
+.container {
+    @apply pt-32 px-5;
+}
+.cardContent {
+    min-height: 150px;
+	border: 2px solid #A349A4;
+	border-radius: 5px;
+    @apply flex flex-col justify-center items-center gap-3 text-center;
+	svg{
+		height: 30px;
+		width: 30px;
+	}
+}

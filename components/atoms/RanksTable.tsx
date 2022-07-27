@@ -55,7 +55,10 @@ export default function RanksTable() {
     };
 
     const numberWithCommas = (x: any) => {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        if(x){
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+        return ''
     };
 
     const redirectPageDetail = (code: string) => {
