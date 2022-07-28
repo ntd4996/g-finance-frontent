@@ -59,13 +59,14 @@ export default function DetailTop(props: any) {
                                         ? styles.textGreen
                                         : styles.textRed
                                 }
+                                style={{ color: data?.priceColor }}
                             >
-                                {data?.costPrice ?? 0} ({Math.round((data?.priceDifference || 0) * 100) / 100}
+                                {(data?.costPrice ?? 0).toLocaleString('en-US', { minimumFractionDigits: 2 })} ({Math.round((data?.priceDifference || 0) * 100) / 100}
                                 %)
                             </div>
                             <div>
-                                Vol: {data?.volume ?? 0} (
-                                {Math.round(data?.volumeDifferent ?? 0 * 100)/100}%)
+                                Vol: {(data?.volume ?? 0).toLocaleString('en-US', { minimumFractionDigits: 0 })} (
+                                {Math.round(data?.volumeDifferent ?? 0 * 100) / 100}%)
                             </div>
                         </div>
                     </div>

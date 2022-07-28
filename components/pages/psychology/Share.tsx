@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import styles from "./Share.module.scss";
+import moment from 'moment';
+
 import {
     Autocomplete,
     Box,
@@ -73,7 +75,7 @@ const Transition = React.forwardRef(function Transition(
 
 export default function Share() {
     const [open, setOpen] = useState(false);
-    const [ticker, setTicker] = useState<any>({ component: 'HAG', name: 'Công ty CP Hoàng Anh Gia Lai' });
+    const [ticker, setTicker] = useState<any>({ component: 'HAG', name: 'Công ty CP Hoàng Anh Gia Lai', lastUpdate: '' });
     const [tickerlDetai, setTickerDetail] = useState<any>({});
     const [tickers, setTickers] = useState<any[]>([]);
     const fetAllTickers = async () => {
@@ -273,7 +275,7 @@ export default function Share() {
 
             <div>
                 <div className="flex justify-between">
-                    <div className={styles.title}>Giá {ticker?.component} ngày {'1111'}</div>
+                    <div className={styles.title}>Giá {ticker?.component} ngày {moment(tickerlDetai.lastUpdate).format('DD/MM/YYYY')}</div>
                     <span
                         onClick={handleClickOpen}
                         className="flex justify-center items-center gap-3 textSecondary"
@@ -283,15 +285,15 @@ export default function Share() {
                 </div>
                 <div className={styles.divFlex}>
                     <div className="flex flex-col">
-                        <span className={styles.numberTitle}>43.248</span>
-                        <span className={styles.numberRed}>
+                        <span className={styles.numberTitle}>{(tickerlDetai?.costPrice || 0).toLocaleString('en-US', { minimumFractionDigits: 0 })}</span>
+                        {/* <span className={styles.numberRed}>
                             <ArrowDown />
                             1.54 (2.35%)
-                        </span>
+                        </span> */}
                     </div>
                     <div className="flex flex-col">
                         <span className={styles.mass}>Khối lượng</span>
-                        <span className={styles.numberMass}>19.242.364</span>
+                        <span className={styles.numberMass}>{(tickerlDetai?.volume || 0).toLocaleString('en-US', { minimumFractionDigits: 0 })}</span>
                     </div>
                 </div>
             </div>

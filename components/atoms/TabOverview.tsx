@@ -8,6 +8,7 @@ import dayjs from "dayjs";
 export default function TabOverView(props: any) {
     const { data, loading, toggleButtonDay } = props;
     const [dateDisplay, setDateDisplay] = useState({} as any);
+    const [logoUrl, setLogoUrl] = useState(null);
 
     useEffect(() => {
         switch (toggleButtonDay) {
@@ -35,6 +36,15 @@ export default function TabOverView(props: any) {
         }
     }, [toggleButtonDay]);
 
+    useEffect(() => {
+        if (data) {
+            setLogoUrl(data.profile?.logo_url);
+        } else {
+            setLogoUrl(null);
+        }
+        chooseDataTicker(0)
+    }, [data])
+
     const chooseDataTicker = (day: number) => {
         if (data?.tickerPerDays) {
             const tickerPerDays = data?.tickerPerDays;
@@ -51,10 +61,10 @@ export default function TabOverView(props: any) {
             // });
             if (dataChoose?.id) {
                 setDateDisplay(dataChoose);
-            } else {
-                setDateDisplay({});
+                return;
             }
         }
+        setDateDisplay(data);
     };
 
     const convertDate = (date: any): string => {
@@ -86,7 +96,7 @@ export default function TabOverView(props: any) {
                                         : styles.textRed
                                 }
                             >
-                                {_.ceil(dateDisplay?.metadata[key]?.amount, 3)}
+                                {(dateDisplay?.metadata[key]?.amount).toLocaleString('en-US', { minimumFractionDigits: 0 })}
                             </span>
                         </div>
                     </div>
@@ -180,10 +190,10 @@ export default function TabOverView(props: any) {
                 <div className={styles.content}>
                     <div className={styles.information}>
                         <div>
-                            {dateDisplay?.profile?.logo_url ? (
+                            {logoUrl ? (
                                 <div className={styles.logo}>
                                     <Image
-                                        src={data?.profile?.logo_url}
+                                        src={logoUrl}
                                         alt="logo"
                                         width="100%"
                                         height="100%"

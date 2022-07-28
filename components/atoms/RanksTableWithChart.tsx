@@ -111,13 +111,13 @@ export default function RanksTable() {
                                         }}
                                     >
                                         <div className={styles.colName}>
-                                            <div className={styles.numberTop}>
-                                                {row.costPrice ?? 0}
+                                            <div className={styles.numberTop} style={{ color: row.priceColor }}>
+                                                {(row.costPrice ?? 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
                                             </div>
                                             <div
                                                 className={styles.numberBottom}
                                             >
-                                                {row.volume ?? 0}
+                                                {(row.volume ?? 0).toLocaleString('en-US', { minimumFractionDigits: 0 })}
                                             </div>
                                         </div>
                                     </TableCell>

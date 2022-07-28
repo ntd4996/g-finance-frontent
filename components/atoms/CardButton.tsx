@@ -52,10 +52,10 @@ export default function CardButton() {
                             <div className={styles.bottomCard}>
                                 <div className={styles.flexCol}>
                                     <span className={styles.numberTop}>
-                                        {row.costPrice ?? 0}
+                                        {(row.costPrice ?? 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
                                     </span>
                                     <span className={styles.numberBottom}>
-                                        {row.volume ?? 0}
+                                        {(row.volume ?? 0).toLocaleString('en-US', { minimumFractionDigits: 0 })}
                                     </span>
                                 </div>
                             </div>
