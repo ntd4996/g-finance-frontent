@@ -30,6 +30,7 @@ import ArrowRight from "../../icons/ArrowRight";
 import { TransitionProps } from "@mui/material/transitions";
 import ClearIcon from "@mui/icons-material/Clear";
 import TicketServer from "../../../services/ticket";
+import ArrowUp from "../../icons/ArrowUp";
 
 function createData(name: string, carbs: number, protein: string) {
     return { name, carbs, protein };
@@ -285,11 +286,11 @@ export default function Share() {
                 </div>
                 <div className={styles.divFlex}>
                     <div className="flex flex-col">
-                        <span className={styles.numberTitle}>{(tickerlDetai?.costPrice || 0).toLocaleString('en-US', { minimumFractionDigits: 0 })}</span>
-                        {/* <span className={styles.numberRed}>
-                            <ArrowDown />
-                            1.54 (2.35%)
-                        </span> */}
+                        <span className={styles.numberTitle} style={{ color: tickerlDetai?.priceColor }}>{(tickerlDetai?.costPrice || 0).toLocaleString('en-US', { minimumFractionDigits: 0 })}</span>
+                        <span className={styles.numberRed} style={{ color: tickerlDetai?.priceColor }}>
+                            {tickerlDetai?.priceDifference ? tickerlDetai?.priceDifference < 0 ? <ArrowDown /> : <ArrowUp /> : ''}
+                            {tickerlDetai?.priceDifference} ({tickerlDetai?.priceDifferencePercent} %)
+                        </span>
                     </div>
                     <div className="flex flex-col">
                         <span className={styles.mass}>Khối lượng</span>

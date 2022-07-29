@@ -61,7 +61,7 @@ export default function DetailTop(props: any) {
                                 }
                                 style={{ color: data?.priceColor }}
                             >
-                                {(data?.costPrice ?? 0).toLocaleString('en-US', { minimumFractionDigits: 2 })} ({Math.round((data?.priceDifference || 0) * 100) / 100}
+                                {(data?.costPrice ?? 0).toLocaleString('en-US', { minimumFractionDigits: 2 })} ({Math.round((data?.priceDifferencePercent || 0) * 100) / 100}
                                 %)
                             </div>
                             <div>
