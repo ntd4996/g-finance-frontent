@@ -2,20 +2,20 @@ import { Button, Slide } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { currentLayoutSlice } from "../../../stores/layout";
-import styles from "./blog.module.scss";
+import styles from "./method.module.scss";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import { TransitionProps } from "@mui/material/transitions";
-import ContainerBlog from "../../../components/pages/admin/blog/ContainerBlog";
+import ContainerMethod from "../../../components/pages/admin/method/ContainerMethod";
 
 const Transition = React.forwardRef<unknown, TransitionProps>((props, ref) => (
     // @ts-ignore
     <Slide direction="up" ref={ref} {...props} />
 ));
 
-export default function CreateBlog() {
+export default function DetailMethod() {
     const Dispatch = useDispatch();
     const [open, setOpen] = React.useState(false);
 
@@ -32,7 +32,7 @@ export default function CreateBlog() {
         Dispatch(currentLayoutSlice.actions.updateIsLogin(true));
         Dispatch(currentLayoutSlice.actions.updateIsShowNav(false));
         Dispatch(currentLayoutSlice.actions.updateValueNav(-1));
-        Dispatch(currentLayoutSlice.actions.updateTitle("Thêm mới Blog"));
+        Dispatch(currentLayoutSlice.actions.updateTitle("Chỉnh Sửa Phương Pháp"));
         Dispatch(currentLayoutSlice.actions.updateIsShowHeader(true));
         Dispatch(currentLayoutSlice.actions.updateIsShowHeaderAdmin(false));
     };
@@ -48,7 +48,7 @@ export default function CreateBlog() {
 
     return (
         <div className="w-full">
-            <ContainerBlog onSubmitData={onSubmitData} isCreate/>
+            <ContainerMethod onSubmitData={onSubmitData} isCreate={false} />
 
             <Dialog
                 open={open}
@@ -64,7 +64,7 @@ export default function CreateBlog() {
                         id="alert-dialog-slide-description"
                         className={styles.titleDialog}
                     >
-                        Thêm mới blog thành công
+                        Chỉnh sửa phương pháp thành công
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

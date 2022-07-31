@@ -20,6 +20,7 @@ const Header = () => {
         isFixedHeader,
         isShowHeader,
         isShowHeaderAdmin,
+        isShowButtonAdmin,
     } = useSelector((state: RootState) => state.layout);
     const router = useRouter();
     const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -64,18 +65,21 @@ const Header = () => {
                                 <span>ADMIN - G FINANCE</span>
                             </div>
                         </div>
-                        <Button
-                            color="secondary"
-                            variant="contained"
-                            style={{
-                                backgroundColor: theme.palette.secondary.main,
-                            }}
-                            onClick={() => {
-                                router.push("/home");
-                            }}
-                        >
-                            Quay lại trang chủ
-                        </Button>
+                        {isShowButtonAdmin && (
+                            <Button
+                                color="secondary"
+                                variant="contained"
+                                style={{
+                                    backgroundColor:
+                                        theme.palette.secondary.main,
+                                }}
+                                onClick={() => {
+                                    router.push("/admin");
+                                }}
+                            >
+                                Quay lại Admin
+                            </Button>
+                        )}
                     </div>
                 </div>
             ) : (

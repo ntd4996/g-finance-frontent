@@ -1,7 +1,7 @@
 import { Button, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import styles from "./ContainerBlog.module.scss";
+import styles from "./ContainerMethod.module.scss";
 import dynamic from "next/dynamic";
 import theme from "../../../../libs/theme";
 import Typography from "@mui/material/Typography";
@@ -15,7 +15,7 @@ interface propsType {
     isCreate: boolean;
 }
 
-export default function ContainerBlog(props: propsType) {
+export default function ContainerMethod(props: propsType) {
     const [namePreview, setNamePreview] = useState("");
     const [contentPreview, setContentPreview] = useState("");
     const [isPreview, setIsPreview] = useState(false);
@@ -89,11 +89,11 @@ export default function ContainerBlog(props: propsType) {
                     <Link underline="hover" color="inherit" href="/admin">
                         Admin
                     </Link>
-                    <Link underline="hover" color="inherit" href="/admin/blog">
-                        Quản Lý Blog
+                    <Link underline="hover" color="inherit" href="/admin/method">
+                        Quản Lý Phương Pháp Chung
                     </Link>
                     <Typography color="text.primary">
-                        {props.isCreate ? "Thêm Mới Blog" : "Chỉnh Sửa Blog"}
+                        {props.isCreate ? "Thêm Mới Phương Pháp" : "Chỉnh Sửa Phương Pháp"}
                     </Typography>
                 </Breadcrumbs>
             </div>
@@ -118,13 +118,13 @@ export default function ContainerBlog(props: propsType) {
                     ></div>
                 </div>
             ) : (
-                <div className={styles.containerBlog}>
+                <div className={styles.containerMethod}>
                     <div className={styles.form}>
                         <div className={styles.displayField}>
                             <Controller
                                 control={control}
                                 rules={{
-                                    required: "Tên Blog không được bỏ trống",
+                                    required: "Tên Phương Pháp không được bỏ trống",
                                 }}
                                 name="name"
                                 render={({
@@ -132,7 +132,7 @@ export default function ContainerBlog(props: propsType) {
                                 }) => (
                                     <TextField
                                         id="outlined-password-input"
-                                        label="Tên Blog"
+                                        label="Tên Phương Pháp"
                                         type="text"
                                         onBlur={onBlur}
                                         onChange={onChange}

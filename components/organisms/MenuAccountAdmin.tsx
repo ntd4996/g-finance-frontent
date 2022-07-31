@@ -12,6 +12,7 @@ import Blog from "../icons/Blog";
 import Drawer from "@mui/material/Drawer";
 import { RootState } from "../../stores";
 import { useSelector } from "react-redux";
+import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
 
 interface propsType {
     isOpenMenu: boolean;
@@ -54,6 +55,16 @@ export default function MenuAccountAdmin(props: propsType) {
                             >
                                 <Buildings />
                                 Trang chủ
+                            </div>
+                            <div
+                                className={styles.content}
+                                onClick={() => redirectPage("/admin")}
+                            >
+                                <AdminPanelSettingsOutlinedIcon
+                                    fontSize="large"
+                                    color="secondary"
+                                />
+                                Admin
                             </div>
                             <div
                                 className={styles.content}

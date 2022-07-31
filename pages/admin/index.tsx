@@ -29,6 +29,7 @@ export default function Admin() {
         Dispatch(currentLayoutSlice.actions.updateIsShowHeaderAdmin(true));
         Dispatch(currentLayoutSlice.actions.updateIsFixedHeader(true));
         Dispatch(currentLayoutSlice.actions.updateIsShowNav(false));
+        Dispatch(currentLayoutSlice.actions.updateIsShowButtonAdmin(false));
     };
 
     return (
@@ -62,7 +63,12 @@ export default function Admin() {
                     </Card>
                 </Grid>
                 <Grid item xs={6} sm={4}>
-                    <Card className={styles.card}>
+                    <Card
+                        className={styles.card}
+                        onClick={() => {
+                            router.push("/admin/guide");
+                        }}
+                    >
                         <CardActionArea>
                             <CardContent className={styles.cardContent}>
                                 <Book />
@@ -72,14 +78,19 @@ export default function Admin() {
                                     component="div"
                                     className="capitalize"
                                 >
-                                    Hưỡng dẫn sử dụng chung
+                                    Hưỡng dẫn chung
                                 </Typography>
                             </CardContent>
                         </CardActionArea>
                     </Card>
                 </Grid>
                 <Grid item xs={6} sm={4}>
-                    <Card className={styles.card}>
+                    <Card
+                        className={styles.card}
+                        onClick={() => {
+                            router.push("/admin/method");
+                        }}
+                    >
                         <CardActionArea>
                             <CardContent className={styles.cardContent}>
                                 <Method />
@@ -96,7 +107,12 @@ export default function Admin() {
                     </Card>
                 </Grid>
                 <Grid item xs={6} sm={4}>
-                    <Card className={styles.card}>
+                    <Card
+                        className={styles.card}
+                        onClick={() => {
+                            router.push("/admin/gfinance");
+                        }}
+                    >
                         <CardActionArea>
                             <CardContent className={styles.cardContent}>
                                 <Document />
@@ -113,7 +129,12 @@ export default function Admin() {
                     </Card>
                 </Grid>
                 <Grid item xs={6} sm={4}>
-                    <Card className={styles.card}>
+                    <Card
+                        className={styles.card}
+                        onClick={() => {
+                            router.push("/admin/info");
+                        }}
+                    >
                         <CardActionArea>
                             <CardContent className={styles.cardContent}>
                                 <Info />

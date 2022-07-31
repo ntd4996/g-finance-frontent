@@ -48,7 +48,7 @@ export default function DetailBlog() {
 
     return (
         <div className="w-full">
-            <ContainerBlog onSubmitData={onSubmitData} />
+            <ContainerBlog onSubmitData={onSubmitData} isCreate={false} />
 
             <Dialog
                 open={open}

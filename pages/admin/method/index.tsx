@@ -20,7 +20,7 @@ import Tooltip from "@mui/material/Tooltip";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { currentLayoutSlice } from "../../../stores/layout";
-import styles from "./blog.module.scss";
+import styles from "./method.module.scss";
 import { Button } from "@mui/material";
 import theme from "../../../libs/theme";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
@@ -79,7 +79,7 @@ const headCells: readonly HeadCell[] = [
         id: "name",
         numeric: false,
         disablePadding: true,
-        label: "Tên Blog",
+        label: "Tên Phương Pháp Đầu Tư",
     },
     {
         id: "action",
@@ -174,7 +174,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
                                                 theme.palette.secondary.main,
                                         }}
                                         onClick={() => {
-                                            router.push("/admin/blog/create");
+                                            router.push("/admin/method/create");
                                         }}
                                     >
                                         Thêm mới
@@ -226,7 +226,7 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
                     id="tableTitle"
                     component="div"
                 >
-                    Quản Lý Blog
+                    Quản Lý Phương Pháp Đầu Tư
                 </Typography>
             )}
             {numSelected > 0 ? (
@@ -242,13 +242,13 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
     );
 };
 
-export default function Blog() {
+export default function Method() {
     const Dispatch = useDispatch();
     const router = useRouter();
     const [rows, setRows] = React.useState([
-        { id: 1, name: "Blog 1" },
-        { id: 2, name: "Blog 2" },
-        { id: 3, name: "Blog 3" },
+        { id: 1, name: "Phương Pháp Đầu Tư 1" },
+        { id: 2, name: "Phương Pháp Đầu Tư 2" },
+        { id: 3, name: "Phương Pháp Đầu Tư 3" },
     ]);
 
     const [order, setOrder] = React.useState<Order>("asc");
@@ -333,7 +333,9 @@ export default function Blog() {
                     <Link underline="hover" color="inherit" href="/admin">
                         Admin
                     </Link>
-                    <Typography color="text.primary">Quản Lý Blog</Typography>
+                    <Typography color="text.primary">
+                        Quản Lý Phương Pháp Đầu Tư
+                    </Typography>
                 </Breadcrumbs>
             </div>
             <Box sx={{ width: "100%" }}>
@@ -410,7 +412,7 @@ export default function Blog() {
                                                         onClick={() => {
                                                             console.log(row);
                                                             router.push(
-                                                                `/admin/blog/${row.id}`
+                                                                `/admin/method/${row.id}`
                                                             );
                                                         }}
                                                     >
