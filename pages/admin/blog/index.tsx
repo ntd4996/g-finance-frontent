@@ -1,4 +1,3 @@
-/* eslint-disable */
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -19,10 +18,11 @@ import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import DeleteIcon from "@mui/icons-material/Delete";
-// import { visuallyHidden } from "@mui/utils";
 import EditIcon from "@mui/icons-material/Edit";
 import { currentLayoutSlice } from "../../../stores/layout";
 import styles from "./blog.module.scss";
+import { Button } from "@mui/material";
+import theme from "../../../libs/theme";
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
     if (b[orderBy] < a[orderBy]) {
@@ -97,6 +97,8 @@ interface EnhancedTableProps {
 }
 
 function EnhancedTableHead(props: EnhancedTableProps) {
+    const router = useRouter();
+
     const {
         onSelectAllClick,
         order,
@@ -161,7 +163,21 @@ function EnhancedTableHead(props: EnhancedTableProps) {
                                     ) : null}
                                 </TableSortLabel>
                             ) : (
-                                <></>
+                                <div className={styles.thAction}>
+                                    <Button
+                                        color="secondary"
+                                        variant="contained"
+                                        style={{
+                                            backgroundColor:
+                                                theme.palette.secondary.main,
+                                        }}
+                                        onClick={() => {
+                                            router.push("/admin/blog/create");
+                                        }}
+                                    >
+                                        Thêm mới
+                                    </Button>
+                                </div>
                             )}
                         </TableCell>
                     );
@@ -367,7 +383,11 @@ export default function Blog() {
                                                 <TableCell
                                                     component="th"
                                                     scope="row"
-                                                    padding="checkbox"
+                                                    // padding="normal"
+                                                    align="center"
+                                                    className={
+                                                        styles.withTableAction
+                                                    }
                                                 >
                                                     <IconButton
                                                         color="secondary"

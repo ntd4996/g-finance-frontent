@@ -9,29 +9,9 @@
 .tableContainer {
     height: calc(100vh - 205px);
 }
-.containerBlog {
-    @apply flex flex-col w-full pt-32 gap-5 px-5 justify-between;
-    height: calc(100vh - 20px);
+.withTableAction{
+    width: 100px;
 }
-.editor {
-    height: calc(100vh - 260px);
-    padding-bottom: 50px;
-}
-.field {
-    @apply w-1/2;
-}
-.form {
-    @apply flex flex-col w-full gap-5;
-}
-.displayField {
-    @apply flex items-start justify-between;
-}
-
-// preview
-.containerPreview {
-    @apply flex flex-col pt-24 gap-5 px-5 justify-start w-full;
-    height: calc(100vh - 20px);
-    img{
-        max-width: 500px;
-    }
+.thAction{
+    padding-bottom: 10px;
 }

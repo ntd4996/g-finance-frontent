@@ -15,7 +15,7 @@ const Transition = React.forwardRef<unknown, TransitionProps>((props, ref) => (
     <Slide direction="up" ref={ref} {...props} />
 ));
 
-export default function DetailBlog() {
+export default function CreateBlog() {
     const Dispatch = useDispatch();
     const [open, setOpen] = React.useState(false);
 
@@ -32,7 +32,7 @@ export default function DetailBlog() {
         Dispatch(currentLayoutSlice.actions.updateIsLogin(true));
         Dispatch(currentLayoutSlice.actions.updateIsShowNav(false));
         Dispatch(currentLayoutSlice.actions.updateValueNav(-1));
-        Dispatch(currentLayoutSlice.actions.updateTitle("Chỉnh Sửa Blog"));
+        Dispatch(currentLayoutSlice.actions.updateTitle("Thêm mới Blog"));
         Dispatch(currentLayoutSlice.actions.updateIsShowHeader(true));
         Dispatch(currentLayoutSlice.actions.updateIsShowHeaderAdmin(false));
     };
@@ -64,7 +64,7 @@ export default function DetailBlog() {
                         id="alert-dialog-slide-description"
                         className={styles.titleDialog}
                     >
-                        Chỉnh sửa blog thành công
+                        Thêm mới blog thành công
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

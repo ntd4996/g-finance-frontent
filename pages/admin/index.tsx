@@ -41,6 +41,7 @@ export default function Admin() {
             >
                 <Grid item xs={6} sm={4}>
                     <Card
+                        className={styles.card}
                         onClick={() => {
                             router.push("/admin/blog");
                         }}
@@ -61,7 +62,7 @@ export default function Admin() {
                     </Card>
                 </Grid>
                 <Grid item xs={6} sm={4}>
-                    <Card>
+                    <Card className={styles.card}>
                         <CardActionArea>
                             <CardContent className={styles.cardContent}>
                                 <Book />
@@ -78,7 +79,7 @@ export default function Admin() {
                     </Card>
                 </Grid>
                 <Grid item xs={6} sm={4}>
-                    <Card>
+                    <Card className={styles.card}>
                         <CardActionArea>
                             <CardContent className={styles.cardContent}>
                                 <Method />
@@ -95,7 +96,7 @@ export default function Admin() {
                     </Card>
                 </Grid>
                 <Grid item xs={6} sm={4}>
-                    <Card>
+                    <Card className={styles.card}>
                         <CardActionArea>
                             <CardContent className={styles.cardContent}>
                                 <Document />
@@ -112,7 +113,7 @@ export default function Admin() {
                     </Card>
                 </Grid>
                 <Grid item xs={6} sm={4}>
-                    <Card>
+                    <Card className={styles.card}>
                         <CardActionArea>
                             <CardContent className={styles.cardContent}>
                                 <Info />
