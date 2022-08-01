@@ -287,7 +287,7 @@ export default function Share() {
                 </TableContainer>
             </div>
 
-            <div>
+            {ticker?.component && (<div>
                 <div className="flex justify-between">
                     <div className={styles.title}>
                         <p style={{ fontSize: 18 }}>Giá cổ phiếu {ticker?.component}</p>
@@ -327,7 +327,7 @@ export default function Share() {
                         <span className={styles.numberMass}>{(tickerlDetai?.volume || 0).toLocaleString('en-US', { minimumFractionDigits: 0 })}</span>
                     </div>
                 </div>
-            </div>
+            </div>)}
 
             <div>
                 <Box
