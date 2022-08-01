@@ -31,6 +31,7 @@ import { TransitionProps } from "@mui/material/transitions";
 import ClearIcon from "@mui/icons-material/Clear";
 import TicketServer from "../../../services/ticket";
 import ArrowUp from "../../icons/ArrowUp";
+import { useRouter } from "next/router";
 
 function createData(name: string, carbs: number, protein: string) {
     return { name, carbs, protein };
@@ -76,9 +77,10 @@ const Transition = React.forwardRef(function Transition(
 
 export default function Share() {
     const [open, setOpen] = useState(false);
-    const [ticker, setTicker] = useState<any>({ component: 'HAG', name: 'Công ty CP Hoàng Anh Gia Lai', lastUpdate: '' });
+    const [ticker, setTicker] = useState<any>({ component: 'HAG', name: 'Công ty CP Hoàng Anh Gia Lai' });
     const [tickerlDetai, setTickerDetail] = useState<any>({});
     const [tickers, setTickers] = useState<any[]>([]);
+    const router = useRouter();
     const fetAllTickers = async () => {
         await TicketServer.listTicket({ size: -1 })
             .then((result) => {
@@ -116,17 +118,18 @@ export default function Share() {
             return;
         }
 
-        for (const tk of tickers) {
-            if (tk?.component == 'HAG') {
-                setTicker(tk);
-                return;
-            }
-        }
-        setTicker(tickers[0]);
+        // for (const tk of tickers) {
+        //     if (tk?.component == 'HAG') {
+        //         setTicker(tk);
+        //         return;
+        //     }
+        // }
+        // setTicker(tickers[0]);
     }, [tickers.length])
 
     const handleClickOpen = () => {
-        setOpen(true);
+        // setOpen(true);
+        router.push(`detail/${ticker.component}`);
     };
 
     const handleClose = () => {
@@ -147,6 +150,16 @@ export default function Share() {
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
     };
+
+    const toColor = (value: number, flag: number) => {
+        if (value == flag) {
+            return '#FF9900';
+        }
+        if (value < flag) {
+            return '#CC0000';
+        }
+        return '#00A500';
+    }
 
     return (
         <div className="px-5 w-full">
@@ -276,21 +289,38 @@ export default function Share() {
 
             <div>
                 <div className="flex justify-between">
-                    <div className={styles.title}>Giá {ticker?.component} ngày {moment(tickerlDetai.lastUpdate).format('DD/MM/YYYY')}</div>
+                    <div className={styles.title}>
+                        <p style={{ fontSize: 18 }}>Giá cổ phiếu {ticker?.component}</p>
+                        <p style={{
+                            fontSize: 12,
+                            fontStyle: 'italic',
+                            fontWeight: 500,
+                        }}>
+                            Cập nhật {moment(tickerlDetai.lastUpdate).format('HH:mm')} ngày {moment(tickerlDetai.lastUpdate).format('DD/MM/YYYY')}
+                        </p>
+                    </div>
                     <span
                         onClick={handleClickOpen}
                         className="flex justify-center items-center gap-3 textSecondary"
+                        style={{ cursor: 'pointer' }}
                     >
                         Chi tiết <ArrowRight />
                     </span>
                 </div>
                 <div className={styles.divFlex}>
+
                     <div className="flex flex-col">
-                        <span className={styles.numberTitle} style={{ color: tickerlDetai?.priceColor }}>{(tickerlDetai?.costPrice || 0).toLocaleString('en-US', { minimumFractionDigits: 0 })}</span>
-                        <span className={styles.numberRed} style={{ color: tickerlDetai?.priceColor }}>
-                            {tickerlDetai?.priceDifference ? tickerlDetai?.priceDifference < 0 ? <ArrowDown /> : <ArrowUp /> : ''}
-                            {tickerlDetai?.priceDifference} ({tickerlDetai?.priceDifferencePercent} %)
-                        </span>
+                        <p style={{ fontSize: 16 }}>Giá đóng cửa</p>
+                        <div className="flex flex-row">
+                            <span className={styles.numberTitle} style={{ color: tickerlDetai?.priceColor, marginRight: 5 }}>{(tickerlDetai?.costPrice || 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+                            <span className={styles.numberRed} style={{ color: tickerlDetai?.priceColor }}>
+                                {tickerlDetai?.priceDifference ? tickerlDetai?.priceDifference < 0 ? <ArrowDown /> : <ArrowUp /> : ''}
+                                {tickerlDetai?.priceDifference} ({tickerlDetai?.priceDifferencePercent} %)
+                            </span>
+                        </div>
+                        <p style={{ marginTop: 20, fontSize: 14 }}>Giá tham chiếu: <b>{tickerlDetai?.priceLast}</b></p>
+                        <p style={{ marginTop: 20, fontSize: 14 }}>Giá mở cửa: <span style={{ color: toColor(tickerlDetai?.priceOpen, tickerlDetai?.priceLast) }}>{tickerlDetai?.priceOpen}</span></p>
+                        <p style={{ marginTop: 20, fontSize: 14 }}>Cao nhất/Thấp nhất: <span style={{ color: toColor(tickerlDetai?.priceMax, tickerlDetai?.priceLast) }}>{tickerlDetai?.priceMax}</span>/<span style={{ color: toColor(tickerlDetai?.priceMin, tickerlDetai?.priceLast) }}>{tickerlDetai?.priceMin}</span></p>
                     </div>
                     <div className="flex flex-col">
                         <span className={styles.mass}>Khối lượng</span>
@@ -634,6 +664,6 @@ export default function Share() {
                     </DialogContentText>
                 </DialogContent>
             </Dialog>
-        </div>
+        </div >
     );
 }
