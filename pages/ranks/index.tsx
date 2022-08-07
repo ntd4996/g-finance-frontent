@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import RanksTable from "../components/atoms/RanksTable";
-import ToggleButtonDay from "../components/atoms/ToggleButtonDay";
-import { currentLayoutSlice } from "../stores/layout";
+import RanksTable from "../../components/pages/ranks/RanksTable";
+import ToggleButtonDay from "../../components/pages/ranks/ToggleButtonDay";
+import { currentLayoutSlice } from "../../stores/layout";
 
 export default function Ranks() {
     const Dispatch = useDispatch();

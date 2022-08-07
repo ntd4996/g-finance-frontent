@@ -1,0 +1,21 @@
+.page {
+    @apply w-full flex flex-row py-5 px-5 items-center justify-center gap-3;
+}
+.buttons {
+    height: 24px !important;
+    border-radius: 16px !important;
+    border: 0 !important;
+    color: #000;
+    background: #f5edff !important;
+    font-family: "Manrope" !important;
+    font-style: normal;
+    font-weight: 400 !important;
+    font-size: 12px !important;
+    line-height: 16px !important;
+    margin-right: 8px !important;
+    text-transform: capitalize !important;
+}
+.buttonsSelected {
+    background: #a349a4 !important;
+    color: #f8f8f8 !important;
+}

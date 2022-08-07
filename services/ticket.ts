@@ -1,4 +1,5 @@
 import request from "../utils/request";
+import _ from "lodash";
 
 export interface IIndexTagListParamsType {
     page?: number;
@@ -10,10 +11,14 @@ export interface IIndexTagListParamsType {
 
 export default class TicketServer {
     static listTicket(params?: IIndexTagListParamsType) {
+        const paramsFilter = _.omitBy(
+            params,
+            (v) => _.isUndefined(v) || _.isNull(v) || v === ""
+        );
         return request({
             url: "/tickers",
             method: "get",
-            params: params,
+            params: paramsFilter,
         });
     }
 
