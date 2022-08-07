@@ -77,7 +77,7 @@ export default function RanksTable() {
                 defaultPage={page}
                 onChangePage={onChangePage}
             />
-            <TableContainer>
+            <TableContainer className={styles.ranksTable}>
                 <Table aria-label="simple table">
                     <TableHead>
                         <TableRow className={styles.tableHead}>
