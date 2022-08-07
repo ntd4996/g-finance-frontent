@@ -2,8 +2,9 @@
     @apply mx-auto w-full px-10 pr-16 sm:w-1/2 sm:p-0;
 }
 .fixedFilter{
-	@apply fixed -top-0 right-0;
-	width: 45%;
+	@apply -top-0 right-0;
+	position: fixed !important;
+	width: 45% !important;
 	z-index: 999;
 	@media (min-width: 640px) {
 		right: 13%;
