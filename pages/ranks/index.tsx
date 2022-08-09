@@ -12,14 +12,14 @@ export default function Ranks() {
     }, []);
     const changeLayoutState = () => {
         Dispatch(currentLayoutSlice.actions.updateIsBack(true));
-        Dispatch(currentLayoutSlice.actions.updateIsShowNav(false));
+        Dispatch(currentLayoutSlice.actions.updateIsShowNav(true));
         Dispatch(currentLayoutSlice.actions.updateTitle("Xếp hạng cổ phiếu"));
         Dispatch(currentLayoutSlice.actions.updateIsShowHeader(true));
         Dispatch(currentLayoutSlice.actions.updateIsLogin(true));
     };
 
     return (
-        <div className="pagePaddingTop pageNotNav">
+        <div className="pagePaddingTop pageNotNav pb-20">
             <ToggleButtonDay />
             <RanksTable />
         </div>

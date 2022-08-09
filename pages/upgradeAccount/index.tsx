@@ -28,14 +28,15 @@ export default function UpgradeAccount() {
     const changeLayoutState = () => {
         dispatch(currentLayoutSlice.actions.updateIsBack(true));
         dispatch(currentLayoutSlice.actions.updateIsLogin(true));
-        dispatch(currentLayoutSlice.actions.updateIsShowNav(false));
+        dispatch(currentLayoutSlice.actions.updateIsShowNav(true));
+        dispatch(currentLayoutSlice.actions.updateValueNav(-1));
         dispatch(
             currentLayoutSlice.actions.updateTitle("Đăng ký tài khoản VIP")
         );
         dispatch(currentLayoutSlice.actions.updateIsShowHeader(true));
     };
     return (
-        <div className="pagePaddingTop bg-white">
+        <div className="pagePaddingTop bg-white pb-20">
             <div className="flex items-center w-100 justify-center pt-5 mb-7 relative z-10">
                 <ToggleButtonGroup
                     color="secondary"

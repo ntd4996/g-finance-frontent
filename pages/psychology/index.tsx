@@ -17,13 +17,14 @@ export default function Psychology() {
     const changeLayoutState = () => {
         dispatch(currentLayoutSlice.actions.updateIsBack(true));
         dispatch(currentLayoutSlice.actions.updateIsLogin(true));
-        dispatch(currentLayoutSlice.actions.updateIsShowNav(false));
+        dispatch(currentLayoutSlice.actions.updateIsShowNav(true));
         dispatch(
             currentLayoutSlice.actions.updateTitle(
                 "Tâm lý thị trường & Phán đoán"
             )
         );
         dispatch(currentLayoutSlice.actions.updateIsShowHeader(true));
+        dispatch(currentLayoutSlice.actions.updateValueNav(-1));
     };
 
     const [alignment, setAlignment] = React.useState("cophieu");
@@ -38,7 +39,7 @@ export default function Psychology() {
     };
 
     return (
-        <div className="pagePaddingTop bg-white">
+        <div className="pagePaddingTop bg-white pb-20">
             <div className="flex items-center w-100 justify-center pt-5 mb-7 relative z-10">
                 <ToggleButtonGroup
                     color="secondary"

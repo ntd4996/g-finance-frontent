@@ -14,10 +14,11 @@ export default function Exp() {
         Dispatch(currentLayoutSlice.actions.updateIsFixedHeader(true));
         Dispatch(currentLayoutSlice.actions.updateIsShowHeader(true));
         Dispatch(currentLayoutSlice.actions.updateIsBack(false));
-        Dispatch(currentLayoutSlice.actions.updateIsShowNav(false));
+        Dispatch(currentLayoutSlice.actions.updateIsShowNav(true));
+        Dispatch(currentLayoutSlice.actions.updateValueNav(-1));
     };
     return (
-        <div className="pagePaddingTop">
+        <div className="pagePaddingTop pb-20">
             <TabContainerExp />
         </div>
     );

@@ -16,12 +16,13 @@ export default function ShareToEarn() {
     const changeLayoutState = () => {
         dispatch(currentLayoutSlice.actions.updateIsBack(true));
         dispatch(currentLayoutSlice.actions.updateIsLogin(true));
-        dispatch(currentLayoutSlice.actions.updateIsShowNav(false));
         dispatch(currentLayoutSlice.actions.updateTitle("Share to earn"));
         dispatch(currentLayoutSlice.actions.updateIsShowHeader(true));
+        dispatch(currentLayoutSlice.actions.updateIsShowNav(true));
+        dispatch(currentLayoutSlice.actions.updateValueNav(-1));
     };
     return (
-        <div className="pagePaddingTop bg-white">
+        <div className="pagePaddingTop bg-white pb-20">
             <Banner />
             <InputCopied />
             <ShareLink />

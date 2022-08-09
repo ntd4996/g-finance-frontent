@@ -53,7 +53,7 @@ function TabShare(props: WithStyles<typeof stylesRoot>) {
     };
     return (
         <div>
-            <div className="w-full">
+            <div className="w-full pb-20">
                 <Box
                     sx={{ borderBottom: 1, borderColor: "divider" }}
                     className={styles.tab}
