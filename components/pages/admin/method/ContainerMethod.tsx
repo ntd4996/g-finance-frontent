@@ -30,21 +30,15 @@ export default function ContainerMethod(props: propsType) {
 
     const modules = {
         toolbar: [
-            [{ header: "1" }, { header: "2" }],
-            [{ size: [] }],
+            [{ header: 1 }, { header: 2 }], // custom button values
+            [{ header: [1, 2, 3, 4, 5, 6, false] }],
+            [{ align: [] }],
             ["bold", "italic", "underline", "strike", "blockquote"],
-            [
-                { list: "ordered" },
-                { list: "bullet" },
-                { indent: "-1" },
-                { indent: "+1" },
-            ],
-            ["image", "video"],
+            [{ list: "ordered" }, { list: "bullet" }],
+            [{ indent: "-1" }, { indent: "+1" }], // outdent/indent
+            ["image", "video", "link"],
+            [{ color: [] }, { background: [] }],
         ],
-        clipboard: {
-            // toggle to add extra line breaks when pasting HTML:
-            matchVisual: false,
-        },
     };
 
     const formats = [
@@ -89,11 +83,17 @@ export default function ContainerMethod(props: propsType) {
                     <Link underline="hover" color="inherit" href="/admin">
                         Admin
                     </Link>
-                    <Link underline="hover" color="inherit" href="/admin/method">
+                    <Link
+                        underline="hover"
+                        color="inherit"
+                        href="/admin/method"
+                    >
                         Quản Lý Phương Pháp Chung
                     </Link>
                     <Typography color="text.primary">
-                        {props.isCreate ? "Thêm Mới Phương Pháp" : "Chỉnh Sửa Phương Pháp"}
+                        {props.isCreate
+                            ? "Thêm Mới Phương Pháp"
+                            : "Chỉnh Sửa Phương Pháp"}
                     </Typography>
                 </Breadcrumbs>
             </div>
@@ -113,7 +113,7 @@ export default function ContainerMethod(props: propsType) {
 
                     <div className={styles.title}>{namePreview}</div>
                     <div
-                        className="content"
+                        className="content ql-editor"
                         dangerouslySetInnerHTML={{ __html: contentPreview }}
                     ></div>
                 </div>
@@ -124,7 +124,8 @@ export default function ContainerMethod(props: propsType) {
                             <Controller
                                 control={control}
                                 rules={{
-                                    required: "Tên Phương Pháp không được bỏ trống",
+                                    required:
+                                        "Tên Phương Pháp không được bỏ trống",
                                 }}
                                 name="name"
                                 render={({
@@ -165,7 +166,6 @@ export default function ContainerMethod(props: propsType) {
                             }) => (
                                 <ReactQuill
                                     modules={modules}
-                                    formats={formats}
                                     theme="snow"
                                     className={styles.editor}
                                     defaultValue={value}
