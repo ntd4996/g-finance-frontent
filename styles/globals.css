@@ -741,3 +741,6 @@ html {
 .ql-editor a {
     color: #06c;
 }
+.ql-toolbar.ql-snow + .ql-container.ql-snow {
+    height: calc(100vh - 330px);
+}
