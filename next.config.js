@@ -6,6 +6,7 @@ const nextConfig = {
             "cdn24hmoney.24hstatic.com",
             "cafefcdn.com",
             "images1.cafef.vn",
+            "image.vietstock.vn",
         ],
     },
     sassOptions: {

@@ -25,7 +25,7 @@ export default function TabNewspapers(props: any) {
     };
     const getMorePost = async () => {
         const pageList = page + 1;
-        await ArticlesServer.listArticles({ page: pageList })
+        await ArticlesServer.listArticles({ ...params, page: pageList })
             .then((result) => {
                 if (result?.data?.data) {
                     const data = result?.data?.data;

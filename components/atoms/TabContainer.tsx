@@ -176,7 +176,7 @@ function TabContainer(props: any) {
                 <TabSignal data={data} />
             </TabPanel>
             <TabPanel value={value} index={3}>
-                <TabAnalysis />
+                <TabNewspapers data={{ ...data, component: [data.component, 'baocaophantich'].join(',') }} />
             </TabPanel>
             <TabPanel value={value} index={4}>
                 <TabNewspapers data={data} />

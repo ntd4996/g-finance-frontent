@@ -90,7 +90,7 @@ export default function DetailFindNews() {
                 )}
 
                 <div className={styles.title}>{dataArticles?.title}</div>
-                <div className={styles.sapo}>{dataArticles?.sapo}</div>
+                <div className={styles.sapo} dangerouslySetInnerHTML={{ __html: dataArticles?.sapo }}></div>
                 <div className={styles.flexRow}>
                     <div className="flex gap-2 justify-center">
                         <Clock />
@@ -113,7 +113,12 @@ export default function DetailFindNews() {
                             case "p":
                                 return (
                                     <div key={index}>
-                                        <p>{ele.content}</p>
+                                        <p dangerouslySetInnerHTML={{ __html: ele.content }}></p>
+                                    </div>
+                                );
+                            case "div":
+                                return (
+                                    <div key={index} dangerouslySetInnerHTML={{ __html: ele.content }}>
                                     </div>
                                 );
                             case "img":
