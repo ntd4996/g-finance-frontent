@@ -744,3 +744,13 @@ html {
 .ql-toolbar.ql-snow + .ql-container.ql-snow {
     height: calc(100vh - 330px);
 }
+.MuiAlert-message {
+    display: flex;
+    align-items: center;
+}
+.linear-progress {
+    position: absolute;
+    top: 0;
+    z-index: 100;
+    left: 0;
+}

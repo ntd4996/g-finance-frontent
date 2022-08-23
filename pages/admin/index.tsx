@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { currentLayoutSlice } from "../../stores/layout";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -12,10 +12,12 @@ import Info from "../../components/icons/Info";
 import Document from "../../components/icons/Document";
 import Method from "../../components/icons/Method";
 import Book from "../../components/icons/Book";
+import { RootState } from "../../stores";
 
 export default function Admin() {
     const Dispatch = useDispatch();
     const router = useRouter();
+
 
     useEffect(() => {
         changeLayoutState();
@@ -25,6 +27,7 @@ export default function Admin() {
             Dispatch(currentLayoutSlice.actions.updateIsShowNav(true));
         };
     }, []);
+
     const changeLayoutState = () => {
         Dispatch(currentLayoutSlice.actions.updateIsShowHeaderAdmin(true));
         Dispatch(currentLayoutSlice.actions.updateIsFixedHeader(true));

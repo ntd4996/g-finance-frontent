@@ -1,4 +1,4 @@
-import { Button, TextField } from "@mui/material";
+import { Box, Button, LinearProgress, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import styles from "./ContainerGuide.module.scss";
@@ -7,14 +7,18 @@ import theme from "../../../../libs/theme";
 import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
+import { LoadingButton } from "@mui/lab";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 interface propsType {
     onSubmitData: (data: any) => void;
+    guide?: any;
+    loading?: boolean;
 }
 
 export default function ContainerGuide(props: propsType) {
+    const { guide, loading } = props;
     const [namePreview, setNamePreview] = useState("");
     const [contentPreview, setContentPreview] = useState("");
     const [isPreview, setIsPreview] = useState(false);
@@ -24,8 +28,14 @@ export default function ContainerGuide(props: propsType) {
         control,
         formState: { errors },
         setValue,
+        reset,
         getValues,
-    } = useForm();
+    } = useForm({
+        defaultValues: {
+            title: guide?.title ?? "",
+            content: guide?.content ?? "",
+        },
+    });
 
     const modules = {
         toolbar: [
@@ -40,26 +50,19 @@ export default function ContainerGuide(props: propsType) {
         ],
     };
 
-    const formats = [
-        "header",
-        "size",
-        "bold",
-        "italic",
-        "underline",
-        "strike",
-        "blockquote",
-        "list",
-        "bullet",
-        "indent",
-        "link",
-        "image",
-        "video",
-    ];
-
     useEffect(() => {
-        setValue("name", "");
-        setValue("content", "");
-    }, []);
+        if (guide?.id) {
+            const data = {
+                title: guide.title,
+                content: guide.content,
+            };
+            reset(data);
+            setIsPreview(true);
+            setTimeout(() => {
+                setIsPreview(false);
+            }, 1);
+        }
+    }, [guide]);
 
     const onSubmit = (data: any) => {
         props.onSubmitData(data);
@@ -67,7 +70,7 @@ export default function ContainerGuide(props: propsType) {
 
     const preview = () => {
         setContentPreview(getValues("content"));
-        setNamePreview(getValues("name"));
+        setNamePreview(getValues("title"));
         setIsPreview(true);
     };
 
@@ -77,6 +80,11 @@ export default function ContainerGuide(props: propsType) {
 
     return (
         <div className="w-full pt-24 px-5">
+            {loading && (
+                <Box sx={{ width: "100%" }} className="linear-progress">
+                    <LinearProgress color="secondary" />
+                </Box>
+            )}
             <div role="presentation" className={styles.breadcrumb}>
                 <Breadcrumbs aria-label="breadcrumb">
                     <Link underline="hover" color="inherit" href="/admin">
@@ -117,7 +125,7 @@ export default function ContainerGuide(props: propsType) {
                                     required:
                                         "Tên hưỡng dẫn không được bỏ trống",
                                 }}
-                                name="name"
+                                name="title"
                                 render={({
                                     field: { onChange, onBlur, value },
                                 }) => (
@@ -127,13 +135,14 @@ export default function ContainerGuide(props: propsType) {
                                         type="text"
                                         onBlur={onBlur}
                                         onChange={onChange}
-                                        error={!!errors?.name}
+                                        error={!!errors?.title}
                                         helperText={
-                                            errors?.name?.message as any
+                                            errors?.title?.message as any
                                         }
                                         required
                                         value={value}
                                         className={styles.field}
+                                        disabled={loading}
                                     />
                                 )}
                             />
@@ -162,12 +171,13 @@ export default function ContainerGuide(props: propsType) {
                                     onChange={(content) => {
                                         setValue("content", content);
                                     }}
+                                    readOnly={loading}
                                 />
                             )}
                         />
                     </div>
 
-                    <Button
+                    <LoadingButton
                         color="primary"
                         variant="contained"
                         style={{
@@ -175,9 +185,10 @@ export default function ContainerGuide(props: propsType) {
                         }}
                         onClick={handleSubmit(onSubmit)}
                         size="large"
+                        loading={loading}
                     >
                         Submit
-                    </Button>
+                    </LoadingButton>
                 </div>
             )}
         </div>

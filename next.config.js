@@ -12,6 +12,14 @@ const nextConfig = {
     sassOptions: {
         includePaths: [path.join(__dirname, "styles")],
     },
+    async rewrites() {
+        return [
+            {
+                source: "/api/:path*",
+                destination: `${process.env.NEXT_PUBLIC_URL_BACKEND}/:path*`,
+            },
+        ];
+    },
 };
 
 module.exports = nextConfig;

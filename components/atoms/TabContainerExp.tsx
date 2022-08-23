@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./TabContainerNew.module.scss";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -7,6 +7,7 @@ import { withStyles, WithStyles } from "@mui/styles";
 import CardNew from "./CardNew";
 import TopNews from "./TopNews";
 import { useRouter } from "next/router";
+import AdminServices from "../../services/admin";
 
 interface TabPanelProps {
     children?: React.ReactNode;
@@ -50,6 +51,8 @@ const stylesRoot = {
 function TabContainerExp(props: WithStyles<typeof stylesRoot>) {
     const { classes } = props;
     const [value, setValue] = React.useState(0);
+    const [loading, setLoading] = useState(true);
+    const [guide, setGuide] = useState({} as any);
 
     const handleChange = (event: React.SyntheticEvent, newValue: number) => {
         setValue(newValue);
@@ -63,6 +66,7 @@ function TabContainerExp(props: WithStyles<typeof stylesRoot>) {
             switch (tab) {
                 case "guide":
                     setValue(0);
+                    getGuide();
                     break;
 
                 case "method":
@@ -74,6 +78,22 @@ function TabContainerExp(props: WithStyles<typeof stylesRoot>) {
             }
         }
     }, [tab]);
+
+    const getGuide = async () => {
+        setLoading(true);
+        await AdminServices.getListOfCategory({ category: "guide" })
+            .then((result) => {
+                if (result?.data?.data) {
+                    if (result?.data?.data?.length > 0) {
+                        setGuide(result?.data?.data[0]);
+                    }
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        setLoading(false);
+    };
 
     return (
         <div className="w-full">
@@ -118,7 +138,21 @@ function TabContainerExp(props: WithStyles<typeof stylesRoot>) {
             </Box>
             <TabPanel value={value} index={0}>
                 <div className="pb-20">
-                    <div className={styles.textComingSoon}>Coming soon...</div>
+                    {!!guide?.id ? (
+                        <div className={styles.containerPreview}>
+                            <div className={styles.title}>{guide?.title}</div>
+                            <div
+                                className="content ql-editor"
+                                dangerouslySetInnerHTML={{
+                                    __html: guide?.content,
+                                }}
+                            ></div>
+                        </div>
+                    ) : (
+                        <div className={styles.textComingSoon}>
+                            Coming soon...
+                        </div>
+                    )}
                 </div>
             </TabPanel>
             <TabPanel value={value} index={1}>

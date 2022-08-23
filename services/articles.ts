@@ -10,14 +10,14 @@ export interface IIndexTagListParamsType {
 export default class ArticlesServer {
     static listArticles(params?: IIndexTagListParamsType) {
         return request({
-            url: "/articles",
+            url: "/api/articles",
             method: "get",
             params: params,
         });
     }
     static detailArticles({ id }: any) {
         return request({
-            url: `/articles/${id}`,
+            url: `/api/articles/${id}`,
             method: "get",
         });
     }

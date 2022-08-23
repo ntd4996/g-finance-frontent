@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import styles from "./Share.module.scss";
-import moment from 'moment';
+import moment from "moment";
 
 import {
     Autocomplete,
@@ -32,6 +32,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import TicketServer from "../../../services/ticket";
 import ArrowUp from "../../icons/ArrowUp";
 import { useRouter } from "next/router";
+import _ from "lodash";
 
 function createData(name: string, carbs: number, protein: string) {
     return { name, carbs, protein };
@@ -77,25 +78,40 @@ const Transition = React.forwardRef(function Transition(
 
 export default function Share() {
     const [open, setOpen] = useState(false);
-    const [ticker, setTicker] = useState<any>({ component: 'HAG', name: 'Công ty CP Hoàng Anh Gia Lai' });
+    const [ticker, setTicker] = useState<any>({
+        component: "HAG",
+        name: "Công ty CP Hoàng Anh Gia Lai",
+    });
     const [tickerlDetai, setTickerDetail] = useState<any>({});
     const [tickers, setTickers] = useState<any[]>([]);
     const router = useRouter();
+    const { id } = router.query;
+    console.log(id);
+
     const fetAllTickers = async () => {
         await TicketServer.listTicket({ size: -1 })
             .then((result) => {
                 if (result?.data?.data) {
-                    setTickers(result.data.data);
+                    const resultData = result?.data?.data;
+                    setTickers(resultData);
+                    if (id) {
+                        const findTicker = _.find(resultData, {
+                            component: id,
+                        });
+                        console.log("🚀 ~ findTicker", findTicker)
+                        console.log(resultData[0])
+                    }
+                    if (resultData?.length > 0) setTicker(resultData[0]);
                 }
             })
             .catch((err) => {
                 console.log(err);
             });
-    }
+    };
 
     useEffect(() => {
         fetAllTickers();
-    }, []);
+    }, [id]);
 
     useEffect(() => {
         const loadTicker = async () => {
@@ -108,8 +124,7 @@ export default function Share() {
                 .catch((err) => {
                     console.log(err);
                 });
-
-        }
+        };
         loadTicker();
     }, [ticker]);
 
@@ -125,7 +140,7 @@ export default function Share() {
         //     }
         // }
         // setTicker(tickers[0]);
-    }, [tickers.length])
+    }, [tickers.length]);
 
     const handleClickOpen = () => {
         // setOpen(true);
@@ -153,13 +168,13 @@ export default function Share() {
 
     const toColor = (value: number, flag: number) => {
         if (value == flag) {
-            return '#FF9900';
+            return "#FF9900";
         }
         if (value < flag) {
-            return '#CC0000';
+            return "#CC0000";
         }
-        return '#00A500';
-    }
+        return "#00A500";
+    };
 
     return (
         <div className="px-5 w-full">
@@ -185,12 +200,18 @@ export default function Share() {
                     setTicker(newValue);
                 }}
                 className={styles.inputSearch}
-                sx={{ width: '100%' }}
+                sx={{ width: "100%" }}
                 options={tickers}
                 autoHighlight
-                getOptionLabel={(option) => `${option.component} - ${option.name}`}
+                getOptionLabel={(option) =>
+                    `${option.component} - ${option.name}`
+                }
                 renderOption={(props, option) => (
-                    <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+                    <Box
+                        component="li"
+                        sx={{ "& > img": { mr: 2, flexShrink: 0 } }}
+                        {...props}
+                    >
                         {option.component} - {option.name}
                     </Box>
                 )}
@@ -200,7 +221,7 @@ export default function Share() {
                         label="Nhập mã cổ phiếu"
                         inputProps={{
                             ...params.inputProps,
-                            autoComplete: 'new-password', // disable autocomplete and autofill
+                            autoComplete: "new-password", // disable autocomplete and autofill
                         }}
                     />
                 )}
@@ -248,86 +269,171 @@ export default function Share() {
                 <TableContainer>
                     <Table aria-label="simple table">
                         <TableBody>
-                            {(tickerlDetai[alignment]?.indicators || []).map((row: any, index: any) => (
-                                <TableRow
-                                    key={index}
-                                    sx={{
-                                        "&:last-child td, &:last-child th": {
-                                            border: 0,
-                                        },
-                                    }}
-                                >
-                                    <TableCell align="left" width={"60%"}>
-                                        <div className={styles.name}>
-                                            {row.indicatorName}
-                                        </div>
-                                    </TableCell>
-                                    <TableCell align="center">
-                                        <div className={styles.numberLabel}>
-                                            {row.latestValue}
-                                        </div>
-                                    </TableCell>
-                                    <TableCell align="right">
-                                        <div
-                                            className={
-                                                row.signal === "buy"
-                                                    ? "textGreen"
-                                                    : row.signal === "sell"
+                            {(tickerlDetai[alignment]?.indicators || []).map(
+                                (row: any, index: any) => (
+                                    <TableRow
+                                        key={index}
+                                        sx={{
+                                            "&:last-child td, &:last-child th":
+                                                {
+                                                    border: 0,
+                                                },
+                                        }}
+                                    >
+                                        <TableCell align="left" width={"60%"}>
+                                            <div className={styles.name}>
+                                                {row.indicatorName}
+                                            </div>
+                                        </TableCell>
+                                        <TableCell align="center">
+                                            <div className={styles.numberLabel}>
+                                                {row.latestValue}
+                                            </div>
+                                        </TableCell>
+                                        <TableCell align="right">
+                                            <div
+                                                className={
+                                                    row.signal === "buy"
+                                                        ? "textGreen"
+                                                        : row.signal === "sell"
                                                         ? "textRed"
                                                         : "textMiddle"
-                                            }
-                                        >
-                                            {row.signal === 'sell' ? 'Bán' : row.signal === 'buy' ? 'Mua' : 'Trung lập'}
-                                        </div>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
+                                                }
+                                            >
+                                                {row.signal === "sell"
+                                                    ? "Bán"
+                                                    : row.signal === "buy"
+                                                    ? "Mua"
+                                                    : "Trung lập"}
+                                            </div>
+                                        </TableCell>
+                                    </TableRow>
+                                )
+                            )}
                         </TableBody>
                     </Table>
                 </TableContainer>
             </div>
 
-            {ticker?.component && (<div>
-                <div className="flex justify-between">
-                    <div className={styles.title}>
-                        <p style={{ fontSize: 18 }}>Giá cổ phiếu {ticker?.component}</p>
-                        <p style={{
-                            fontSize: 12,
-                            fontStyle: 'italic',
-                            fontWeight: 500,
-                        }}>
-                            Cập nhật {moment(tickerlDetai.lastUpdate).format('HH:mm')} ngày {moment(tickerlDetai.lastUpdate).format('DD/MM/YYYY')}
-                        </p>
+            {ticker?.component && (
+                <div>
+                    <div className="flex justify-between">
+                        <div className={styles.title}>
+                            <p style={{ fontSize: 18 }}>
+                                Giá cổ phiếu {ticker?.component}
+                            </p>
+                            <p
+                                style={{
+                                    fontSize: 12,
+                                    fontStyle: "italic",
+                                    fontWeight: 500,
+                                }}
+                            >
+                                Cập nhật{" "}
+                                {moment(tickerlDetai.lastUpdate).format(
+                                    "HH:mm"
+                                )}{" "}
+                                ngày{" "}
+                                {moment(tickerlDetai.lastUpdate).format(
+                                    "DD/MM/YYYY"
+                                )}
+                            </p>
+                        </div>
+                        <span
+                            onClick={handleClickOpen}
+                            className="flex justify-center items-center gap-3 textSecondary"
+                            style={{ cursor: "pointer" }}
+                        >
+                            Chi tiết <ArrowRight />
+                        </span>
                     </div>
-                    <span
-                        onClick={handleClickOpen}
-                        className="flex justify-center items-center gap-3 textSecondary"
-                        style={{ cursor: 'pointer' }}
-                    >
-                        Chi tiết <ArrowRight />
-                    </span>
-                </div>
-                <div className={styles.divFlex}>
-
-                    <div className="flex flex-col">
-                        <p style={{ fontSize: 16 }}>Giá đóng cửa</p>
-                        <div className="flex flex-row">
-                            <span className={styles.numberTitle} style={{ color: tickerlDetai?.priceColor, marginRight: 5 }}>{(tickerlDetai?.costPrice || 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
-                            <span className={styles.numberRed} style={{ color: tickerlDetai?.priceColor }}>
-                                {tickerlDetai?.priceDifference ? tickerlDetai?.priceDifference < 0 ? <ArrowDown /> : <ArrowUp /> : ''}
-                                {tickerlDetai?.priceDifference} ({tickerlDetai?.priceDifferencePercent} %)
+                    <div className={styles.divFlex}>
+                        <div className="flex flex-col">
+                            <p style={{ fontSize: 16 }}>Giá đóng cửa</p>
+                            <div className="flex flex-row">
+                                <span
+                                    className={styles.numberTitle}
+                                    style={{
+                                        color: tickerlDetai?.priceColor,
+                                        marginRight: 5,
+                                    }}
+                                >
+                                    {(
+                                        tickerlDetai?.costPrice || 0
+                                    ).toLocaleString("en-US", {
+                                        minimumFractionDigits: 2,
+                                    })}
+                                </span>
+                                <span
+                                    className={styles.numberRed}
+                                    style={{ color: tickerlDetai?.priceColor }}
+                                >
+                                    {tickerlDetai?.priceDifference ? (
+                                        tickerlDetai?.priceDifference < 0 ? (
+                                            <ArrowDown />
+                                        ) : (
+                                            <ArrowUp />
+                                        )
+                                    ) : (
+                                        ""
+                                    )}
+                                    {tickerlDetai?.priceDifference} (
+                                    {tickerlDetai?.priceDifferencePercent} %)
+                                </span>
+                            </div>
+                            <p style={{ marginTop: 20, fontSize: 14 }}>
+                                Giá tham chiếu: <b>{tickerlDetai?.priceLast}</b>
+                            </p>
+                            <p style={{ marginTop: 20, fontSize: 14 }}>
+                                Giá mở cửa:{" "}
+                                <span
+                                    style={{
+                                        color: toColor(
+                                            tickerlDetai?.priceOpen,
+                                            tickerlDetai?.priceLast
+                                        ),
+                                    }}
+                                >
+                                    {tickerlDetai?.priceOpen}
+                                </span>
+                            </p>
+                            <p style={{ marginTop: 20, fontSize: 14 }}>
+                                Cao nhất/Thấp nhất:{" "}
+                                <span
+                                    style={{
+                                        color: toColor(
+                                            tickerlDetai?.priceMax,
+                                            tickerlDetai?.priceLast
+                                        ),
+                                    }}
+                                >
+                                    {tickerlDetai?.priceMax}
+                                </span>
+                                /
+                                <span
+                                    style={{
+                                        color: toColor(
+                                            tickerlDetai?.priceMin,
+                                            tickerlDetai?.priceLast
+                                        ),
+                                    }}
+                                >
+                                    {tickerlDetai?.priceMin}
+                                </span>
+                            </p>
+                        </div>
+                        <div className="flex flex-col">
+                            <span className={styles.mass}>Khối lượng</span>
+                            <span className={styles.numberMass}>
+                                {(tickerlDetai?.volume || 0).toLocaleString(
+                                    "en-US",
+                                    { minimumFractionDigits: 0 }
+                                )}
                             </span>
                         </div>
-                        <p style={{ marginTop: 20, fontSize: 14 }}>Giá tham chiếu: <b>{tickerlDetai?.priceLast}</b></p>
-                        <p style={{ marginTop: 20, fontSize: 14 }}>Giá mở cửa: <span style={{ color: toColor(tickerlDetai?.priceOpen, tickerlDetai?.priceLast) }}>{tickerlDetai?.priceOpen}</span></p>
-                        <p style={{ marginTop: 20, fontSize: 14 }}>Cao nhất/Thấp nhất: <span style={{ color: toColor(tickerlDetai?.priceMax, tickerlDetai?.priceLast) }}>{tickerlDetai?.priceMax}</span>/<span style={{ color: toColor(tickerlDetai?.priceMin, tickerlDetai?.priceLast) }}>{tickerlDetai?.priceMin}</span></p>
-                    </div>
-                    <div className="flex flex-col">
-                        <span className={styles.mass}>Khối lượng</span>
-                        <span className={styles.numberMass}>{(tickerlDetai?.volume || 0).toLocaleString('en-US', { minimumFractionDigits: 0 })}</span>
                     </div>
                 </div>
-            </div>)}
+            )}
 
             <div>
                 <Box
@@ -664,6 +770,6 @@ export default function Share() {
                     </DialogContentText>
                 </DialogContent>
             </Dialog>
-        </div >
+        </div>
     );
 }

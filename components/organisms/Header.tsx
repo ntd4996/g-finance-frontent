@@ -4,26 +4,31 @@ import Button from "@mui/material/Button";
 import theme from "../../libs/theme";
 import { IconButton } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../stores";
 import { useRouter } from "next/router";
 import HamburgerButton from "../icons/HamburgerButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MenuAccountUser from "./MenuAccountUser";
 import MenuAccountAdmin from "./MenuAccountAdmin";
+import UserServer from "../../services/user";
+import { currentAccountSlice } from "../../stores/account";
 
 const Header = () => {
     const {
         isBack,
         title,
-        isLogin,
         isFixedHeader,
         isShowHeader,
         isShowHeaderAdmin,
         isShowButtonAdmin,
     } = useSelector((state: RootState) => state.layout);
+    const { user } = useSelector((state: RootState) => state.account);
+
     const router = useRouter();
     const [isOpenMenu, setIsOpenMenu] = useState(false);
+
+    const dispatch = useDispatch();
 
     const toggleDrawer = () => {
         setIsOpenMenu(!isOpenMenu);
@@ -32,6 +37,31 @@ const Header = () => {
     const redirectPage = (url: string) => {
         toggleDrawer();
         router.push(url);
+    };
+
+    const isLogin = !!user?.id;
+
+    useEffect(() => {
+        getUser();
+    }, []);
+
+    const getUser = () => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            UserServer.getUser()
+                .then((result) => {
+                    if (result?.data?.data) {
+                        dispatch(
+                            currentAccountSlice.actions.updateUser(
+                                result?.data?.data
+                            )
+                        );
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
     };
 
     return (

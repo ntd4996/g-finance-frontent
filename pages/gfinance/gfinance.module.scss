@@ -1,11 +1,3 @@
-.tab {
-    height: 36px !important;
-}
-.textComingSoon {
-    @apply w-full pb-20 text-center p-7 text-2xl;
-    color: #8c8c8c;
-}
-
 .containerPreview {
     @apply flex flex-col gap-5 justify-start w-full relative;
     line-height: 1.5;

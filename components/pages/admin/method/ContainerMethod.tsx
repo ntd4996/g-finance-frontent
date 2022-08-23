@@ -1,4 +1,4 @@
-import { Button, TextField } from "@mui/material";
+import { Box, Button, LinearProgress, TextField } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import styles from "./ContainerMethod.module.scss";
@@ -7,15 +7,20 @@ import theme from "../../../../libs/theme";
 import Typography from "@mui/material/Typography";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
+import { LoadingButton } from "@mui/lab";
 
 const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 interface propsType {
     onSubmitData: (data: any) => void;
+    onDeleteData: () => void;
     isCreate: boolean;
+    loading: boolean;
+    blog?: any;
 }
 
 export default function ContainerMethod(props: propsType) {
+    const { blog, loading, isCreate } = props;
     const [namePreview, setNamePreview] = useState("");
     const [contentPreview, setContentPreview] = useState("");
     const [isPreview, setIsPreview] = useState(false);
@@ -25,8 +30,14 @@ export default function ContainerMethod(props: propsType) {
         control,
         formState: { errors },
         setValue,
+        reset,
         getValues,
-    } = useForm();
+    } = useForm({
+        defaultValues: {
+            title: blog?.title ?? "",
+            content: blog?.content ?? "",
+        },
+    });
 
     const modules = {
         toolbar: [
@@ -41,34 +52,31 @@ export default function ContainerMethod(props: propsType) {
         ],
     };
 
-    const formats = [
-        "header",
-        "size",
-        "bold",
-        "italic",
-        "underline",
-        "strike",
-        "blockquote",
-        "list",
-        "bullet",
-        "indent",
-        "link",
-        "image",
-        "video",
-    ];
-
     useEffect(() => {
-        setValue("name", "");
-        setValue("content", "");
-    }, []);
+        if (blog?.id) {
+            const data = {
+                title: blog.title,
+                content: blog.content,
+            };
+            reset(data);
+            setIsPreview(true);
+            setTimeout(() => {
+                setIsPreview(false);
+            }, 1);
+        }
+    }, [blog]);
 
     const onSubmit = (data: any) => {
         props.onSubmitData(data);
     };
 
+    const deleteBlog = () => {
+        props.onDeleteData();
+    };
+
     const preview = () => {
         setContentPreview(getValues("content"));
-        setNamePreview(getValues("name"));
+        setNamePreview(getValues("title"));
         setIsPreview(true);
     };
 
@@ -78,6 +86,11 @@ export default function ContainerMethod(props: propsType) {
 
     return (
         <div className="w-full pt-24 px-5">
+            {loading && (
+                <Box sx={{ width: "100%" }} className="linear-progress">
+                    <LinearProgress color="secondary" />
+                </Box>
+            )}
             <div role="presentation" className={styles.breadcrumb}>
                 <Breadcrumbs aria-label="breadcrumb">
                     <Link underline="hover" color="inherit" href="/admin">
@@ -127,7 +140,7 @@ export default function ContainerMethod(props: propsType) {
                                     required:
                                         "Tên Phương Pháp không được bỏ trống",
                                 }}
-                                name="name"
+                                name="title"
                                 render={({
                                     field: { onChange, onBlur, value },
                                 }) => (
@@ -137,25 +150,41 @@ export default function ContainerMethod(props: propsType) {
                                         type="text"
                                         onBlur={onBlur}
                                         onChange={onChange}
-                                        error={!!errors?.name}
+                                        error={!!errors?.title}
                                         helperText={
-                                            errors?.name?.message as any
+                                            errors?.title?.message as any
                                         }
                                         required
                                         value={value}
                                         className={styles.field}
+                                        disabled={loading}
                                     />
                                 )}
                             />
+                            <div className="flex gap-3 items-center h-full pl-2">
+                                {!isCreate && (
+                                    <LoadingButton
+                                        color="error"
+                                        variant="contained"
+                                        onClick={deleteBlog}
+                                        size="large"
+                                        className="bg-red-500 px-2 sm:px-5"
+                                        loading={loading}
+                                    >
+                                        Xóa Phương pháp
+                                    </LoadingButton>
+                                )}
 
-                            <Button
-                                color="secondary"
-                                variant="outlined"
-                                onClick={preview}
-                                size="large"
-                            >
-                                Preview
-                            </Button>
+                                <LoadingButton
+                                    color="secondary"
+                                    variant="outlined"
+                                    onClick={preview}
+                                    loading={loading}
+                                    size="large"
+                                >
+                                    Preview
+                                </LoadingButton>
+                            </div>
                         </div>
 
                         <Controller
@@ -172,12 +201,13 @@ export default function ContainerMethod(props: propsType) {
                                     onChange={(content) => {
                                         setValue("content", content);
                                     }}
+                                    readOnly={loading}
                                 />
                             )}
                         />
                     </div>
 
-                    <Button
+                    <LoadingButton
                         color="primary"
                         variant="contained"
                         style={{
@@ -185,9 +215,10 @@ export default function ContainerMethod(props: propsType) {
                         }}
                         onClick={handleSubmit(onSubmit)}
                         size="large"
+                        loading={loading}
                     >
                         Submit
-                    </Button>
+                    </LoadingButton>
                 </div>
             )}
         </div>

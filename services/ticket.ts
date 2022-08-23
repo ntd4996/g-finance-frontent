@@ -16,7 +16,7 @@ export default class TicketServer {
             (v) => _.isUndefined(v) || _.isNull(v) || v === ""
         );
         return request({
-            url: "/tickers",
+            url: "/api/tickers",
             method: "get",
             params: paramsFilter,
         });
@@ -24,7 +24,7 @@ export default class TicketServer {
 
     static detailTicket(params?: IIndexTagListParamsType) {
         return request({
-            url: `/tickers/${params?.id}`,
+            url: `/api/tickers/${params?.id}`,
             method: "get",
         });
     }

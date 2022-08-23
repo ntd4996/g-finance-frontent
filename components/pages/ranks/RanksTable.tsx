@@ -25,7 +25,7 @@ export default function RanksTable() {
     const [dataFetch, setDataFetch] = useState([] as any[]);
     const [page, setPage] = useState(0);
     const [totalPage, setTotalPage] = useState(0);
-    const [filter, setFilter] = useState('')
+    const [filter, setFilter] = useState("");
 
     useEffect(() => {
         fetchData();
@@ -67,7 +67,7 @@ export default function RanksTable() {
     };
 
     const search = (filterSearch: string) => {
-        setFilter(filterSearch)
+        setFilter(filterSearch);
     };
     return (
         <div>

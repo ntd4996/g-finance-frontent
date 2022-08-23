@@ -1,5 +1,5 @@
 import { Button, Slide } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { currentLayoutSlice } from "../../../stores/layout";
 import styles from "./blog.module.scss";
@@ -9,6 +9,8 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import { TransitionProps } from "@mui/material/transitions";
 import ContainerBlog from "../../../components/pages/admin/blog/ContainerBlog";
+import AdminServices from "../../../services/admin";
+import { useRouter } from "next/router";
 
 const Transition = React.forwardRef<unknown, TransitionProps>((props, ref) => (
     // @ts-ignore
@@ -17,7 +19,9 @@ const Transition = React.forwardRef<unknown, TransitionProps>((props, ref) => (
 
 export default function CreateBlog() {
     const Dispatch = useDispatch();
+    const router  = useRouter();
     const [open, setOpen] = React.useState(false);
+    const [loading, setLoading] = useState(false);
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -41,14 +45,32 @@ export default function CreateBlog() {
         changeLayoutState();
     }, []);
 
-    const onSubmitData = (data: any) => {
-        console.log("🚀 ~ data", data);
-        handleClickOpen();
+    const onSubmitData = async (data: any) => {
+        setLoading(true);
+        await AdminServices.createItemInCategory({
+            category: "blogs",
+            body: data,
+        })
+            .then((result) => {
+                if (result?.data?.code === 200) {
+                    handleClickOpen();
+                    router.push('/admin/blog')
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        setLoading(false);
     };
 
     return (
         <div className="w-full">
-            <ContainerBlog onSubmitData={onSubmitData} isCreate/>
+            <ContainerBlog
+                onSubmitData={onSubmitData}
+                isCreate
+                onDeleteData={() => {}}
+                loading={loading}
+            />
 
             <Dialog
                 open={open}

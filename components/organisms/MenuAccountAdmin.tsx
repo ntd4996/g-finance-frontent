@@ -27,6 +27,15 @@ export default function MenuAccountAdmin(props: propsType) {
         (state: RootState) => state.layout
     );
 
+    const { user } = useSelector((state: RootState) => state.account);
+
+    const isLogin = !!user?.id;
+
+    const logout = () => {
+        localStorage.removeItem("token");
+        redirectPage("/login");
+    };
+
     return (
         <div>
             {isShowHeaderAdmin ? (
@@ -102,12 +111,11 @@ export default function MenuAccountAdmin(props: propsType) {
                                 Quản Lý Liên hệ
                             </div>
                         </div>
-                        <div
-                            className={styles.bottom}
-                            onClick={() => redirectPage("/login")}
-                        >
-                            <Logout /> Đăng xuất
-                        </div>
+                        {isLogin && (
+                            <div className={styles.bottom} onClick={logout}>
+                                <Logout /> Đăng xuất
+                            </div>
+                        )}
                     </div>
                 </Drawer>
             ) : (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./MenuAccountUser.module.scss";
 import Notification from "../icons/Notification";
 import Avatar from "../atoms/Avatar";
@@ -16,8 +16,10 @@ import News from "../icons/News";
 import Ranks from "../icons/Ranks";
 import Drawer from "@mui/material/Drawer";
 import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../stores";
+import { currentAccountSlice } from "../../stores/account";
+import _ from "lodash";
 
 interface propsType {
     isOpenMenu: boolean;
@@ -28,9 +30,23 @@ interface propsType {
 export default function MenuAccountUser(props: propsType) {
     const { isOpenMenu, toggleDrawer, redirectPage } = props;
 
+    const dispatch = useDispatch();
+
     const { isShowHeaderAdmin } = useSelector(
         (state: RootState) => state.layout
     );
+
+    const { user, isUserAdmin } = useSelector(
+        (state: RootState) => state.account
+    );
+
+    const isLogin = !!user?.id;
+
+    const logout = () => {
+        localStorage.removeItem("token");
+        dispatch(currentAccountSlice.actions.updateUser({}));
+        redirectPage("/login");
+    };
 
     return (
         <div>
@@ -54,16 +70,19 @@ export default function MenuAccountUser(props: propsType) {
                             </div>
                         </div>
                         <div className={styles.middle}>
-                            <div
-                                className={styles.content}
-                                onClick={() => redirectPage("/admin")}
-                            >
-                                <AdminPanelSettingsOutlinedIcon
-                                    fontSize="large"
-                                    color="secondary"
-                                />
-                                Admin
-                            </div>
+                            {isUserAdmin && (
+                                <div
+                                    className={styles.content}
+                                    onClick={() => redirectPage("/admin")}
+                                >
+                                    <AdminPanelSettingsOutlinedIcon
+                                        fontSize="large"
+                                        color="secondary"
+                                    />
+                                    Admin
+                                </div>
+                            )}
+
                             <div
                                 className={styles.content}
                                 onClick={() => redirectPage("/home")}
@@ -149,12 +168,11 @@ export default function MenuAccountUser(props: propsType) {
                                 Liên hệ
                             </div>
                         </div>
-                        <div
-                            className={styles.bottom}
-                            onClick={() => redirectPage("/login")}
-                        >
-                            <Logout /> Đăng xuất
-                        </div>
+                        {isLogin && (
+                            <div className={styles.bottom} onClick={logout}>
+                                <Logout /> Đăng xuất
+                            </div>
+                        )}
                     </div>
                 </Drawer>
             ) : (

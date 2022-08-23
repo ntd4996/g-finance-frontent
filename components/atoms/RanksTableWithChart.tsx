@@ -43,9 +43,21 @@ export default function RanksTable() {
                 <div>
                     {[...Array(10)].map((x, i) => (
                         <div className={styles.skeleton} key={i}>
-                            <Skeleton variant="text" width={"40%"} height={50} />
-                            <Skeleton variant="text" width={"10%"} height={50} />
-                            <Skeleton variant="text" width={"10%"} height={50} />
+                            <Skeleton
+                                variant="text"
+                                width={"40%"}
+                                height={50}
+                            />
+                            <Skeleton
+                                variant="text"
+                                width={"10%"}
+                                height={50}
+                            />
+                            <Skeleton
+                                variant="text"
+                                width={"10%"}
+                                height={50}
+                            />
                             <Skeleton variant="text" width={"40%"} />
                         </div>
                     ))}
@@ -111,13 +123,26 @@ export default function RanksTable() {
                                         }}
                                     >
                                         <div className={styles.colName}>
-                                            <div className={styles.numberTop} style={{ color: row.priceColor }}>
-                                                {(row.costPrice ?? 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                                            <div
+                                                className={styles.numberTop}
+                                                style={{
+                                                    color: row.priceColor,
+                                                }}
+                                            >
+                                                {(
+                                                    row.costPrice ?? 0
+                                                ).toLocaleString("en-US", {
+                                                    minimumFractionDigits: 2,
+                                                })}
                                             </div>
                                             <div
                                                 className={styles.numberBottom}
                                             >
-                                                {(row.volume ?? 0).toLocaleString('en-US', { minimumFractionDigits: 0 })}
+                                                {(
+                                                    row.volume ?? 0
+                                                ).toLocaleString("en-US", {
+                                                    minimumFractionDigits: 0,
+                                                })}
                                             </div>
                                         </div>
                                     </TableCell>
@@ -129,8 +154,7 @@ export default function RanksTable() {
                                         }}
                                     >
                                         <div className={styles.numberLabel}>
-                                            {parseInt(row?.scope) ??
-                                                0}
+                                            {parseInt(row?.scope) ?? 0}
                                         </div>
                                     </TableCell>
                                 </TableRow>

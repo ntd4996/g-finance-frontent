@@ -9,13 +9,20 @@ export default function TabNewspapers(props: any) {
     const [loading, setLoading] = useState(true);
     const [dataArticles, setDataArticles] = useState([] as any[]);
     const [page, setPage] = useState(0);
+    const [hasMore, setHasMore] = useState(true);
+    const [isNoArticles, setIsNoArticles] = useState(false);
+
     const params = { keywords: data?.component };
     const fetchData = async () => {
-        await ArticlesServer.listArticles({ ...params, page: page, })
+        await ArticlesServer.listArticles({ ...params, page: page })
             .then((result) => {
                 if (result?.data?.data) {
                     const data = result?.data?.data;
                     setDataArticles(data);
+                    if (data?.length === 0) {
+                        setHasMore(false);
+                        setIsNoArticles(true);
+                    }
                 }
             })
             .catch((err) => {
@@ -30,6 +37,9 @@ export default function TabNewspapers(props: any) {
                 if (result?.data?.data) {
                     const data = result?.data?.data;
                     setDataArticles([...dataArticles, ...data]);
+                    if (data?.length === 0) {
+                        setHasMore(false);
+                    }
                 }
             })
             .catch((err) => {
@@ -55,17 +65,26 @@ export default function TabNewspapers(props: any) {
                 </div>
             ) : (
                 <div>
-                    <InfiniteScroll
-                        dataLength={dataArticles.length}
-                        next={getMorePost}
-                        hasMore={true}
-                        loader={<CardNewSkeleton />}
-                        endMessage={<h4>Nothing more to show</h4>}
-                    >
-                        {dataArticles.map((articles, index) => (
-                            <CardNew articles={articles} key={index} />
-                        ))}
-                    </InfiniteScroll>
+                    {isNoArticles ? (
+                        <div>
+                            <div className="pb-20">
+                                <div className="textComingSoon">
+                                    Không có bài phần tích
+                                </div>
+                            </div>
+                        </div>
+                    ) : (
+                        <InfiniteScroll
+                            dataLength={dataArticles.length}
+                            next={getMorePost}
+                            hasMore={hasMore}
+                            loader={<CardNewSkeleton />}
+                        >
+                            {dataArticles.map((articles, index) => (
+                                <CardNew articles={articles} key={index} />
+                            ))}
+                        </InfiniteScroll>
+                    )}
                 </div>
             )}
         </div>

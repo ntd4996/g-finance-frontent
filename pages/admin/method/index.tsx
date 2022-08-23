@@ -25,6 +25,7 @@ import { Button } from "@mui/material";
 import theme from "../../../libs/theme";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
+import AdminServices from "../../../services/admin";
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
     if (b[orderBy] < a[orderBy]) {
@@ -76,7 +77,7 @@ interface HeadCell {
 
 const headCells: readonly HeadCell[] = [
     {
-        id: "name",
+        id: "title",
         numeric: false,
         disablePadding: true,
         label: "Tên Phương Pháp Đầu Tư",
@@ -119,19 +120,6 @@ function EnhancedTableHead(props: EnhancedTableProps) {
     return (
         <TableHead>
             <TableRow>
-                <TableCell padding="checkbox">
-                    <Checkbox
-                        color="secondary"
-                        indeterminate={
-                            numSelected > 0 && numSelected < rowCount
-                        }
-                        checked={rowCount > 0 && numSelected === rowCount}
-                        onChange={onSelectAllClick}
-                        inputProps={{
-                            "aria-label": "select all desserts",
-                        }}
-                    />
-                </TableCell>
                 {headCells.map((headCell) => {
                     return (
                         <TableCell
@@ -143,6 +131,11 @@ function EnhancedTableHead(props: EnhancedTableProps) {
                             sortDirection={
                                 orderBy === headCell.id ? order : false
                             }
+                            sx={{
+                                paddingLeft: "16px",
+                                width: "70%",
+                            }}
+                            className=" md:w-10/12"
                         >
                             {headCell.id !== "action" ? (
                                 <TableSortLabel
@@ -153,16 +146,6 @@ function EnhancedTableHead(props: EnhancedTableProps) {
                                     onClick={createSortHandler(headCell.id)}
                                 >
                                     {headCell.label}
-                                    {orderBy === headCell.id ? (
-                                        <Box
-                                            component="span"
-                                            // sx={visuallyHidden}
-                                        >
-                                            {order === "desc"
-                                                ? "sorted descending"
-                                                : "sorted ascending"}
-                                        </Box>
-                                    ) : null}
                                 </TableSortLabel>
                             ) : (
                                 <div className={styles.thAction}>
@@ -210,34 +193,14 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
                 }),
             }}
         >
-            {numSelected > 0 ? (
-                <Typography
-                    sx={{ flex: "1 1 100%" }}
-                    color="inherit"
-                    variant="subtitle1"
-                    component="div"
-                >
-                    {numSelected} selected
-                </Typography>
-            ) : (
-                <Typography
-                    sx={{ flex: "1 1 100%" }}
-                    variant="h6"
-                    id="tableTitle"
-                    component="div"
-                >
-                    Quản Lý Phương Pháp Đầu Tư
-                </Typography>
-            )}
-            {numSelected > 0 ? (
-                <Tooltip title="Delete">
-                    <IconButton>
-                        <DeleteIcon />
-                    </IconButton>
-                </Tooltip>
-            ) : (
-                <></>
-            )}
+            <Typography
+                sx={{ flex: "1 1 100%" }}
+                variant="h6"
+                id="tableTitle"
+                component="div"
+            >
+                Quản Lý Blog
+            </Typography>
         </Toolbar>
     );
 };
@@ -245,11 +208,7 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
 export default function Method() {
     const Dispatch = useDispatch();
     const router = useRouter();
-    const [rows, setRows] = React.useState([
-        { id: 1, name: "Phương Pháp Đầu Tư 1" },
-        { id: 2, name: "Phương Pháp Đầu Tư 2" },
-        { id: 3, name: "Phương Pháp Đầu Tư 3" },
-    ]);
+    const [rows, setRows] = React.useState([]);
 
     const [order, setOrder] = React.useState<Order>("asc");
     const [orderBy, setOrderBy] = React.useState<string>("calories");
@@ -259,15 +218,29 @@ export default function Method() {
 
     useEffect(() => {
         changeLayoutState();
+        getListMethods();
         return () => {
             Dispatch(currentLayoutSlice.actions.updateIsShowButtonAdmin(false));
         };
     }, []);
+
     const changeLayoutState = () => {
         Dispatch(currentLayoutSlice.actions.updateIsShowHeaderAdmin(true));
         Dispatch(currentLayoutSlice.actions.updateIsFixedHeader(true));
         Dispatch(currentLayoutSlice.actions.updateIsShowNav(false));
         Dispatch(currentLayoutSlice.actions.updateIsShowButtonAdmin(true));
+    };
+
+    const getListMethods = () => {
+        AdminServices.getListOfCategory({ category: "methods" })
+            .then((result) => {
+                if (result?.data?.data) {
+                    setRows(result?.data?.data);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
 
     const handleRequestSort = (
@@ -283,31 +256,11 @@ export default function Method() {
         event: React.ChangeEvent<HTMLInputElement>
     ) => {
         if (event.target.checked) {
-            const newSelecteds = rows.map((n: any) => n.name);
-            setSelected(newSelecteds);
+            const newSelectees = rows.map((n: any) => n.title);
+            setSelected(newSelectees);
             return;
         }
         setSelected([]);
-    };
-
-    const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
-        const selectedIndex = selected.indexOf(name);
-        let newSelected: readonly string[] = [];
-
-        if (selectedIndex === -1) {
-            newSelected = newSelected.concat(selected, name);
-        } else if (selectedIndex === 0) {
-            newSelected = newSelected.concat(selected.slice(1));
-        } else if (selectedIndex === selected.length - 1) {
-            newSelected = newSelected.concat(selected.slice(0, -1));
-        } else if (selectedIndex > 0) {
-            newSelected = newSelected.concat(
-                selected.slice(0, selectedIndex),
-                selected.slice(selectedIndex + 1)
-            );
-        }
-
-        setSelected(newSelected);
     };
 
     const handleChangePage = (event: unknown, newPage: number) => {
@@ -321,7 +274,7 @@ export default function Method() {
         setPage(0);
     };
 
-    const isSelected = (name: string) => selected.indexOf(name) !== -1;
+    const isSelected = (title: string) => selected.indexOf(title) !== -1;
 
     const emptyRows =
         page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
@@ -359,7 +312,7 @@ export default function Method() {
                                     )
                                     .map((row: any, index) => {
                                         const isItemSelected = isSelected(
-                                            row.name
+                                            row.title
                                         );
                                         const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -369,32 +322,19 @@ export default function Method() {
                                                 role="checkbox"
                                                 aria-checked={isItemSelected}
                                                 tabIndex={-1}
-                                                key={row.name}
+                                                key={row.title}
                                                 selected={isItemSelected}
                                             >
-                                                <TableCell padding="checkbox">
-                                                    <Checkbox
-                                                        color="secondary"
-                                                        checked={isItemSelected}
-                                                        inputProps={{
-                                                            "aria-labelledby":
-                                                                labelId,
-                                                        }}
-                                                        onClick={(event) =>
-                                                            handleClick(
-                                                                event,
-                                                                row.name
-                                                            )
-                                                        }
-                                                    />
-                                                </TableCell>
                                                 <TableCell
                                                     component="th"
                                                     id={labelId}
                                                     scope="row"
                                                     padding="none"
+                                                    sx={{
+                                                        paddingLeft: "16px",
+                                                    }}
                                                 >
-                                                    {row.name}
+                                                    {row.title}
                                                 </TableCell>
                                                 <TableCell
                                                     component="th"
@@ -412,7 +352,7 @@ export default function Method() {
                                                         onClick={() => {
                                                             console.log(row);
                                                             router.push(
-                                                                `/admin/method/${row.id}`
+                                                                `/admin/method/${row.slug}`
                                                             );
                                                         }}
                                                     >
