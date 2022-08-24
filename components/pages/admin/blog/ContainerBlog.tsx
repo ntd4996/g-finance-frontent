@@ -164,7 +164,7 @@ export default function ContainerBlog(props: propsType) {
                                         className="bg-red-500 px-2 sm:px-5"
                                         loading={loading}
                                     >
-                                        Xóa Phương pháp
+                                        Xóa Blog
                                     </LoadingButton>
                                 )}
                                 <LoadingButton
