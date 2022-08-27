@@ -62,8 +62,10 @@ export default function Login() {
         if (_.isEmpty(errors)) {
             await AuthServer.signin(data)
                 .then((result) => {
-                    if (result?.data.code !== 200) {
-                        setErrorText(result.data.message);
+                    if (result?.data.code == 4003) {
+                        setErrorText(`${result.data.message}. Please click <b><a href='/active?email=${data.email}'>here</a></b> to active`);
+                    } else if (result?.data.code !== 200) {
+                        setErrorText(`${result.data.message}`);
                     } else if (result?.data?.data?.token) {
                         const token = result.data.data.token;
                         localStorage.setItem("token", token);
@@ -114,7 +116,7 @@ export default function Login() {
                     <div className="w-full text-red-500 ml-2 mb-3">
                         <Fade in={true}>
                             <Alert variant="outlined" severity="error">
-                                {errorText}
+                                <p dangerouslySetInnerHTML={{ __html: errorText }}></p>
                             </Alert>
                         </Fade>
                     </div>
