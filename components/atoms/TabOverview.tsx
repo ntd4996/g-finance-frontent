@@ -59,8 +59,20 @@ export default function TabOverView(props: any) {
             //         }
             //     }
             // });
+            console.log('data choose id: ', dataChoose);
             if (dataChoose?.id) {
-                setDateDisplay(dataChoose);
+                const dataS = {} as any;
+                for (const key in dataChoose) {
+                    if (dataChoose[key])
+                        dataS[key] = dataChoose[key];
+                }
+                for (const key in data) {
+                    if (key == 'tickerPerDays')
+                        continue;
+                    if (!dataChoose[key])
+                        dataS[key] = data[key];
+                }
+                setDateDisplay(dataS);
                 return;
             }
         }
