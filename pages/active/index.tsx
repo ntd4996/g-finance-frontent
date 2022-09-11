@@ -45,8 +45,8 @@ export default function ActiveCode() {
             .then((result) => {
                 if (result?.data.code !== 200) {
                     setErrorText(result.data.message);
-                }else{
-                    router.push('/activeComplete')
+                } else {
+                    router.push("/activeComplete");
                 }
             })
             .catch((err) => {
@@ -112,15 +112,17 @@ export default function ActiveCode() {
                     <div className="ml-2 textSecond">
                         Email: <span className="text-black">{email}</span>
                     </div>
-                    <ReactCodeInput
-                        name="input-code"
-                        type="text"
-                        fields={4}
-                        inputMode="latin"
-                        onChange={(e) => {
-                            setCode(e);
-                        }}
-                    />
+                    <div className="flex justify-center">
+                        <ReactCodeInput
+                            name="input-code"
+                            type="text"
+                            fields={4}
+                            inputMode="latin"
+                            onChange={(e) => {
+                                setCode(e);
+                            }}
+                        />
+                    </div>
                 </div>
 
                 <LoadingButton

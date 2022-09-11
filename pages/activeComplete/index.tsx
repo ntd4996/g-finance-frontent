@@ -3,12 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { currentLayoutSlice } from "../../stores/layout";
-import { Alert, Fade } from "@mui/material";
-import theme from "../../libs/theme";
-import { LoadingButton } from "@mui/lab";
 import _ from "lodash";
-import AuthServer from "../../services/auth";
-import ReactCodeInput from "react-code-input";
 
 export default function CompleteSendEmail() {
     const dispatch = useDispatch();

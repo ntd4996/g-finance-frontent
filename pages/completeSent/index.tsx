@@ -1,18 +1,17 @@
 import { useDispatch } from "react-redux";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { currentLayoutSlice } from "../../stores/layout";
-import { Alert, Fade } from "@mui/material";
-import theme from "../../libs/theme";
-import { LoadingButton } from "@mui/lab";
-import _ from "lodash";
-import AuthServer from "../../services/auth";
-import ReactCodeInput from "react-code-input";
+import Link from "next/link";
 
 export default function CompleteSendEmail() {
     const dispatch = useDispatch();
     const router = useRouter();
+
+    const { email } = router.query;
+
+    console.log("🚀 ~ email", email);
 
     useEffect(() => {
         changeLayoutState();
@@ -46,7 +45,22 @@ export default function CompleteSendEmail() {
 
                 <div className="textSecond mt-10">
                     Activation code has been sent in email
-                    <br /> Please check your email
+                    <br /> Please check your email:{" "}
+                    <a
+                        target="_blank"
+                        href={`https://${
+                            email?.slice(email.indexOf("@") + 1) as string
+                        }`}
+                        rel="noopener noreferrer"
+                        className="text-blue-600 mt-20"
+                    >
+                        {email} [Open]
+                    </a>
+                    <br />
+                    <span className="text-blue-600 italic text-base">
+                        (Please also check your spam mail if you don't see it in
+                        your Inbox)
+                    </span>
                 </div>
 
                 <div className="textSecond mt-10">

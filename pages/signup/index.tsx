@@ -6,16 +6,14 @@ import { currentLayoutSlice } from "../../stores/layout";
 import TextField from "@mui/material/TextField";
 import { Alert, LoadingButton } from "@mui/lab";
 import theme from "../../libs/theme";
-import Google from "../../components/icons/Google";
-import FacebookCircle from "../../components/icons/FacebookCircle";
-import Apple from "../../components/icons/Apple";
 import { useForm } from "react-hook-form";
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import _ from "lodash";
 import AuthServer from "../../services/auth";
-import axios from "axios";
-import { Fade } from "@mui/material";
+import { Autocomplete, createFilterOptions, Fade } from "@mui/material";
+
+const filter = createFilterOptions();
 
 export default function SignUp() {
     const dispatch = useDispatch();
@@ -24,6 +22,10 @@ export default function SignUp() {
     const [isLoading, setIsLoading] = useState(false);
 
     const [errorText, setErrorText] = useState("");
+
+    const [value, setValue] = useState("");
+
+    const optionsEmail: any = [];
 
     useEffect(() => {
         changeLayoutState();
@@ -60,7 +62,13 @@ export default function SignUp() {
         resolver: yupResolver(formSchema),
     });
 
+    const changeEmail = (e: any) => {
+        const value = e.target.value;
+        setValue(value);
+    };
+
     const onSubmit = async (data: any) => {
+        console.log(data)
         setIsLoading(true);
         if (_.isEmpty(errors)) {
             await AuthServer.signup(data)
@@ -68,7 +76,7 @@ export default function SignUp() {
                     if (result?.data.code !== 200) {
                         setErrorText(result.data.message);
                     } else {
-                        router.push("/completeSent");
+                        router.push(`/completeSent?email=${data.email}`);
                     }
                 })
                 .catch((err) => {
@@ -76,6 +84,19 @@ export default function SignUp() {
                 });
         }
         setIsLoading(false);
+    };
+
+    const renderOptionsEmail = (value: string) => {
+        if (value) {
+            return [
+                `${value}@gmail.com`,
+                `${value}@icloud.com`,
+                `${value}@yahoo.com`,
+                `${value}@yahoo.com.vn`,
+                `${value}@hotmail.com`,
+            ];
+        }
+        return [];
     };
 
     return (
@@ -99,17 +120,61 @@ export default function SignUp() {
                     </div>
                 )}
 
-                <TextField
-                    label="Your email"
-                    id="email"
-                    color="secondary"
-                    error={!!errors?.email}
-                    helperText={errors?.email?.message as any}
-                    required
-                    placeholder="Your email"
-                    className="textField-login"
-                    {...register("email")}
-                    disabled={isLoading}
+                <Autocomplete
+                    value={value}
+                    onChange={(event, newValue: any) => {
+                        setValue(newValue);
+                    }}
+                    filterOptions={(options: any, params: any) => {
+                        const inputValue = params?.inputValue;
+                        if (params?.inputValue) {
+                            if (!/@/.test(inputValue)) {
+                                const arrayOptions =
+                                    renderOptionsEmail(inputValue);
+                                const filtered = filter(arrayOptions, params);
+                                return filtered;
+                            } else {
+                                const inputSlice = inputValue.slice(
+                                    0,
+                                    inputValue.indexOf("@")
+                                );
+                                const arrayOptions =
+                                    renderOptionsEmail(inputSlice);
+                                const filtered = filter(arrayOptions, params);
+                                console.log("🚀 ~ filtered", filtered);
+                                return filtered;
+                            }
+                        }
+
+                        const filtered = filter(options, params);
+                        return filtered;
+                    }}
+                    id="free-solo-dialog-demo"
+                    options={optionsEmail}
+                    disableClearable
+                    renderOption={(props, option) => (
+                        <li {...props}>{option}</li>
+                    )}
+                    freeSolo
+                    selectOnFocus
+                    clearOnBlur
+                    handleHomeEndKeys
+                    renderInput={(params) => (
+                        <TextField
+                            {...params}
+                            label="Your email"
+                            id="email"
+                            color="secondary"
+                            error={!!errors?.email}
+                            helperText={errors?.email?.message as any}
+                            required
+                            placeholder="Your email"
+                            className="textField-login"
+                            {...register("email")}
+                            disabled={isLoading}
+                            onChange={changeEmail}
+                        />
+                    )}
                 />
 
                 <TextField
@@ -179,18 +244,6 @@ export default function SignUp() {
                         Login
                     </span>
                 </div>
-                {/* <div className="textSecond">- Or sign in with -</div>
-                <div className="flex gap-4 py-5">
-                    <div className="divBoxIcon">
-                        <Google />
-                    </div>
-                    <div className="divBoxIcon">
-                        <FacebookCircle />
-                    </div>
-                    <div className="divBoxIcon">
-                        <Apple />
-                    </div>
-                </div> */}
             </div>
         </div>
     );
