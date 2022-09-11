@@ -3,7 +3,6 @@ import React, { useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { currentLayoutSlice } from "../../stores/layout";
-import Link from "next/link";
 
 export default function CompleteSendEmail() {
     const dispatch = useDispatch();
@@ -58,7 +57,7 @@ export default function CompleteSendEmail() {
                     </a>
                     <br />
                     <span className="text-blue-600 italic text-base">
-                        (Please also check your spam mail if you don't see it in
+                        (Please also check your spam mail if you don&apos;t see it in
                         your Inbox)
                     </span>
                 </div>

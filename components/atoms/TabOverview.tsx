@@ -4,7 +4,10 @@ import styles from "./TabOverView.module.scss";
 import _ from "lodash";
 import { Skeleton } from "@mui/material";
 import dayjs from "dayjs";
-import TradingViewWidget from "react-tradingview-widget";
+import {
+    AdvancedRealTimeChart,
+    CopyrightStyles,
+} from "react-ts-tradingview-widgets";
 
 export default function TabOverView(props: any) {
     const { data, loading, toggleButtonDay } = props;
@@ -120,28 +123,32 @@ export default function TabOverView(props: any) {
         return <div className={styles.gird}>{renderObj}</div>;
     };
 
+    const stylesCopyright: CopyrightStyles = {
+        parent: {
+            display: "none",
+        },
+    };
+
     return (
         <div className="w-full container">
             <div className={styles.tradingView}>
-                {typeof window !== "undefined" && typeof document !== 'undefined' ? (
-                    <TradingViewWidget
-                        autosize={true}
-                        symbol="NASDAQ:AAPL"
-                        timezone="Etc/UTC"
-                        interval="D"
-                        theme="light"
-                        style="1"
-                        toolbar_bg="#f1f3f6"
-                        enable_publishing={false}
-                        allow_symbol_change={false}
-                        container_id="tradingview_b7acd"
-                        locale="vi_VN"
-                        save_image={true}
-                        hide_legend={true}
-                    />
-                ) : (
-                    <div></div>
-                )}
+                <AdvancedRealTimeChart
+                    autosize={true}
+                    symbol="NASDAQ:AAPL"
+                    timezone="Etc/UTC"
+                    interval="D"
+                    theme="light"
+                    style="1"
+                    toolbar_bg="#f1f3f6"
+                    enable_publishing={false}
+                    allow_symbol_change={false}
+                    container_id="tradingview_b7acd"
+                    locale="vi_VN"
+                    save_image={true}
+                    hide_legend={true}
+                    copyrightStyles={stylesCopyright}
+                    withdateranges={false}
+                ></AdvancedRealTimeChart>
             </div>
             <div>
                 {loading ? (
