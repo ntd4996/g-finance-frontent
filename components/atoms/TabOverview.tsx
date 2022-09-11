@@ -8,12 +8,14 @@ import {
     AdvancedRealTimeChart,
     CopyrightStyles,
 } from "react-ts-tradingview-widgets";
+import { useRouter } from "next/router";
 
 export default function TabOverView(props: any) {
     const { data, loading, toggleButtonDay } = props;
     const [dateDisplay, setDateDisplay] = useState({} as any);
     const [logoUrl, setLogoUrl] = useState(null);
-
+    const router = useRouter();
+    const { id } = router.query;
     useEffect(() => {
         switch (toggleButtonDay) {
             case "now":
@@ -132,23 +134,25 @@ export default function TabOverView(props: any) {
     return (
         <div className="w-full container">
             <div className={styles.tradingView}>
-                <AdvancedRealTimeChart
-                    autosize={true}
-                    symbol="NASDAQ:AAPL"
-                    timezone="Etc/UTC"
-                    interval="D"
-                    theme="light"
-                    style="1"
-                    toolbar_bg="#f1f3f6"
-                    enable_publishing={false}
-                    allow_symbol_change={false}
-                    container_id="tradingview_b7acd"
-                    locale="vi_VN"
-                    save_image={true}
-                    hide_legend={true}
-                    copyrightStyles={stylesCopyright}
-                    withdateranges={false}
-                ></AdvancedRealTimeChart>
+                {id && (
+                    <AdvancedRealTimeChart
+                        autosize={true}
+                        symbol={`HOSE:${id}`}
+                        timezone="Etc/UTC"
+                        interval="D"
+                        theme="light"
+                        style="1"
+                        toolbar_bg="#f1f3f6"
+                        enable_publishing={false}
+                        allow_symbol_change={true}
+                        container_id="tradingview_b7acd"
+                        locale="vi_VN"
+                        save_image={true}
+                        hide_legend={true}
+                        copyrightStyles={stylesCopyright}
+                        withdateranges={false}
+                    ></AdvancedRealTimeChart>
+                )}
             </div>
             <div>
                 {loading ? (
