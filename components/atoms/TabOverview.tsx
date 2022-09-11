@@ -4,6 +4,7 @@ import styles from "./TabOverView.module.scss";
 import _ from "lodash";
 import { Skeleton } from "@mui/material";
 import dayjs from "dayjs";
+import TradingViewWidget from "react-tradingview-widget";
 
 export default function TabOverView(props: any) {
     const { data, loading, toggleButtonDay } = props;
@@ -42,8 +43,8 @@ export default function TabOverView(props: any) {
         } else {
             setLogoUrl(null);
         }
-        chooseDataTicker(0)
-    }, [data])
+        chooseDataTicker(0);
+    }, [data]);
 
     const chooseDataTicker = (day: number) => {
         if (data?.tickerPerDays) {
@@ -59,18 +60,15 @@ export default function TabOverView(props: any) {
             //         }
             //     }
             // });
-            console.log('data choose id: ', dataChoose);
+            console.log("data choose id: ", dataChoose);
             if (dataChoose?.id) {
                 const dataS = {} as any;
                 for (const key in dataChoose) {
-                    if (dataChoose[key])
-                        dataS[key] = dataChoose[key];
+                    if (dataChoose[key]) dataS[key] = dataChoose[key];
                 }
                 for (const key in data) {
-                    if (key == 'tickerPerDays')
-                        continue;
-                    if (!dataChoose[key])
-                        dataS[key] = data[key];
+                    if (key == "tickerPerDays") continue;
+                    if (!dataChoose[key]) dataS[key] = data[key];
                 }
                 setDateDisplay(dataS);
                 return;
@@ -108,7 +106,11 @@ export default function TabOverView(props: any) {
                                         : styles.textRed
                                 }
                             >
-                                {(dateDisplay?.metadata[key]?.amount).toLocaleString('en-US', { minimumFractionDigits: 0 })}
+                                {(dateDisplay?.metadata[
+                                    key
+                                ]?.amount).toLocaleString("en-US", {
+                                    minimumFractionDigits: 0,
+                                })}
                             </span>
                         </div>
                     </div>
@@ -120,7 +122,27 @@ export default function TabOverView(props: any) {
 
     return (
         <div className="w-full container">
-            <div className={styles.tradingView}>Tradingview</div>
+            <div className={styles.tradingView}>
+                {typeof window !== "undefined" && typeof document !== 'undefined' ? (
+                    <TradingViewWidget
+                        autosize={true}
+                        symbol="NASDAQ:AAPL"
+                        timezone="Etc/UTC"
+                        interval="D"
+                        theme="light"
+                        style="1"
+                        toolbar_bg="#f1f3f6"
+                        enable_publishing={false}
+                        allow_symbol_change={false}
+                        container_id="tradingview_b7acd"
+                        locale="vi_VN"
+                        save_image={true}
+                        hide_legend={true}
+                    />
+                ) : (
+                    <div></div>
+                )}
+            </div>
             <div>
                 {loading ? (
                     <div className={styles.gird}>

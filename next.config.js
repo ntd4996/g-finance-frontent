@@ -1,6 +1,7 @@
 const path = require("path");
 const nextConfig = {
     reactStrictMode: false,
+    exportTrailingSlash: false,
     images: {
         domains: [
             "cdn24hmoney.24hstatic.com",
