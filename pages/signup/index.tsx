@@ -11,7 +11,14 @@ import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import _ from "lodash";
 import AuthServer from "../../services/auth";
-import { Autocomplete, createFilterOptions, Fade } from "@mui/material";
+import {
+    Autocomplete,
+    createFilterOptions,
+    Fade,
+    InputAdornment,
+} from "@mui/material";
+import ErrorIcon from "@mui/icons-material/Error";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 const filter = createFilterOptions();
 
@@ -23,8 +30,7 @@ export default function SignUp() {
 
     const [errorText, setErrorText] = useState("");
 
-    const [value, setValue] = useState("");
-
+    const [value, setValues] = useState("");
     const optionsEmail: any = [];
 
     useEffect(() => {
@@ -57,6 +63,8 @@ export default function SignUp() {
         register,
         handleSubmit,
         formState: { errors },
+        getValues,
+        setValue,
     } = useForm({
         mode: "onTouched",
         resolver: yupResolver(formSchema),
@@ -64,11 +72,11 @@ export default function SignUp() {
 
     const changeEmail = (e: any) => {
         const value = e.target.value;
-        setValue(value);
+        setValues(value);
+        setValue("nickname", value.slice(0, value.indexOf("@")));
     };
 
     const onSubmit = async (data: any) => {
-        console.log(data);
         setIsLoading(true);
         if (_.isEmpty(errors)) {
             await AuthServer.signup(data)
@@ -123,7 +131,11 @@ export default function SignUp() {
                 <Autocomplete
                     value={value}
                     onChange={(event, newValue: any) => {
-                        setValue(newValue);
+                        setValues(newValue);
+                        setValue(
+                            "nickname",
+                            newValue.slice(0, newValue.indexOf("@"))
+                        );
                     }}
                     filterOptions={(options: any, params: any) => {
                         const inputValue = params?.inputValue;
@@ -192,6 +204,21 @@ export default function SignUp() {
                     className="textField-login"
                     {...register("password")}
                     disabled={isLoading}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                {!!errors?.password ? (
+                                    <ErrorIcon style={{ color: "#d32f2f" }} />
+                                ) : getValues("password")?.length ? (
+                                    <CheckCircleIcon
+                                        style={{ color: "green" }}
+                                    />
+                                ) : (
+                                    <div></div>
+                                )}
+                            </InputAdornment>
+                        ),
+                    }}
                 />
                 <TextField
                     label="Confirm password"
@@ -205,8 +232,24 @@ export default function SignUp() {
                     {...register("confirmPassword")}
                     required
                     disabled={isLoading}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                {!!errors?.confirmPassword ? (
+                                    <ErrorIcon style={{ color: "#d32f2f" }} />
+                                ) : getValues("confirmPassword")?.length ? (
+                                    <CheckCircleIcon
+                                        style={{ color: "green" }}
+                                    />
+                                ) : (
+                                    <div></div>
+                                )}
+                            </InputAdornment>
+                        ),
+                    }}
                 />
                 <TextField
+                    value={getValues("nickname") ? getValues("nickname") : ""}
                     label="Nickname"
                     id="nickname"
                     color="secondary"
