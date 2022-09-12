@@ -31,6 +31,7 @@ export default function SignUp() {
     const [errorText, setErrorText] = useState("");
 
     const [value, setValues] = useState("");
+    const [valueNickname, setValueNickname] = useState('')
     const optionsEmail: any = [];
 
     useEffect(() => {
@@ -73,7 +74,7 @@ export default function SignUp() {
     const changeEmail = (e: any) => {
         const value = e.target.value;
         setValues(value);
-        setValue("nickname", value.slice(0, value.indexOf("@")));
+        setValueNickname(value.slice(0, value.indexOf("@")))
     };
 
     const onSubmit = async (data: any) => {
@@ -132,10 +133,7 @@ export default function SignUp() {
                     value={value}
                     onChange={(event, newValue: any) => {
                         setValues(newValue);
-                        setValue(
-                            "nickname",
-                            newValue.slice(0, newValue.indexOf("@"))
-                        );
+                        setValueNickname(newValue.slice(0, newValue.indexOf("@")))
                     }}
                     filterOptions={(options: any, params: any) => {
                         const inputValue = params?.inputValue;
@@ -153,7 +151,6 @@ export default function SignUp() {
                                 const arrayOptions =
                                     renderOptionsEmail(inputSlice);
                                 const filtered = filter(arrayOptions, params);
-                                console.log("🚀 ~ filtered", filtered);
                                 return filtered;
                             }
                         }
@@ -249,7 +246,7 @@ export default function SignUp() {
                     }}
                 />
                 <TextField
-                    value={getValues("nickname") ? getValues("nickname") : ""}
+                    value={valueNickname}
                     label="Nickname"
                     id="nickname"
                     color="secondary"
@@ -260,6 +257,9 @@ export default function SignUp() {
                     className="textField-login"
                     {...register("nickname")}
                     disabled={isLoading}
+                    onChange={(e)=>{
+                        setValueNickname(e.target.value)
+                    }}
                 />
                 <LoadingButton
                     color="secondary"
