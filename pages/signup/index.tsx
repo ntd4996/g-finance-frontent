@@ -66,7 +66,7 @@ export default function SignUp() {
         getValues,
         setValue,
     } = useForm({
-        mode: "onTouched",
+        mode: "onChange",
         resolver: yupResolver(formSchema),
     });
 
