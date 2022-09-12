@@ -68,7 +68,7 @@ export default function SignUp() {
     };
 
     const onSubmit = async (data: any) => {
-        console.log(data)
+        console.log(data);
         setIsLoading(true);
         if (_.isEmpty(errors)) {
             await AuthServer.signup(data)
@@ -159,6 +159,9 @@ export default function SignUp() {
                     selectOnFocus
                     clearOnBlur
                     handleHomeEndKeys
+                    sx={{
+                        width: "100%",
+                    }}
                     renderInput={(params) => (
                         <TextField
                             {...params}
