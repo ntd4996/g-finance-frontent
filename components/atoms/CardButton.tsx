@@ -3,6 +3,7 @@ import styles from "./CardButton.module.scss";
 import ChartButton from "./ChartButton";
 import { useRouter } from "next/router";
 import TicketServer from "../../services/ticket";
+import ChartTable from "./ChartTable";
 
 export default function CardButton() {
     const router = useRouter();
@@ -20,7 +21,7 @@ export default function CardButton() {
     }, []);
 
     const fetchData = async () => {
-        await TicketServer.listTicket()
+        await TicketServer.listTicket({ size: 4 })
             .then((result) => {
                 if (result?.data?.data) {
                     setDataFetch(result.data.data);
@@ -40,6 +41,7 @@ export default function CardButton() {
                         <div
                             className={styles.card}
                             onClick={() => redirectPage(row?.component)}
+                            key={`chart-${index}`}
                         >
                             <div className={styles.topCard}>
                                 <div className={styles.title}>
@@ -61,7 +63,12 @@ export default function CardButton() {
                             </div>
                             <div className={styles.positionChart}>
                                 <div className={styles.chard}>
-                                    <ChartButton />
+                                    {/* <ChartButton /> */}
+                                    <ChartTable
+                                        component={row?.component}
+                                        // color1={row.color1}
+                                        // color2={row.color2}
+                                    />
                                 </div>
                             </div>
                         </div>

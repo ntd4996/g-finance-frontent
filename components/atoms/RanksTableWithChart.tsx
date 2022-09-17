@@ -99,7 +99,7 @@ export default function RanksTable() {
                                         align="center"
                                         sx={{
                                             padding: 0,
-                                            width: "56px",
+                                            width: "156px",
                                         }}
                                         className={styles.colChartTable}
                                     >
@@ -109,6 +109,7 @@ export default function RanksTable() {
                                             >
                                                 <div className={styles.chard}>
                                                     <ChartTable
+                                                        component={row?.component}
                                                         color1={row.color1}
                                                         color2={row.color2}
                                                     />
