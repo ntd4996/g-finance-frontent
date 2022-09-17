@@ -28,4 +28,11 @@ export default class TicketServer {
             method: "get",
         });
     }
+
+    static historiesTicket(params?: IIndexTagListParamsType) {
+        return request({
+            url: `/api/tickers/histories/${params?.id}?size=${params?.size}`,
+            method: "get",
+        });
+    }
 }
