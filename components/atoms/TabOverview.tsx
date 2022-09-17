@@ -128,9 +128,6 @@ export default function TabOverView(props: any) {
         }
         return "";
     };
-    const handleEventMove = (data: any): void => {
-        console.log('handle event', data);
-    }
     const chartRef = (chart: any): void => {
         setChart(chart);
     }
@@ -162,19 +159,18 @@ export default function TabOverView(props: any) {
         }
         return <div className={styles.gird}>{renderObj}</div>;
     };
-    
+
     return (
         <div className="w-full container">
 
-            <div className={styles.tradingView} id="tradingview">
+            <div id="tradingview">
                 <Chart
                     options={options}
                     candlestickSeries={candlestickSeries} 
                     autoWidth={true} 
                     height={320} 
                     chartRef={chartRef}
-                    onTimeRangeMove={handleEventMove}
-                    onCrosshairMove={handleEventMove} />
+                    />
             </div>
             <div>
                 {loading ? (
