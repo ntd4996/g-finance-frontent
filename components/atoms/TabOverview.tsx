@@ -1,21 +1,38 @@
 import Image from "next/image";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useRef, useState } from "react";
 import styles from "./TabOverView.module.scss";
 import _ from "lodash";
 import { Skeleton } from "@mui/material";
-import dayjs from "dayjs";
-import {
-    AdvancedRealTimeChart,
-    CopyrightStyles,
-} from "react-ts-tradingview-widgets";
-import { useRouter } from "next/router";
-
+// import dayjs from "dayjs";
+import Chart from '@qognicafinance/react-lightweight-charts'
+import TicketServer from "../../services/ticket";
+import { IChartApi } from "lightweight-charts";
 export default function TabOverView(props: any) {
     const { data, loading, toggleButtonDay } = props;
     const [dateDisplay, setDateDisplay] = useState({} as any);
     const [logoUrl, setLogoUrl] = useState(null);
-    const router = useRouter();
-    const { id } = router.query;
+    const [chart, setChart] = useState(null as unknown as IChartApi);
+
+    const options = {
+        alignLabels: true,
+        timeScale: {
+            rightOffset: 10,
+            barSpacing: 10,
+            fixLeftEdge: false,
+            lockVisibleTimeRangeOnResize: true,
+            rightBarStaysOnScroll: true,
+            borderVisible: false,
+            borderColor: "#fff000",
+            visible: true,
+            timeVisible: true,
+            secondsVisible: false
+        }
+    };
+    const candlestickSeries = [{
+        data: [
+        ]
+    }]
+
     useEffect(() => {
         switch (toggleButtonDay) {
             case "now":
@@ -48,9 +65,26 @@ export default function TabOverView(props: any) {
         } else {
             setLogoUrl(null);
         }
-        chooseDataTicker(0);
-    }, [data]);
 
+        chooseDataTicker(0)
+    }, [data])
+    const histories: any[] = [];
+    const loadHistory = async () => {
+        const result = await TicketServer.historiesTicket({ id: data.component, size: 200 });
+        const res = result?.data;
+        if ((res?.data || []).length == 0) {
+            return;
+        }
+        histories.unshift(...(res.data || []));
+        const candlestickSeries = chart.addCandlestickSeries();
+        candlestickSeries.setData(histories);
+    }
+
+    useEffect(() => {
+        if (!chart || !data?.component)
+            return;
+        loadHistory();
+    }, [data.component, chart])
     const chooseDataTicker = (day: number) => {
         if (data?.tickerPerDays) {
             const tickerPerDays = data?.tickerPerDays;
@@ -65,7 +99,6 @@ export default function TabOverView(props: any) {
             //         }
             //     }
             // });
-            console.log("data choose id: ", dataChoose);
             if (dataChoose?.id) {
                 const dataS = {} as any;
                 for (const key in dataChoose) {
@@ -95,7 +128,9 @@ export default function TabOverView(props: any) {
         }
         return "";
     };
-
+    const chartRef = (chart: any): void => {
+        setChart(chart);
+    }
     const RenderMetadata: FC = () => {
         let renderObj;
         if (dateDisplay?.metadata) {
@@ -125,34 +160,17 @@ export default function TabOverView(props: any) {
         return <div className={styles.gird}>{renderObj}</div>;
     };
 
-    const stylesCopyright: CopyrightStyles = {
-        parent: {
-            display: "none",
-        },
-    };
-
     return (
         <div className="w-full container">
-            <div className={styles.tradingView}>
-                {id && (
-                    <AdvancedRealTimeChart
-                        autosize={true}
-                        symbol={`HOSE:${id}`}
-                        timezone="Etc/UTC"
-                        interval="D"
-                        theme="light"
-                        style="1"
-                        toolbar_bg="#f1f3f6"
-                        enable_publishing={false}
-                        allow_symbol_change={true}
-                        container_id="tradingview_b7acd"
-                        locale="vi_VN"
-                        save_image={true}
-                        hide_legend={true}
-                        copyrightStyles={stylesCopyright}
-                        withdateranges={false}
-                    ></AdvancedRealTimeChart>
-                )}
+
+            <div id="tradingview">
+                <Chart
+                    options={options}
+                    candlestickSeries={candlestickSeries} 
+                    autoWidth={true} 
+                    height={320} 
+                    chartRef={chartRef}
+                    />
             </div>
             <div>
                 {loading ? (
