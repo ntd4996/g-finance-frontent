@@ -16,7 +16,7 @@ export default function TabOverView(props: any) {
     const options = {
         alignLabels: true,
         timeScale: {
-            rightOffset: 10,
+            rightOffset: 1,
             barSpacing: 10,
             fixLeftEdge: false,
             lockVisibleTimeRangeOnResize: true,
