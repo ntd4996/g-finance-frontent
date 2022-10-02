@@ -137,6 +137,9 @@ const Header = () => {
                                             backgroundColor:
                                                 theme.palette.secondary.main,
                                         }}
+                                        onClick={() => {
+                                            router.push("/login");
+                                        }}
                                     >
                                         Login
                                     </Button>

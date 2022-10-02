@@ -12,14 +12,18 @@ type MyComponentProps = React.PropsWithChildren<{
 
 ChartTable.defaultProps = {
     color1: "#00B98D",
-    color2: "rgba(0, 221, 168, 0)",
+    color2: "rgba(204, 0, 0, 0)",
 };
 
 export default function ChartTable(props: MyComponentProps) {
-    const { color1, color2, component } = props;
+    const { color1, component } = props;
     const [chart, setChart] = useState(null as unknown as EChartsInstance);
+    const [color2, setColor2] = useState(props.color2);
     const loadHistory = async (component: string) => {
-        const result = await TicketServer.historiesTicket({ id: component, size: 15 });
+        const result = await TicketServer.historiesTicket({
+            id: component,
+            size: 15,
+        });
         const res = result?.data;
         if ((res?.data || []).length == 0) {
             return;
@@ -29,20 +33,21 @@ export default function ChartTable(props: MyComponentProps) {
                 {
                     type: "line",
                     name: "price",
-                    data: res?.data.map((item: { close: number; }) => item.close),
-                }
+                    data: res?.data.map(
+                        (item: { close: number }) => item.close
+                    ),
+                },
             ],
             xAxis: [
                 {
                     type: "category",
                     boundaryGap: false,
-                    data: res?.data.map((item: { time: string; }) => item.time),
+                    data: res?.data.map((item: { time: string }) => item.time),
                     show: false,
                 },
             ],
-
-        })
-    }
+        });
+    };
     useEffect(() => {
         if (!component) {
             return;
@@ -51,7 +56,8 @@ export default function ChartTable(props: MyComponentProps) {
             return;
         }
         loadHistory(component);
-    }, [component, chart])
+        setColor2(hexToRgbA(color1));
+    }, [component, chart]);
     const option = {
         title: {
             text: "Stacked Area Chart",
@@ -151,7 +157,23 @@ export default function ChartTable(props: MyComponentProps) {
     };
     const chartRef = (chart: EChartsInstance): void => {
         setChart(chart);
-    }
+    };
+    const hexToRgbA = (hex: string) => {
+        let c: any;
+        if (/^#([A-Fa-f0-9]{3}){1,2}$/.test(hex)) {
+            c = hex.substring(1).split("");
+            if (c.length == 3) {
+                c = [c[0], c[0], c[1], c[1], c[2], c[2]];
+            }
+            c = "0x" + c.join("");
+            return (
+                "rgba(" +
+                [(c >> 16) & 255, (c >> 8) & 255, c & 255].join(",") +
+                ",0)"
+            );
+        }
+        throw new Error("Bad Hex");
+    };
 
     return (
         <ReactECharts

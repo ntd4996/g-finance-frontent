@@ -54,10 +54,16 @@ export default function CardButton() {
                             <div className={styles.bottomCard}>
                                 <div className={styles.flexCol}>
                                     <span className={styles.numberTop}>
-                                        {(row.costPrice ?? 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                                        {(row.costPrice ?? 0).toLocaleString(
+                                            "en-US",
+                                            { minimumFractionDigits: 2 }
+                                        )}
                                     </span>
                                     <span className={styles.numberBottom}>
-                                        {(row.volume ?? 0).toLocaleString('en-US', { minimumFractionDigits: 0 })}
+                                        {(row.volume ?? 0).toLocaleString(
+                                            "en-US",
+                                            { minimumFractionDigits: 0 }
+                                        )}
                                     </span>
                                 </div>
                             </div>
@@ -66,7 +72,7 @@ export default function CardButton() {
                                     {/* <ChartButton /> */}
                                     <ChartTable
                                         component={row?.component}
-                                        // color1={row.color1}
+                                        color1={row?.priceColor}
                                         // color2={row.color2}
                                     />
                                 </div>

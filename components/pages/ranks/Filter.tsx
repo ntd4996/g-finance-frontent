@@ -71,6 +71,7 @@ export default function Filter(props: typeProps) {
                         </InputAdornment>
                     }
                     label="Tìm Kiếm"
+                    className={styles.input}
                 />
             </FormControl>
         </div>

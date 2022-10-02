@@ -109,9 +109,10 @@ export default function RanksTable() {
                                             >
                                                 <div className={styles.chard}>
                                                     <ChartTable
-                                                        component={row?.component}
-                                                        color1={row.color1}
-                                                        color2={row.color2}
+                                                        component={
+                                                            row?.component
+                                                        }
+                                                        color1={row?.priceColor}
                                                     />
                                                 </div>
                                             </div>

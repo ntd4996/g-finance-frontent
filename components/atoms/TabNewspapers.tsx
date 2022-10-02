@@ -69,7 +69,7 @@ export default function TabNewspapers(props: any) {
                         <div>
                             <div className="pb-20">
                                 <div className="textComingSoon">
-                                    Không có bài phần tích
+                                    Không có bài phân tích
                                 </div>
                             </div>
                         </div>

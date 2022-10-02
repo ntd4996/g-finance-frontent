@@ -14,10 +14,6 @@ import Paginator from "./Paginator";
 import { Skeleton } from "@mui/material";
 import Filter from "./Filter";
 
-function createData(name: string, calories: string, carbs: number) {
-    return { name, calories, carbs };
-}
-
 export default function RanksTable() {
     const router = useRouter();
 
@@ -68,6 +64,10 @@ export default function RanksTable() {
 
     const search = (filterSearch: string) => {
         setFilter(filterSearch);
+    };
+
+    const clickFavoriteHear = () => {
+        console.log("1");
     };
     return (
         <div>
@@ -249,7 +249,7 @@ export default function RanksTable() {
                                         </div>
                                     </TableCell>
                                     <TableCell align="center">
-                                        <FavoriteHear />
+                                        <FavoriteHear data={row} />
                                     </TableCell>
                                 </TableRow>
                             ))
